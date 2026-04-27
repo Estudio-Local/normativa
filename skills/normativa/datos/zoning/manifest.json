@@ -1,0 +1,810 @@
+{
+  "api": "https://gis.maldonado.gub.uy/arcgis/rest/services/Servicios_AGOL/ORDENANZA_CONSTRUCCION/MapServer",
+  "layers": [
+    {
+      "id": 1,
+      "name": "1-1 Predios Frentistas a Ruta 10 y a la Costa",
+      "geometry": "esriGeometryPolygon",
+      "file": "001-1-1-predios-frentistas-a-ruta-10-y-a-la-costa.geojson",
+      "features": 1
+    },
+    {
+      "id": 2,
+      "name": "Subzona 1-2-1 Residencial",
+      "geometry": "esriGeometryPolygon",
+      "file": "002-subzona-1-2-1-residencial.geojson",
+      "features": 1
+    },
+    {
+      "id": 3,
+      "name": "Subzona 1-2-2 Resto",
+      "geometry": "esriGeometryPolygon",
+      "file": "003-subzona-1-2-2-resto.geojson",
+      "features": 1
+    },
+    {
+      "id": 4,
+      "name": "1-3 Predios Frentistas a ruta 10",
+      "geometry": "esriGeometryPolyline",
+      "file": "004-1-3-predios-frentistas-a-ruta-10.geojson",
+      "features": 1
+    },
+    {
+      "id": 5,
+      "name": "1-4-1-Barrio Jardin Costanera",
+      "geometry": "esriGeometryPolyline",
+      "file": "005-1-4-1-barrio-jardin-costanera.geojson",
+      "features": 1
+    },
+    {
+      "id": 6,
+      "name": "1-4-2 Barrio Jardin Resto",
+      "geometry": "esriGeometryPolygon",
+      "file": "006-1-4-2-barrio-jardin-resto.geojson",
+      "features": 1
+    },
+    {
+      "id": 143,
+      "name": "1-4-2 Barrio Jardin Resto - PAI",
+      "geometry": "esriGeometryPolygon",
+      "file": "143-1-4-2-barrio-jardin-resto-pai.geojson",
+      "features": 1
+    },
+    {
+      "id": 142,
+      "name": "Subzona_1_4_3_Costanera_Sur",
+      "geometry": "esriGeometryPolygon",
+      "file": "142-subzona-1-4-3-costanera-sur.geojson",
+      "features": 1
+    },
+    {
+      "id": 146,
+      "name": "1-4-4 Marina Beach",
+      "geometry": "esriGeometryPolygon",
+      "file": "146-1-4-4-marina-beach.geojson",
+      "features": 1
+    },
+    {
+      "id": 7,
+      "name": "1-5-Santa M\u00f3nica",
+      "geometry": "esriGeometryPolygon",
+      "file": "007-1-5-santa-m\u00f3nica.geojson",
+      "features": 1
+    },
+    {
+      "id": 8,
+      "name": "1-6 Pedro Campbell y Manzanas Adyacentes al Norte",
+      "geometry": "esriGeometryPolygon",
+      "file": "008-1-6-pedro-campbell-y-manzanas-adyacentes-al-norte.geojson",
+      "features": 1
+    },
+    {
+      "id": 10,
+      "name": "1-1-1-1 Centro",
+      "geometry": "esriGeometryPolygon",
+      "file": "010-1-1-1-1-centro.geojson",
+      "features": 1
+    },
+    {
+      "id": 11,
+      "name": "1-1-1-2 Rambla Resto",
+      "geometry": "esriGeometryPolygon",
+      "file": "011-1-1-1-2-rambla-resto.geojson",
+      "features": 1
+    },
+    {
+      "id": 144,
+      "name": "Subzona 1-1-1-3 Rambla Los Angeles",
+      "geometry": "esriGeometryPolygon",
+      "file": "144-subzona-1-1-1-3-rambla-los-angeles.geojson",
+      "features": 1
+    },
+    {
+      "id": 12,
+      "name": "1-1-2 Tucuman",
+      "geometry": "esriGeometryPolygon",
+      "file": "012-1-1-2-tucuman.geojson",
+      "features": 1
+    },
+    {
+      "id": 13,
+      "name": "1-1-3- Puerto",
+      "geometry": "esriGeometryPolygon",
+      "file": "013-1-1-3-puerto.geojson",
+      "features": 1
+    },
+    {
+      "id": 14,
+      "name": "1-1-4 Resto",
+      "geometry": "esriGeometryPolygon",
+      "file": "014-1-1-4-resto.geojson",
+      "features": 1
+    },
+    {
+      "id": 15,
+      "name": "1-2-1 Rinconada",
+      "geometry": "esriGeometryPolygon",
+      "file": "015-1-2-1-rinconada.geojson",
+      "features": 1
+    },
+    {
+      "id": 16,
+      "name": "1-2-2 Bulevar Artigas",
+      "geometry": "esriGeometryPolygon",
+      "file": "016-1-2-2-bulevar-artigas.geojson",
+      "features": 1
+    },
+    {
+      "id": 17,
+      "name": "1-2-3 La Falda",
+      "geometry": "esriGeometryPolygon",
+      "file": "017-1-2-3-la-falda.geojson",
+      "features": 1
+    },
+    {
+      "id": 18,
+      "name": "1-2-4 Barrio Obrero",
+      "geometry": "esriGeometryPolygon",
+      "file": "018-1-2-4-barrio-obrero.geojson",
+      "features": 1
+    },
+    {
+      "id": 19,
+      "name": "1-2-5 Country Oeste",
+      "geometry": "esriGeometryPolygon",
+      "file": "019-1-2-5-country-oeste.geojson",
+      "features": 1
+    },
+    {
+      "id": 20,
+      "name": "1-2-6 Playa Grande, Miramar , Playa Hermosa,Playa Verde",
+      "geometry": "esriGeometryPolygon",
+      "file": "020-1-2-6-playa-grande-miramar-playa-hermosaplaya-verde.geojson",
+      "features": 1
+    },
+    {
+      "id": 21,
+      "name": "1-3-1 Ramblas",
+      "geometry": "esriGeometryPolygon",
+      "file": "021-1-3-1-ramblas.geojson",
+      "features": 1
+    },
+    {
+      "id": 22,
+      "name": "1-3-2 Rambla Punta Fria y Playa Grande",
+      "geometry": "esriGeometryPolygon",
+      "file": "022-1-3-2-rambla-punta-fria-y-playa-grande.geojson",
+      "features": 1
+    },
+    {
+      "id": 23,
+      "name": "1-3-3 Comercial",
+      "geometry": "esriGeometryPolygon",
+      "file": "023-1-3-3-comercial.geojson",
+      "features": 1
+    },
+    {
+      "id": 24,
+      "name": "1-3-4 Resto del Sector",
+      "geometry": "esriGeometryPolygon",
+      "file": "024-1-3-4-resto-del-sector.geojson",
+      "features": 1
+    },
+    {
+      "id": 25,
+      "name": "Sector 2 Arco de Portezuelo",
+      "geometry": "esriGeometryPolygon",
+      "file": "025-sector-2-arco-de-portezuelo.geojson",
+      "features": 1
+    },
+    {
+      "id": 28,
+      "name": "Subzona 1-1-1 Comercial",
+      "geometry": "esriGeometryPolygon",
+      "file": "028-subzona-1-1-1-comercial.geojson",
+      "features": 1
+    },
+    {
+      "id": 29,
+      "name": "Subzona 1-1-2 Residencial",
+      "geometry": "esriGeometryPolygon",
+      "file": "029-subzona-1-1-2-residencial.geojson",
+      "features": 1
+    },
+    {
+      "id": 30,
+      "name": "Subzona 1-1-2 Gastronomico",
+      "geometry": "esriGeometryPolygon",
+      "file": "030-subzona-1-1-2-gastronomico.geojson",
+      "features": 1
+    },
+    {
+      "id": 32,
+      "name": "Subzona 1-2-1 Gorlero",
+      "geometry": "esriGeometryPolygon",
+      "file": "032-subzona-1-2-1-gorlero.geojson",
+      "features": 1
+    },
+    {
+      "id": 33,
+      "name": "Subzona 1-2-2 Adyacentes a Gorlero",
+      "geometry": "esriGeometryPolygon",
+      "file": "033-subzona-1-2-2-adyacentes-a-gorlero.geojson",
+      "features": 1
+    },
+    {
+      "id": 34,
+      "name": "Subzona 1-2-3 Calle 20 y 24",
+      "geometry": "esriGeometryPolygon",
+      "file": "034-subzona-1-2-3-calle-20-y-24.geojson",
+      "features": 1
+    },
+    {
+      "id": 35,
+      "name": "1-2-4 Manzanas 39 y 40",
+      "geometry": "esriGeometryPolygon",
+      "file": "035-1-2-4-manzanas-39-y-40.geojson",
+      "features": 1
+    },
+    {
+      "id": 36,
+      "name": "Subzona 1-2-5 Resto",
+      "geometry": "esriGeometryPolygon",
+      "file": "036-subzona-1-2-5-resto.geojson",
+      "features": 1
+    },
+    {
+      "id": 38,
+      "name": "Subzona 1-3-1 La Pastora Costanera",
+      "geometry": "esriGeometryPolygon",
+      "file": "038-subzona-1-3-1-la-pastora-costanera.geojson",
+      "features": 1
+    },
+    {
+      "id": 39,
+      "name": "Subzona 1-3-2 La Pastora Resto",
+      "geometry": "esriGeometryPolygon",
+      "file": "039-subzona-1-3-2-la-pastora-resto.geojson",
+      "features": 1
+    },
+    {
+      "id": 41,
+      "name": "2-5-1 Avenidas Principales",
+      "geometry": "esriGeometryPolygon",
+      "file": "041-2-5-1-avenidas-principales.geojson",
+      "features": 1
+    },
+    {
+      "id": 42,
+      "name": "2-5-2 Avenidas Secundarias",
+      "geometry": "esriGeometryPolygon",
+      "file": "042-2-5-2-avenidas-secundarias.geojson",
+      "features": 1
+    },
+    {
+      "id": 43,
+      "name": "2-5-4 Avenida Roosevelt",
+      "geometry": "esriGeometryPolyline",
+      "file": "043-2-5-4-avenida-roosevelt.geojson",
+      "features": 1
+    },
+    {
+      "id": 45,
+      "name": "5-1-1 Subzona Humedal TR10",
+      "geometry": "esriGeometryPolygon",
+      "file": "045-5-1-1-subzona-humedal-tr10.geojson",
+      "features": 1
+    },
+    {
+      "id": 46,
+      "name": "5-1-2 Subzona Humedal TR100.cpg",
+      "geometry": "esriGeometryPolygon",
+      "file": "046-5-1-2-subzona-humedal-tr100cpg.geojson",
+      "features": 1
+    },
+    {
+      "id": 47,
+      "name": "5-2-1 Subzona Logistica",
+      "geometry": "esriGeometryPolygon",
+      "file": "047-5-2-1-subzona-logistica.geojson",
+      "features": 1
+    },
+    {
+      "id": 48,
+      "name": "5-2-2 Subzona de Servicios",
+      "geometry": "esriGeometryPolygon",
+      "file": "048-5-2-2-subzona-de-servicios.geojson",
+      "features": 1
+    },
+    {
+      "id": 49,
+      "name": "5-3-1 Subzona APP",
+      "geometry": "esriGeometryPolygon",
+      "file": "049-5-3-1-subzona-app.geojson",
+      "features": 1
+    },
+    {
+      "id": 50,
+      "name": "5-3-2 Subzona Mixta",
+      "geometry": "esriGeometryPolygon",
+      "file": "050-5-3-2-subzona-mixta.geojson",
+      "features": 1
+    },
+    {
+      "id": 52,
+      "name": "Subzona 2-1 Plaza",
+      "geometry": "esriGeometryPolygon",
+      "file": "052-subzona-2-1-plaza.geojson",
+      "features": 1
+    },
+    {
+      "id": 53,
+      "name": "Subzona 2-2 Casco Urbano",
+      "geometry": "esriGeometryPolygon",
+      "file": "053-subzona-2-2-casco-urbano.geojson",
+      "features": 1
+    },
+    {
+      "id": 54,
+      "name": "Subzona 2-3 Barrios Jardin",
+      "geometry": "esriGeometryPolygon",
+      "file": "054-subzona-2-3-barrios-jardin.geojson",
+      "features": 1
+    },
+    {
+      "id": 56,
+      "name": "Subzona 2-4-1",
+      "geometry": "esriGeometryPolygon",
+      "file": "056-subzona-2-4-1.geojson",
+      "features": 1
+    },
+    {
+      "id": 57,
+      "name": "Subzona 2-4-2",
+      "geometry": "esriGeometryPolygon",
+      "file": "057-subzona-2-4-2.geojson",
+      "features": 1
+    },
+    {
+      "id": 58,
+      "name": "2-4-3 Subzona Resto",
+      "geometry": "esriGeometryPolygon",
+      "file": "058-2-4-3-subzona-resto.geojson",
+      "features": 1
+    },
+    {
+      "id": 59,
+      "name": "2-4-4 Urbanizacion Norte",
+      "geometry": "esriGeometryPolygon",
+      "file": "059-2-4-4-urbanizacion-norte.geojson",
+      "features": 1
+    },
+    {
+      "id": 60,
+      "name": "2-4-5 Av Aigua",
+      "geometry": "esriGeometryPolygon",
+      "file": "060-2-4-5-av-aigua.geojson",
+      "features": 1
+    },
+    {
+      "id": 137,
+      "name": "Subzona_2_4_6",
+      "geometry": "esriGeometryPolygon",
+      "file": "137-subzona-2-4-6.geojson",
+      "features": 1
+    },
+    {
+      "id": 140,
+      "name": "Zona_Buffer_100m",
+      "geometry": "esriGeometryPolyline",
+      "file": "140-zona-buffer-100m.geojson",
+      "features": 1
+    },
+    {
+      "id": 63,
+      "name": "Subzona 3-1-1 Fraccionamiento Lobos",
+      "geometry": "esriGeometryPolygon",
+      "file": "063-subzona-3-1-1-fraccionamiento-lobos.geojson",
+      "features": 1
+    },
+    {
+      "id": 64,
+      "name": "Subzona 3-1-2",
+      "geometry": "esriGeometryPolygon",
+      "file": "064-subzona-3-1-2.geojson",
+      "features": 1
+    },
+    {
+      "id": 65,
+      "name": "Subzona 3-1-3 Balneario",
+      "geometry": "esriGeometryPolygon",
+      "file": "065-subzona-3-1-3-balneario.geojson",
+      "features": 1
+    },
+    {
+      "id": 66,
+      "name": "Subzona 3-1-4 Balneario",
+      "geometry": "esriGeometryPolygon",
+      "file": "066-subzona-3-1-4-balneario.geojson",
+      "features": 1
+    },
+    {
+      "id": 67,
+      "name": "Subzona 3-1-5-1 Pinares",
+      "geometry": "esriGeometryPolygon",
+      "file": "067-subzona-3-1-5-1-pinares.geojson",
+      "features": 1
+    },
+    {
+      "id": 68,
+      "name": "Subzona 3-1-5-2 Costanera y Ribera oeste de la Laguna del Diario",
+      "geometry": "esriGeometryPolygon",
+      "file": "068-subzona-3-1-5-2-costanera-y-ribera-oeste-de-la-laguna-del-diario.geojson",
+      "features": 1
+    },
+    {
+      "id": 69,
+      "name": "Subzona 3-1-5-3 Laguna Oeste",
+      "geometry": "esriGeometryPolygon",
+      "file": "069-subzona-3-1-5-3-laguna-oeste.geojson",
+      "features": 1
+    },
+    {
+      "id": 70,
+      "name": "Subzona 3-1-5-4 Piedras del Chileno",
+      "geometry": "esriGeometryPolygon",
+      "file": "070-subzona-3-1-5-4-piedras-del-chileno.geojson",
+      "features": 1
+    },
+    {
+      "id": 71,
+      "name": "Zona de Fragilidad Ecositemica",
+      "geometry": "esriGeometryPolygon",
+      "file": "071-zona-de-fragilidad-ecositemica.geojson",
+      "features": 1
+    },
+    {
+      "id": 72,
+      "name": "Subzona 3-1-6 Resto",
+      "geometry": "esriGeometryPolygon",
+      "file": "072-subzona-3-1-6-resto.geojson",
+      "features": 1
+    },
+    {
+      "id": 73,
+      "name": "Subzona 3-5 Punta Ballena",
+      "geometry": "esriGeometryPolygon",
+      "file": "073-subzona-3-5-punta-ballena.geojson",
+      "features": 1
+    },
+    {
+      "id": 75,
+      "name": "3-2-1 Vias Residenciales",
+      "geometry": "esriGeometryPolyline",
+      "file": "075-3-2-1-vias-residenciales.geojson",
+      "features": 1
+    },
+    {
+      "id": 76,
+      "name": "Subzona 3-2-2 Parada 5 (Area Comercial)",
+      "geometry": "esriGeometryPolygon",
+      "file": "076-subzona-3-2-2-parada-5-area-comercial.geojson",
+      "features": 1
+    },
+    {
+      "id": 77,
+      "name": "3-2-3 San Rafael",
+      "geometry": "esriGeometryPolyline",
+      "file": "077-3-2-3-san-rafael.geojson",
+      "features": 1
+    },
+    {
+      "id": 78,
+      "name": "3-3 Calles con Retiros Especiales",
+      "geometry": "esriGeometryPolyline",
+      "file": "078-3-3-calles-con-retiros-especiales.geojson",
+      "features": 1
+    },
+    {
+      "id": 79,
+      "name": "3-4 Av.Roosevelt",
+      "geometry": "esriGeometryPolyline",
+      "file": "079-3-4-avroosevelt.geojson",
+      "features": 1
+    },
+    {
+      "id": 81,
+      "name": "4-1-1 B\u00ba Jardin Mldo Este",
+      "geometry": "esriGeometryPolygon",
+      "file": "081-4-1-1-b\u00ba-jardin-mldo-este.geojson",
+      "features": 1
+    },
+    {
+      "id": 82,
+      "name": "Subzona 4-1-2 Barrio Jardin Sector Aparicio Saravia",
+      "geometry": "esriGeometryPolygon",
+      "file": "082-subzona-4-1-2-barrio-jardin-sector-aparicio-saravia.geojson",
+      "features": 1
+    },
+    {
+      "id": 83,
+      "name": "4-1-3 Ribera del Arroyo Maldonado",
+      "geometry": "esriGeometryPolygon",
+      "file": "083-4-1-3-ribera-del-arroyo-maldonado.geojson",
+      "features": 1
+    },
+    {
+      "id": 85,
+      "name": "4-2-1 Avda Miguel Angel",
+      "geometry": "esriGeometryPolyline",
+      "file": "085-4-2-1-avda-miguel-angel.geojson",
+      "features": 1
+    },
+    {
+      "id": 86,
+      "name": "4-2-2 Rambla L. Batlle Pacheco",
+      "geometry": "esriGeometryPolyline",
+      "file": "086-4-2-2-rambla-l-batlle-pacheco.geojson",
+      "features": 1
+    },
+    {
+      "id": 87,
+      "name": "4-2-3 Avda.Aparicio Saravia,Maldonado Este",
+      "geometry": "esriGeometryPolyline",
+      "file": "087-4-2-3-avdaaparicio-saraviamaldonado-este.geojson",
+      "features": 1
+    },
+    {
+      "id": 88,
+      "name": "Subzona 4-2-4 Vias Residenciales",
+      "geometry": "esriGeometryPolygon",
+      "file": "088-subzona-4-2-4-vias-residenciales.geojson",
+      "features": 1
+    },
+    {
+      "id": 90,
+      "name": "4-3-1 Microcentralidades",
+      "geometry": "esriGeometryPoint",
+      "file": "090-4-3-1-microcentralidades.geojson",
+      "features": 7
+    },
+    {
+      "id": 91,
+      "name": "4-3-2 Microcentralidades la Rambla",
+      "geometry": "esriGeometryPoint",
+      "file": "091-4-3-2-microcentralidades-la-rambla.geojson",
+      "features": 1
+    },
+    {
+      "id": 92,
+      "name": "4-4 Calles con Retiros Especiales",
+      "geometry": "esriGeometryPolyline",
+      "file": "092-4-4-calles-con-retiros-especiales.geojson",
+      "features": 1
+    },
+    {
+      "id": 94,
+      "name": "Polo Gastron\u00f3mico",
+      "geometry": "esriGeometryPolygon",
+      "file": "094-polo-gastron\u00f3mico.geojson",
+      "features": 1
+    },
+    {
+      "id": 95,
+      "name": "Jaguel",
+      "geometry": "esriGeometryPolygon",
+      "file": "095-jaguel.geojson",
+      "features": 1
+    },
+    {
+      "id": 96,
+      "name": "Campus Universitario y Terminal de Omnibus",
+      "geometry": "esriGeometryPolygon",
+      "file": "096-campus-universitario-y-terminal-de-omnibus.geojson",
+      "features": 1
+    },
+    {
+      "id": 97,
+      "name": "Parque",
+      "geometry": "esriGeometryPolygon",
+      "file": "097-parque.geojson",
+      "features": 1
+    },
+    {
+      "id": 99,
+      "name": "3-1 Centro",
+      "geometry": "esriGeometryPolygon",
+      "file": "099-3-1-centro.geojson",
+      "features": 1
+    },
+    {
+      "id": 100,
+      "name": "3-2 Barrio Jardin",
+      "geometry": "esriGeometryPolygon",
+      "file": "100-3-2-barrio-jardin.geojson",
+      "features": 1
+    },
+    {
+      "id": 103,
+      "name": "1-1-DE LAS PLAZAS",
+      "geometry": "esriGeometryPolygon",
+      "file": "103-1-1-de-las-plazas.geojson",
+      "features": 1
+    },
+    {
+      "id": 104,
+      "name": "1-2-CASCO",
+      "geometry": "esriGeometryPolygon",
+      "file": "104-1-2-casco.geojson",
+      "features": 1
+    },
+    {
+      "id": 105,
+      "name": "1-3-ALVARIZA",
+      "geometry": "esriGeometryPolygon",
+      "file": "105-1-3-alvariza.geojson",
+      "features": 1
+    },
+    {
+      "id": 106,
+      "name": "1-4-COSTA",
+      "geometry": "esriGeometryPolygon",
+      "file": "106-1-4-costa.geojson",
+      "features": 1
+    },
+    {
+      "id": 107,
+      "name": "1-5-RESTO",
+      "geometry": "esriGeometryPolygon",
+      "file": "107-1-5-resto.geojson",
+      "features": 1
+    },
+    {
+      "id": 108,
+      "name": "Retiro 2mts",
+      "geometry": "esriGeometryPolyline",
+      "file": "108-retiro-2mts.geojson",
+      "features": 1
+    },
+    {
+      "id": 109,
+      "name": "Retiro 4mts",
+      "geometry": "esriGeometryPolyline",
+      "file": "109-retiro-4mts.geojson",
+      "features": 1
+    },
+    {
+      "id": 111,
+      "name": "2-1-1-1 Amanzanado Fundacional",
+      "geometry": "esriGeometryPolygon",
+      "file": "111-2-1-1-1-amanzanado-fundacional.geojson",
+      "features": 1
+    },
+    {
+      "id": 112,
+      "name": "2-1-1-2 Manzanas de Fragilidad Ecosistemica",
+      "geometry": "esriGeometryPolygon",
+      "file": "112-2-1-1-2-manzanas-de-fragilidad-ecosistemica.geojson",
+      "features": 1
+    },
+    {
+      "id": 113,
+      "name": "2-1-2-1 Areas Balnearias Urbanizadas",
+      "geometry": "esriGeometryPolygon",
+      "file": "113-2-1-2-1-areas-balnearias-urbanizadas.geojson",
+      "features": 1
+    },
+    {
+      "id": 114,
+      "name": "2-1-2-2 La Juanita",
+      "geometry": "esriGeometryPolygon",
+      "file": "114-2-1-2-2-la-juanita.geojson",
+      "features": 1
+    },
+    {
+      "id": 115,
+      "name": "2-1-3-1 Suelo Suburbano",
+      "geometry": "esriGeometryPolygon",
+      "file": "115-2-1-3-1-suelo-suburbano.geojson",
+      "features": 1
+    },
+    {
+      "id": 116,
+      "name": "2-1-3-2 Suelo Rural",
+      "geometry": "esriGeometryPolygon",
+      "file": "116-2-1-3-2-suelo-rural.geojson",
+      "features": 1
+    },
+    {
+      "id": 117,
+      "name": "2-2 Zona Chacras Maritimas",
+      "geometry": "esriGeometryPolygon",
+      "file": "117-2-2-zona-chacras-maritimas.geojson",
+      "features": 1
+    },
+    {
+      "id": 118,
+      "name": "2-3 Zona Chacras Norte",
+      "geometry": "esriGeometryPolygon",
+      "file": "118-2-3-zona-chacras-norte.geojson",
+      "features": 1
+    },
+    {
+      "id": 119,
+      "name": "2-4 Zona de Prioridad Ambiental",
+      "geometry": "esriGeometryPolygon",
+      "file": "119-2-4-zona-de-prioridad-ambiental.geojson",
+      "features": 1
+    },
+    {
+      "id": 120,
+      "name": "2-5 Zona de Proteccion de Cuerpos de Agua",
+      "geometry": "esriGeometryPolygon",
+      "file": "120-2-5-zona-de-proteccion-de-cuerpos-de-agua.geojson",
+      "features": 1
+    },
+    {
+      "id": 121,
+      "name": "2-6 Zona Banda de Resguardo",
+      "geometry": "esriGeometryPolygon",
+      "file": "121-2-6-zona-banda-de-resguardo.geojson",
+      "features": 1
+    },
+    {
+      "id": 123,
+      "name": "Centro",
+      "geometry": "esriGeometryPolygon",
+      "file": "123-centro.geojson",
+      "features": 1
+    },
+    {
+      "id": 124,
+      "name": "2-2-1 Casco Historico",
+      "geometry": "esriGeometryPolygon",
+      "file": "124-2-2-1-casco-historico.geojson",
+      "features": 1
+    },
+    {
+      "id": 125,
+      "name": "2-2-3 Bienes y Servicios",
+      "geometry": "esriGeometryPolygon",
+      "file": "125-2-2-3-bienes-y-servicios.geojson",
+      "features": 1
+    },
+    {
+      "id": 126,
+      "name": "2-2-4 Resto del Sector",
+      "geometry": "esriGeometryPolygon",
+      "file": "126-2-2-4-resto-del-sector.geojson",
+      "features": 1
+    },
+    {
+      "id": 128,
+      "name": "Casco_Urbano_Garzon",
+      "geometry": "esriGeometryPolygon",
+      "file": "128-casco-urbano-garzon.geojson",
+      "features": 1
+    },
+    {
+      "id": 129,
+      "name": "Estacion",
+      "geometry": "esriGeometryPolygon",
+      "file": "129-estacion.geojson",
+      "features": 1
+    },
+    {
+      "id": 130,
+      "name": "Chacras_Zona_Oeste",
+      "geometry": "esriGeometryPolygon",
+      "file": "130-chacras-zona-oeste.geojson",
+      "features": 1
+    },
+    {
+      "id": 131,
+      "name": "Chacras_Zona_Este",
+      "geometry": "esriGeometryPolygon",
+      "file": "131-chacras-zona-este.geojson",
+      "features": 1
+    }
+  ]
+}

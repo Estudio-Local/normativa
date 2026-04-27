@@ -1,0 +1,17 @@
+{
+  "schema": "estudio-local.selection.v1",
+  "generated_at": "2026-04-26T22:30:00Z",
+  "padrones": ["130", "131", "132"],
+  "locality": "la-juanita",
+  "locality_name": "José Ignacio – La Juanita",
+  "regimen": "comun",
+  "area_total_m2": 13050,
+  "frente_estimado_m": 90,
+  "adjacent": true,
+  "lots": [
+    { "padron": "130", "manzana": "045", "area_m2": 4350, "regimen": "comun", "centroid": [-54.668, -34.812], "frente_m": 30 },
+    { "padron": "131", "manzana": "045", "area_m2": 4350, "regimen": "comun", "centroid": [-54.668, -34.813], "frente_m": 30 },
+    { "padron": "132", "manzana": "045", "area_m2": 4350, "regimen": "comun", "centroid": [-54.668, -34.814], "frente_m": 30 }
+  ],
+  "zone_hint": { "code": "2.1", "data_quality": "verified" }
+}

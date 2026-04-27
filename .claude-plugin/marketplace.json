@@ -1,0 +1,15 @@
+{
+  "name": "normativa",
+  "owner": {
+    "name": "Estudio Local",
+    "url": "https://github.com/Estudio-Local"
+  },
+  "plugins": [
+    {
+      "name": "normativa",
+      "source": "./",
+      "description": "Maldonado UY zoning analysis (TONE) + printable report builder. Two skills: /normativa (envelope analysis) + /informe (HTML report).",
+      "version": "0.1.0"
+    }
+  ]
+}

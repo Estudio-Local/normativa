@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Análisis · {{ANALYSIS_ID}} · Estudio Local</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Martian+Mono:wght@300;400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f6f5f1;
+    --paper: #ffffff;
+    --text: #1a1a1a;
+    --muted: #595959;
+    --border: #d6d4cf;
+    --rule: #1a1a1a;
+    --accent: #3a6ea5;
+    --green: #2f5d2a;
+    --green-bg: rgba(47, 93, 42, 0.15);
+    --warning: #daa016;
+  }
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0; padding: 0;
+    font-family: "Martian Mono", ui-monospace, monospace;
+    background: #d8d7d2;
+    color: var(--text);
+    font-weight: 300;
+    font-size: 11pt;
+    line-height: 1.45;
+  }
+
+  .toolbar {
+    position: sticky; top: 0;
+    height: 44px;
+    background: rgba(26,26,26,0.92);
+    color: var(--bg);
+    display: flex; align-items: center; gap: 8px;
+    padding: 0 16px;
+    z-index: 1000;
+    backdrop-filter: blur(8px);
+  }
+  .toolbar .brand {
+    font-size: 13px; font-weight: 700;
+    color: var(--bg);
+    padding-right: 12px;
+    border-right: 1px solid rgba(246,245,241,0.18);
+    margin-right: 8px;
+  }
+  .toolbar .doc-meta {
+    font-size: 11px; color: rgba(246,245,241,0.65);
+    line-height: 1.4;
+  }
+  .toolbar .doc-meta b { color: var(--bg); }
+  .toolbar .actions { margin-left: auto; display: flex; gap: 6px; }
+  .toolbar .btn {
+    font-size: 11px; font-weight: 700;
+    padding: 6px 12px;
+    border: 1px solid rgba(246,245,241,0.3);
+    border-radius: 2px;
+    background: transparent;
+    color: var(--bg);
+    cursor: pointer;
+  }
+  .toolbar .btn:hover { border-color: var(--bg); }
+  .toolbar .btn.primary {
+    background: var(--bg); color: var(--text); border-color: var(--bg);
+  }
+  @media print { .toolbar { display: none; } }
+
+  .page {
+    width: 210mm;
+    min-height: 297mm;
+    background: var(--paper);
+    margin: 24px auto;
+    padding: 20mm 18mm 24mm;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.12);
+    position: relative;
+    page-break-after: always;
+    display: flex;
+    flex-direction: column;
+  }
+  @media print {
+    body { background: white; }
+    .page {
+      margin: 0; box-shadow: none; width: auto; min-height: auto;
+    }
+    @page { size: A4; margin: 0; }
+  }
+
+  .page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    padding-bottom: 8mm;
+    border-bottom: 2px solid var(--rule);
+    margin-bottom: 8mm;
+  }
+  .page-header .ph-brand {
+    font-size: 14pt; font-weight: 700; letter-spacing: 0.02em;
+  }
+  .page-header .ph-doc-id {
+    font-size: 8pt; color: var(--muted);
+    text-align: right; letter-spacing: 0.04em; line-height: 1.5;
+  }
+  .page-header .ph-doc-id b { color: var(--text); font-weight: 700; }
+
+  .page-footer {
+    margin-top: auto;
+    padding-top: 6mm;
+    border-top: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    font-size: 8pt;
+    color: var(--muted);
+    letter-spacing: 0.04em;
+  }
+  .page-footer b { color: var(--text); font-weight: 700; }
+
+  h1.doc-title {
+    font-size: 22pt; font-weight: 700;
+    line-height: 1.1;
+    margin: 0 0 4mm;
+  }
+  .doc-subtitle {
+    font-size: 11pt;
+    color: var(--muted);
+    margin-bottom: 6mm;
+    letter-spacing: 0.02em;
+  }
+  h2.section {
+    font-size: 9pt; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.08em;
+    color: var(--muted);
+    margin: 8mm 0 3mm;
+    padding-bottom: 2mm;
+    border-bottom: 1px solid var(--border);
+  }
+  h2.section:first-of-type { margin-top: 0; }
+  h3.sub {
+    font-size: 11pt; font-weight: 700;
+    margin: 5mm 0 2mm;
+  }
+  p { margin: 0 0 3mm; }
+  p.lead {
+    font-size: 11pt;
+    line-height: 1.55;
+    color: var(--text);
+    max-width: 130mm;
+  }
+  p.note {
+    font-size: 9pt;
+    color: var(--muted);
+    line-height: 1.5;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 10pt;
+    margin-bottom: 4mm;
+  }
+  th, td {
+    text-align: left;
+    padding: 2.5mm 3mm;
+    vertical-align: top;
+    border-bottom: 1px solid var(--border);
+  }
+  th {
+    font-size: 8pt; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.06em;
+    color: var(--muted);
+    border-bottom: 2px solid var(--rule);
+  }
+  table.kv-stack td:first-child { color: var(--muted); width: 38%; }
+  table.kv-stack td:last-child { font-weight: 700; }
+  table.scenario-grid th, table.scenario-grid td { text-align: center; }
+  table.scenario-grid td:first-child,
+  table.scenario-grid th:first-child {
+    text-align: left; color: var(--muted);
+  }
+  table.scenario-grid .col-recommended {
+    background: rgba(58, 110, 165, 0.06);
+  }
+  table.scenario-grid tr.headline td {
+    border-top: 2px solid var(--rule);
+    border-bottom: 2px solid var(--rule);
+    font-size: 11pt;
+    padding: 4mm 3mm;
+  }
+  table.scenario-grid tr.headline td:first-child {
+    color: var(--text); font-weight: 700;
+  }
+
+  .recommendation {
+    border: 2px solid var(--rule);
+    padding: 5mm 6mm;
+    margin: 4mm 0;
+  }
+  .recommendation .r-label {
+    font-size: 8pt; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.1em;
+    color: var(--muted);
+    margin-bottom: 2mm;
+  }
+  .recommendation .r-headline {
+    font-size: 14pt; font-weight: 700;
+    line-height: 1.3;
+    margin-bottom: 3mm;
+  }
+  .recommendation .r-body { font-size: 10pt; line-height: 1.55; color: var(--text); }
+  .recommendation .r-body p { margin: 0 0 2mm; }
+  .recommendation ul { margin: 2mm 0 0; padding-left: 5mm; font-size: 10pt; }
+
+  ul.tipologias { list-style: none; padding: 0; margin: 2mm 0 4mm; }
+  ul.tipologias li {
+    padding: 2mm 0;
+    border-bottom: 1px dotted var(--border);
+    font-size: 10pt;
+  }
+  ul.tipologias li .check { color: var(--accent); font-weight: 700; margin-right: 4px; }
+  ul.tipologias li .name { font-weight: 700; }
+  ul.tipologias li .threshold {
+    color: var(--muted); font-size: 9pt;
+    margin-left: 14px; display: block; margin-top: 1mm;
+  }
+
+  .disclaimer {
+    font-size: 9pt;
+    color: var(--muted);
+    line-height: 1.5;
+    background: #faf9f6;
+    border-left: 3px solid var(--warning);
+    padding: 3mm 4mm;
+    margin: 4mm 0;
+  }
+  .disclaimer b { color: var(--text); font-weight: 700; }
+</style>
+</head>
+<body>
+
+<div class="toolbar">
+  <span class="brand">Estudio Local</span>
+  <div class="doc-meta">
+    Informe imprimible · <b>Análisis {{ANALYSIS_ID}}</b> · {{LOT_COUNT}} · {{ZONE_HEADLINE}}
+  </div>
+  <div class="actions">
+    <button class="btn primary" onclick="window.print()">Imprimir / PDF</button>
+  </div>
+</div>
+
+<!-- ════════════════ PAGE 1 — Cover + Lot Data ════════════════ -->
+<div class="page">
+  <div class="page-header">
+    <div class="ph-brand">Estudio Local</div>
+    <div class="ph-doc-id">
+      <b>Análisis · {{ANALYSIS_ID}}</b><br>
+      Generado {{DOC_DATE}} · /normativa v{{SKILL_VERSION}}
+    </div>
+  </div>
+
+  <h1 class="doc-title">Análisis de envolvente edificable</h1>
+  <p class="doc-subtitle">{{ADJACENCY_DESC}} · {{ZONE_HEADLINE}} · {{LOCALITY_NAME}}</p>
+
+  <h2 class="section">Datos catastrales</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Padrón</th><th>Manzana</th><th>Superficie</th><th>Frente</th><th>Régimen</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{LOTS_TABLE_ROWS}}
+    </tbody>
+  </table>
+  <p class="note">{{LOTS_NOTE}}</p>
+
+  <h2 class="section">Zona aplicable</h2>
+  <table class="kv-stack">
+    <tbody>
+      {{ZONE_TABLE_ROWS}}
+    </tbody>
+  </table>
+
+  <div class="page-footer">
+    <span><b>Estudio Local</b> · {{ANALYSIS_ID}}</span>
+    <span>Pág 1 / 4</span>
+  </div>
+</div>
+
+<!-- ════════════════ PAGE 2 — Comparativa de escenarios ════════════════ -->
+<div class="page">
+  <div class="page-header">
+    <div class="ph-brand">Estudio Local</div>
+    <div class="ph-doc-id">
+      <b>Análisis · {{ANALYSIS_ID}}</b><br>
+      Padrones {{PADRONES_RANGE}} · {{ZONE_HEADLINE}}
+    </div>
+  </div>
+
+  <h2 class="section">Comparativa de escenarios</h2>
+  <p class="lead">Escenarios evaluados sobre la selección. La unión catastral puede habilitar tipologías de mayor densidad — los escenarios marcados con ★ son los recomendados.</p>
+
+  {{SCENARIO_GRID}}
+
+  <div class="recommendation">
+    <div class="r-label">Recomendación</div>
+    <div class="r-headline">{{RECOMMENDATION_HEADLINE}}</div>
+    <div class="r-body">
+      <p>{{RECOMMENDATION_RATIONALE}}</p>
+      <p style="margin-top:3mm; font-size:9pt; color:var(--muted); text-transform:uppercase; letter-spacing:0.06em;">Trade-offs</p>
+      <ul>
+        {{RECOMMENDATION_TRADEOFFS}}
+      </ul>
+    </div>
+  </div>
+
+  <div class="page-footer">
+    <span><b>Estudio Local</b> · {{ANALYSIS_ID}}</span>
+    <span>Pág 2 / 4</span>
+  </div>
+</div>
+
+<!-- ════════════════ PAGE 3 — Detalle del escenario recomendado ════════════════ -->
+<div class="page">
+  <div class="page-header">
+    <div class="ph-brand">Estudio Local</div>
+    <div class="ph-doc-id">
+      <b>Análisis · {{ANALYSIS_ID}}</b><br>
+      Detalle escenario {{REC_SCENARIO_ID}} — {{REC_SCENARIO_LABEL}}
+    </div>
+  </div>
+
+  <h2 class="section">Escenario {{REC_SCENARIO_ID}} — {{REC_SCENARIO_LABEL}}</h2>
+
+  <h3 class="sub">Envolvente edificable</h3>
+  <table class="kv-stack">
+    <tbody>
+      {{REC_ENVELOPE_ROWS}}
+    </tbody>
+  </table>
+
+  <h3 class="sub">Retiros</h3>
+  <table>
+    <thead><tr><th>Lado</th><th>Distancia</th><th>Notas</th></tr></thead>
+    <tbody>
+      {{REC_RETIROS_ROWS}}
+    </tbody>
+  </table>
+
+  <h3 class="sub">Tipologías habilitadas</h3>
+  <ul class="tipologias">
+    {{REC_TIPOLOGIAS_LIST}}
+  </ul>
+
+  <h3 class="sub">Programa estimado</h3>
+  <p class="note">{{REC_PROGRAMA}}</p>
+
+  <h3 class="sub">Plazos / trámite</h3>
+  <p class="note">{{REC_PLAZOS}}</p>
+
+  <h3 class="sub">Notas</h3>
+  <p class="note">{{REC_GALIBO_NOTE}}</p>
+
+  <div class="page-footer">
+    <span><b>Estudio Local</b> · {{ANALYSIS_ID}}</span>
+    <span>Pág 3 / 4</span>
+  </div>
+</div>
+
+<!-- ════════════════ PAGE 4 — Normativa, fuentes, descargo ════════════════ -->
+<div class="page">
+  <div class="page-header">
+    <div class="ph-brand">Estudio Local</div>
+    <div class="ph-doc-id">
+      <b>Análisis · {{ANALYSIS_ID}}</b><br>
+      Normativa, fuentes y descargo
+    </div>
+  </div>
+
+  <h2 class="section">Marco normativo aplicable</h2>
+  <p class="lead">El análisis se rige por el TONE (Texto Ordenado de Normas de Edificación), Volumen V del Digesto Departamental de Maldonado.</p>
+  <table>
+    <thead><tr><th>Norma</th><th>Vigencia</th><th>Materia</th></tr></thead>
+    <tbody>
+      {{NORMATIVA_ROWS}}
+    </tbody>
+  </table>
+
+  <h2 class="section">Fuentes de datos</h2>
+  <table class="kv-stack">
+    <tbody>
+      <tr><td>Geometría catastral</td><td>SIG Maldonado (Geoportal Intendencia)</td></tr>
+      <tr><td>Polígonos de zonificación</td><td>ArcGIS ORDENANZA_CONSTRUCCION</td></tr>
+      <tr><td>Decretos digitalizados</td><td>Digesto Departamental (digesto.maldonado.gub.uy)</td></tr>
+      <tr><td>Motor de envolvente</td><td>{{GENERATOR_LINE}}</td></tr>
+      <tr><td>Última actualización tone-zones</td><td>{{SOURCES_LAST_UPDATED}}</td></tr>
+    </tbody>
+  </table>
+
+  {{CAVEATS_BLOCK}}
+
+  <h2 class="section">Descargo</h2>
+  <div class="disclaimer">
+    <p><b>Análisis indicativo, no certificación.</b> Este informe se basa en datos catastrales publicados por la Intendencia de Maldonado y en la interpretación del TONE vigente al momento de la generación. No reemplaza el dictamen del cuerpo técnico de la Intendencia ni la consulta formal previa a un trámite de permiso.</p>
+    <p>Verificá el TONE vigente y las modificaciones en <b>digesto.maldonado.gub.uy</b>. La habilitación efectiva de tipologías de unión catastral depende de la aprobación de la DNC.</p>
+    <p>Estudio Local no garantiza completitud ni exactitud de los datos catastrales reproducidos. Los valores de FOS/FOT/altura corresponden a la zona declarada en el portal cartográfico al momento del análisis.</p>
+  </div>
+
+  <div class="page-footer">
+    <span><b>Estudio Local</b> · {{ANALYSIS_ID}} · Generado {{DOC_DATE}}</span>
+    <span>Pág 4 / 4</span>
+  </div>
+</div>
+
+</body>
+</html>

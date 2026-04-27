@@ -1,0 +1,173 @@
+{
+  "schema": "estudio-local.normativa.v1",
+  "generated_at": "2026-04-26T23:45:00Z",
+  "skill_version": "0.1.0",
+
+  "selection": {
+    "padrones": ["130", "131", "132"],
+    "locality": "la-juanita",
+    "locality_name": "José Ignacio – La Juanita",
+    "regimen": "comun",
+    "area_total_m2": 13050,
+    "frente_estimado_m": 90,
+    "adjacent": true,
+    "lots": [
+      { "padron": "130", "manzana": "045", "area_m2": 4350, "frente_m": 30, "regimen": "comun" },
+      { "padron": "131", "manzana": "045", "area_m2": 4350, "frente_m": 30, "regimen": "comun" },
+      { "padron": "132", "manzana": "045", "area_m2": 4350, "frente_m": 30, "regimen": "comun" }
+    ]
+  },
+
+  "zone": {
+    "code": "2.1",
+    "name": "Amanzanado",
+    "decreto": "Dto. 3970/2017",
+    "data_quality": "verified",
+    "tipologias_catalog": [
+      {
+        "codigo": "vivienda_unifamiliar",
+        "nombre": "Vivienda unifamiliar",
+        "altura_m": 7,
+        "FOS_pct": 50,
+        "FOT_pct": 80,
+        "thresholds": { "area_min_m2": 300, "frente_min_m": 12 },
+        "retiros": { "frontal_m": 4, "lateral_m": 3, "fondo_m": 5, "entre_volumenes_m": null }
+      },
+      {
+        "codigo": "apareada",
+        "nombre": "Vivienda apareada",
+        "altura_m": 7,
+        "FOS_pct": 50,
+        "FOT_pct": 100,
+        "thresholds": { "area_min_m2": 600, "frente_min_m": 20 },
+        "retiros": { "frontal_m": 4, "lateral_m": 3, "fondo_m": 5, "entre_volumenes_m": null }
+      },
+      {
+        "codigo": "bloque_bajo",
+        "nombre": "Bloque Bajo",
+        "altura_m": 13.6,
+        "FOS_pct": 50,
+        "FOT_pct": 180,
+        "thresholds": { "area_min_m2": 1200, "frente_min_m": 30 },
+        "retiros": { "frontal_m": 4, "lateral_m": 3, "fondo_m": 5, "entre_volumenes_m": 6 }
+      },
+      {
+        "codigo": "bloque_medio",
+        "nombre": "Bloque Medio",
+        "altura_m": 28,
+        "FOS_pct": 50,
+        "FOT_pct": 290,
+        "thresholds": { "area_min_m2": 1000, "frente_min_m": 30 },
+        "retiros": { "frontal_m": 4, "lateral_m": 3, "fondo_m": 5, "entre_volumenes_m": 6 }
+      }
+    ],
+    "retiros_zone": { "frontal_m": 4, "lateral_m": 3, "fondo_m": 5 },
+    "special_rules": []
+  },
+
+  "scenarios": [
+    {
+      "id": "A",
+      "label": "Lotes individuales",
+      "headline": "3 viviendas unifamiliares · 10.440 m² edificables totales",
+      "applicable": true,
+      "tipologia": { "codigo": "vivienda_unifamiliar", "nombre": "Vivienda unifamiliar" },
+      "envelope": {
+        "FOS_pct": 50,
+        "FOT_pct": 80,
+        "altura_m": 7,
+        "viviendas_estimadas": 3,
+        "area_edificable_m2": 10440,
+        "area_ocupacion_m2": 6525
+      },
+      "retiros": { "frontal_m": 4, "lateral_m": 3, "fondo_m": 5, "entre_volumenes_m": null },
+      "tipologias_habilitadas": ["vivienda_unifamiliar"],
+      "programa": "3 viviendas unifamiliares en lotes independientes (~3.480 m² edificables c/u).",
+      "plazos": "Permiso de construcción ~4–6 meses por lote. Sin trámite catastral previo.",
+      "notes": ""
+    },
+    {
+      "id": "B",
+      "label": "Apareadas",
+      "headline": "6 unidades apareadas · 13.050 m² edificables",
+      "applicable": true,
+      "tipologia": { "codigo": "apareada", "nombre": "Vivienda apareada" },
+      "envelope": {
+        "FOS_pct": 50,
+        "FOT_pct": 100,
+        "altura_m": 7,
+        "viviendas_estimadas": 6,
+        "area_edificable_m2": 13050,
+        "area_ocupacion_m2": 6525
+      },
+      "retiros": { "frontal_m": 4, "lateral_m": 3, "fondo_m": 5, "entre_volumenes_m": null },
+      "tipologias_habilitadas": ["vivienda_unifamiliar", "apareada"],
+      "programa": "~6 unidades apareadas (2 por lote, medianera compartida).",
+      "plazos": "Requiere acuerdo de medianera notarial entre padrones colindantes (~30 días).",
+      "notes": ""
+    },
+    {
+      "id": "C1",
+      "label": "Englobamiento — Bloque Medio",
+      "headline": "37.845 m² edificables, +263% sobre desarrollo individual",
+      "applicable": true,
+      "tipologia": { "codigo": "bloque_medio", "nombre": "Bloque Medio" },
+      "envelope": {
+        "FOS_pct": 50,
+        "FOT_pct": 290,
+        "altura_m": 28,
+        "viviendas_estimadas": 473,
+        "area_edificable_m2": 37845,
+        "area_ocupacion_m2": 6525
+      },
+      "retiros": { "frontal_m": 4, "lateral_m": 3, "fondo_m": 5, "entre_volumenes_m": 6 },
+      "tipologias_habilitadas": ["vivienda_unifamiliar", "apareada", "bloque_bajo", "bloque_medio"],
+      "programa": "Aprox. 473 unidades de 80 m² (3 dorm) o ~630 unidades de 60 m² (2 dorm).",
+      "plazos": "Englobamiento DNC ~60–90 días. Permiso de construcción ~6–9 meses adicionales.",
+      "notes": "Frente union de 90 m supera el mínimo de 30 m. FOS 50% × 13.050 = 6.525 m² ocupación PB. FOT 290% sobre superficie unificada."
+    },
+    {
+      "id": "C2",
+      "label": "Englobamiento — Bloque Bajo",
+      "headline": "23.490 m² edificables, +125% sobre desarrollo individual",
+      "applicable": true,
+      "tipologia": { "codigo": "bloque_bajo", "nombre": "Bloque Bajo" },
+      "envelope": {
+        "FOS_pct": 50,
+        "FOT_pct": 180,
+        "altura_m": 13.6,
+        "viviendas_estimadas": 293,
+        "area_edificable_m2": 23490,
+        "area_ocupacion_m2": 6525
+      },
+      "retiros": { "frontal_m": 4, "lateral_m": 3, "fondo_m": 5, "entre_volumenes_m": 6 },
+      "tipologias_habilitadas": ["vivienda_unifamiliar", "apareada", "bloque_bajo"],
+      "programa": "~293 unidades de 80 m² en PB+4PA. Sin núcleo estructural complejo.",
+      "plazos": "Englobamiento DNC ~60–90 días. Permiso de construcción ~5–7 meses.",
+      "notes": "Alternativa de menor altura sin subsuelo obligatorio."
+    }
+  ],
+
+  "recommendation": {
+    "scenario_id": "C1",
+    "rationale": "El englobamiento de los 3 padrones desbloquea Bloque Medio (área mín 1.000 m², frente mín 30 m), maximizando m² edificables. La unión catastral en DNC (~60–90 días) es el único trámite previo.",
+    "uplift_vs_individual_pct": 263,
+    "tradeoffs": [
+      "Englobamiento requiere fusión catastral DNC (~60–90 días)",
+      "Pérdida de 3 padrones independientes — menos flexibilidad de venta por etapas",
+      "Bloque Medio (PB+9PA) requiere subsuelo recomendado para parking"
+    ]
+  },
+
+  "caveats": [
+    "Frente estimado a partir de la unión geométrica — verificar con plano de obra antes de presentar permiso.",
+    "data_quality=verified para zona 2.1; revisar special_rules manualmente para casos de rambla / borde costero.",
+    "Cantidad de viviendas es estimación con 80 m² promedio — proyecto definitivo determina densidad real."
+  ],
+
+  "sources": {
+    "tone_zones": "skills/normativa/datos/tone-zones.json",
+    "decretos": ["Dto. 3970/2017", "Dto. 4056/2022"],
+    "last_updated": "2026-03-15"
+  }
+}

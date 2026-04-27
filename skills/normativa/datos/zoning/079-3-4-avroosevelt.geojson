@@ -1,0 +1,1 @@
+{"type": "FeatureCollection", "features": [{"type": "Feature", "id": 1, "geometry": {"type": "LineString", "coordinates": [[-54.95631086168837, -34.91891263418867], [-54.92833888231792, -34.94473145521851]]}, "properties": {"objectid": 1, "id": 0, "texto": "4113", "zona": "3-4", "st_length(shape)": 4688.948923366588}}]}

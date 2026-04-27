@@ -1,0 +1,705 @@
+{
+  "titulo": "titulo-iii-cap-ii-sector-1",
+  "zones": [
+    {
+      "zone_code": "1.1",
+      "zone_name": "Predios frentistas a la Ruta 10 y a la Costa",
+      "source_titulo": "titulo-iii-cap-ii-sector-1",
+      "source_article": "Art. D.263",
+      "decreto": "3718/1997",
+      "tipologias": [
+        {
+          "codigo": "unidad_aislada",
+          "nombre": "Unidad Aislada",
+          "thresholds": {
+            "area_min_m2": null,
+            "frente_min_m": null,
+            "operator": "and"
+          },
+          "altura_m": 7,
+          "pisos_label": "PB + PA",
+          "FOS_pct": 25,
+          "FOS_SS_pct": 25,
+          "FOS_V_pct": 50,
+          "FOT_pct": 50,
+          "retiros": {
+            "frontal_m": 6,
+            "lateral_m": 3,
+            "lateral_sum_min_m": null,
+            "fondo_m": 6
+          },
+          "notas": [
+            "Lateral sobre calles transversales: 4 m",
+            "Terrazas/pérgolas en PB permitidas hasta 3 m de profundidad en retiro de fondo",
+            "Salientes: 1,50 m sobre lateral y 2 m sobre frente/fondo en 30% de la superficie",
+            "Prohibido: bloques y unidades apareadas"
+          ]
+        },
+        {
+          "codigo": "conjunto_unidades",
+          "nombre": "Conjunto de unidades aisladas",
+          "thresholds": {
+            "area_min_m2": 1000,
+            "frente_min_m": null,
+            "operator": "and"
+          },
+          "altura_m": 7,
+          "pisos_label": "PB + PA",
+          "FOS_pct": 25,
+          "FOS_SS_pct": 25,
+          "FOS_V_pct": 50,
+          "FOT_pct": 50,
+          "retiros": {
+            "frontal_m": 6,
+            "lateral_m": 3,
+            "lateral_sum_min_m": null,
+            "fondo_m": 6
+          },
+          "notas": [
+            "1.000 m² por vivienda",
+            "Separación mínima entre viviendas: 6 m",
+            "Lateral sobre calles transversales: 4 m"
+          ]
+        }
+      ]
+    },
+    {
+      "zone_code": "1.2",
+      "zone_name": "Costa",
+      "source_titulo": "titulo-iii-cap-ii-sector-1",
+      "source_article": "Art. D.264",
+      "decreto": "3718/1997; 3910/2012",
+      "tipologias": [
+        {
+          "codigo": "bloque_bajo",
+          "nombre": "Bloque Bajo",
+          "thresholds": {
+            "area_min_m2": 1200,
+            "frente_min_m": 30,
+            "operator": "and"
+          },
+          "altura_m": 7,
+          "pisos_label": "PB + PA",
+          "FOS_pct": 40,
+          "FOS_SS_pct": 40,
+          "FOS_V_pct": 20,
+          "FOT_pct": 70,
+          "retiros": {
+            "frontal_m": 4,
+            "lateral_m": null,
+            "lateral_sum_min_m": null,
+            "fondo_m": null
+          },
+          "notas": [
+            "Frontal 6 m sobre Ruta 10 y predios fiscales (4 m resto)",
+            "Terrazas con pérgolas/toldos permitidas hasta 75% del retiro frontal",
+            "Muro frontal máximo: 1,30 m de altura promedio",
+            "Salientes: 1,50 m sobre retiro frontal",
+            "Subzona 1.2.1 (Área Protegida, mzs. 10,11,14,19,20,28,29,33 + frentistas a Salvador Pallas) permite solo unidades aisladas o apareadas"
+          ]
+        }
+      ]
+    },
+    {
+      "zone_code": "1.3",
+      "zone_name": "Predios frentistas a la Ruta 10",
+      "source_titulo": "titulo-iii-cap-ii-sector-1",
+      "source_article": "Art. D.265",
+      "decreto": "3718/1997",
+      "tipologias": [
+        {
+          "codigo": "bloque_bajo",
+          "nombre": "Bloque Bajo",
+          "thresholds": {
+            "area_min_m2": null,
+            "frente_min_m": null,
+            "operator": "and"
+          },
+          "altura_m": 9,
+          "pisos_label": "PB + 1PA + PH",
+          "FOS_pct": 40,
+          "FOS_SS_pct": 40,
+          "FOS_V_pct": 20,
+          "FOT_pct": 105,
+          "retiros": {
+            "frontal_m": 4,
+            "lateral_m": null,
+            "lateral_sum_min_m": null,
+            "fondo_m": null
+          },
+          "notas": [
+            "Frontal 6 m sobre Ruta 10 (4 m resto)",
+            "Edificios frentistas a Ruta 10 deben proyectarse normalmente a la Ruta en 100% de fachada sobre PB",
+            "Último piso a dos aguas con pendiente 45°",
+            "Parámetros aplican a predios frentistas a Ruta 10 hasta la mitad de la manzana, máx. 50 m",
+            "Salientes: 2 m en 30% de fachada (frente y fondo)"
+          ]
+        }
+      ]
+    },
+    {
+      "zone_code": "1.4.1",
+      "zone_name": "Costanera Norte",
+      "source_titulo": "titulo-iii-cap-ii-sector-1",
+      "source_article": "Art. D.266",
+      "decreto": "3718/1997; 4056/2022",
+      "tipologias": [
+        {
+          "codigo": "bloque_bajo_9m",
+          "nombre": "Bloque Bajo 9 m",
+          "thresholds": {
+            "area_min_m2": 1200,
+            "frente_min_m": null,
+            "operator": "and",
+            "manzana_entera_override": true
+          },
+          "altura_m": 9,
+          "pisos_label": "PB + PA + PH",
+          "FOS_pct": null,
+          "FOS_SS_pct": null,
+          "FOS_V_pct": null,
+          "FOT_pct": 70,
+          "retiros": {
+            "frontal_m": 10,
+            "lateral_m": 3,
+            "lateral_sum_min_m": 8,
+            "fondo_m": 4
+          },
+          "notas": [
+            "Frontal 10 m sobre Ruta 10; 6 m en calles transversales",
+            "Bloque debe ubicarse dentro de faja de 50 m desde límite de propiedad",
+            "Proyectado normalmente a la Ruta 10 en 100% de fachada sobre PB",
+            "Separación mínima entre proyecciones: 8 m",
+            "Separación mínima entre edificios en conjuntos: 8 m",
+            "Inscrito en circunferencia Ø 42,50 m",
+            "Planta máxima: 900 m²",
+            "FOS/FOT por superficie de terreno (interpolación lineal): <400 m²: FOS 40% / FOT 60%; >1000 m²: FOS 25%"
+          ]
+        },
+        {
+          "codigo": "bloque_bajo_12m",
+          "nombre": "Bloque Bajo 12 m",
+          "thresholds": {
+            "area_min_m2": 2000,
+            "frente_min_m": 30,
+            "operator": "and"
+          },
+          "altura_m": 12,
+          "pisos_label": "PB + 2PA + PH",
+          "FOS_pct": null,
+          "FOS_SS_pct": null,
+          "FOS_V_pct": null,
+          "FOT_pct": 70,
+          "retiros": {
+            "frontal_m": 10,
+            "lateral_m": 3,
+            "lateral_sum_min_m": 8,
+            "fondo_m": 4
+          },
+          "notas": [
+            "Frontal 10 m sobre Ruta 10; 6 m en calles transversales",
+            "Proyectado normalmente a la Ruta 10 en 100% de fachada sobre PB",
+            "Separación mínima entre proyecciones: 8 m; entre edificios: 8 m",
+            "Inscrito en circunferencia Ø 42,50 m; planta máx. 900 m²"
+          ]
+        },
+        {
+          "codigo": "conjunto_bloques",
+          "nombre": "Conjunto de Bloques",
+          "thresholds": {
+            "area_min_m2": 1500,
+            "frente_min_m": 30,
+            "operator": "and"
+          },
+          "altura_m": 12,
+          "pisos_label": "PB + 2PA + PH",
+          "FOS_pct": null,
+          "FOS_SS_pct": null,
+          "FOS_V_pct": null,
+          "FOT_pct": 70,
+          "retiros": {
+            "frontal_m": 10,
+            "lateral_m": 3,
+            "lateral_sum_min_m": 8,
+            "fondo_m": 4
+          },
+          "notas": [
+            "1.500 m² por bloque; 30 m de frente por bloque",
+            "Separación mínima entre edificios: 8 m"
+          ]
+        }
+      ]
+    },
+    {
+      "zone_code": "1.4.2",
+      "zone_name": "Barrio Jardín — Resto",
+      "source_titulo": "titulo-iii-cap-ii-sector-1",
+      "source_article": "Art. D.266",
+      "decreto": "3718/1997; 4056/2022",
+      "tipologias": [
+        {
+          "codigo": "unidad_aislada",
+          "nombre": "Unidad Aislada",
+          "thresholds": {
+            "area_min_m2": null,
+            "frente_min_m": null,
+            "operator": "and"
+          },
+          "altura_m": 7,
+          "pisos_label": "PB + PA",
+          "FOS_pct": null,
+          "FOS_SS_pct": null,
+          "FOS_V_pct": null,
+          "FOT_pct": 50,
+          "retiros": {
+            "frontal_m": 4,
+            "lateral_m": 3,
+            "lateral_sum_min_m": null,
+            "fondo_m": 3
+          },
+          "notas": [
+            "Frontal 6 m sobre Ruta 10 y predios fiscales (4 m resto)",
+            "Lateral: 3 m + 2 m (segundo lateral)",
+            "Separación mínima entre unidades o pares: 6 m",
+            "Predios pequeños (frente ≤ 15 m): retiro unilateral 3 m, exonerado el de 2 m (edificación ≤ 3 m altura promedial en retiro exonerado)",
+            "FOS/FOT por superficie: <400 m²: FOS 40% / FOT 60%; >1000 m²: FOS 25%"
+          ]
+        },
+        {
+          "codigo": "unidad_apareada",
+          "nombre": "Unidad Apareada",
+          "thresholds": {
+            "area_min_m2": null,
+            "frente_min_m": null,
+            "operator": "and"
+          },
+          "altura_m": 7,
+          "pisos_label": "PB + PA",
+          "FOS_pct": null,
+          "FOS_SS_pct": null,
+          "FOS_V_pct": null,
+          "FOT_pct": 50,
+          "retiros": {
+            "frontal_m": 4,
+            "lateral_m": 3,
+            "lateral_sum_min_m": null,
+            "fondo_m": 3
+          },
+          "notas": [
+            "Frontal 6 m sobre Ruta 10 y predios fiscales (4 m resto)",
+            "Lateral: 3 m + 2 m",
+            "Separación mínima entre pares: 6 m"
+          ]
+        },
+        {
+          "codigo": "conjunto_unidades",
+          "nombre": "Conjunto de Unidades Aisladas/Apareadas",
+          "thresholds": {
+            "area_min_m2": 1000,
+            "frente_min_m": null,
+            "operator": "and"
+          },
+          "altura_m": 7,
+          "pisos_label": "PB + PA",
+          "FOS_pct": null,
+          "FOS_SS_pct": null,
+          "FOS_V_pct": null,
+          "FOT_pct": 50,
+          "retiros": {
+            "frontal_m": 4,
+            "lateral_m": 3,
+            "lateral_sum_min_m": null,
+            "fondo_m": 3
+          },
+          "notas": [
+            "1.000 m² por unidad o par",
+            "Separación mínima: 6 m"
+          ]
+        }
+      ]
+    },
+    {
+      "zone_code": "1.4.3",
+      "zone_name": "Costanera Sur",
+      "source_titulo": "titulo-iii-cap-ii-sector-1",
+      "source_article": "Art. D.266",
+      "decreto": "3718/1997; 4056/2022",
+      "tipologias": [
+        {
+          "codigo": "unidad_aislada",
+          "nombre": "Unidad Aislada",
+          "thresholds": {
+            "area_min_m2": null,
+            "frente_min_m": null,
+            "operator": "and"
+          },
+          "altura_m": 7,
+          "pisos_label": "PB + PA",
+          "FOS_pct": null,
+          "FOS_SS_pct": null,
+          "FOS_V_pct": null,
+          "FOT_pct": 50,
+          "retiros": {
+            "frontal_m": 4,
+            "lateral_m": 3,
+            "lateral_sum_min_m": null,
+            "fondo_m": 3
+          },
+          "notas": [
+            "Frontal 6 m sobre Ruta 10 y predios fiscales (4 m resto)",
+            "Lateral: 3 m + 2 m"
+          ]
+        },
+        {
+          "codigo": "unidad_apareada",
+          "nombre": "Unidad Apareada",
+          "thresholds": {
+            "area_min_m2": null,
+            "frente_min_m": null,
+            "operator": "and"
+          },
+          "altura_m": 7,
+          "pisos_label": "PB + PA",
+          "FOS_pct": null,
+          "FOS_SS_pct": null,
+          "FOS_V_pct": null,
+          "FOT_pct": 50,
+          "retiros": {
+            "frontal_m": 4,
+            "lateral_m": 3,
+            "lateral_sum_min_m": null,
+            "fondo_m": 3
+          },
+          "notas": [
+            "Lateral: 3 m + 2 m"
+          ]
+        },
+        {
+          "codigo": "edificacion_baja",
+          "nombre": "Edificación Baja",
+          "thresholds": {
+            "area_min_m2": 2000,
+            "frente_min_m": 30,
+            "operator": "and"
+          },
+          "altura_m": 7,
+          "pisos_label": "PB + PA",
+          "FOS_pct": null,
+          "FOS_SS_pct": null,
+          "FOS_V_pct": null,
+          "FOT_pct": 50,
+          "retiros": {
+            "frontal_m": 10,
+            "lateral_m": 6,
+            "lateral_sum_min_m": null,
+            "fondo_m": 4
+          },
+          "notas": [
+            "Frontal 10 m sobre Ruta 10; 6 m en calles transversales",
+            "2.000 m² por edificación; agrupamiento solo si unidades ≥ 200 m²",
+            "Agrupamiento de más de 2 unidades = Edificación Baja",
+            "Volúmenes proyectados normalmente a la Ruta 10 en 100% de fachada sobre PB",
+            "Separación mínima entre proyecciones: 12 m; entre edificios: 12 m",
+            "Inscrito en circunferencia Ø 30 m"
+          ]
+        }
+      ]
+    },
+    {
+      "zone_code": "1.4.4",
+      "zone_name": "Marina Beach",
+      "source_titulo": "titulo-iii-cap-ii-sector-1",
+      "source_article": "Art. D.266",
+      "decreto": "3718/1997; 4056/2022",
+      "tipologias": [
+        {
+          "codigo": "unidad_aislada",
+          "nombre": "Unidad Aislada",
+          "thresholds": {
+            "area_min_m2": null,
+            "frente_min_m": null,
+            "operator": "and"
+          },
+          "altura_m": 7,
+          "pisos_label": "PB + PA",
+          "FOS_pct": 25,
+          "FOS_SS_pct": 0,
+          "FOS_V_pct": null,
+          "FOT_pct": 45,
+          "retiros": {
+            "frontal_m": 15,
+            "lateral_m": 3,
+            "lateral_sum_min_m": null,
+            "fondo_m": 3
+          },
+          "notas": [
+            "Frontal 15 m sobre Ruta 10 (10 m servidumbre + 5 m)",
+            "Lateral: 3 m + 2 m",
+            "FOS PA 20%; FOS NNP 60% (natural no pavimentado); no se permiten subsuelos",
+            "Niveles altimétricos naturales conservados (solo alterar donde se implanta la edificación)",
+            "No se permite enjardinado ni especies exóticas",
+            "No cortinas de árboles que impidan visuales al mar; mantener visuales desde Ruta 10",
+            "No construcciones secundarias en retiros (ni permanentes ni transitorias)",
+            "Retiro frontal: área de intervención ≤ 50% de superficie libre entre edificación y servidumbre"
+          ]
+        },
+        {
+          "codigo": "unidad_apareada",
+          "nombre": "Unidad Apareada",
+          "thresholds": {
+            "area_min_m2": null,
+            "frente_min_m": null,
+            "operator": "and"
+          },
+          "altura_m": 7,
+          "pisos_label": "PB + PA",
+          "FOS_pct": 25,
+          "FOS_SS_pct": 0,
+          "FOS_V_pct": null,
+          "FOT_pct": 45,
+          "retiros": {
+            "frontal_m": 15,
+            "lateral_m": 3,
+            "lateral_sum_min_m": null,
+            "fondo_m": 3
+          },
+          "notas": [
+            "Frontal 15 m sobre Ruta 10 (10 m servidumbre + 5 m)",
+            "Lateral: 3 m + 2 m",
+            "FOS PA 20%; FOS NNP 60%"
+          ]
+        },
+        {
+          "codigo": "edificacion_baja",
+          "nombre": "Edificación Baja",
+          "thresholds": {
+            "area_min_m2": 2000,
+            "frente_min_m": 30,
+            "operator": "and"
+          },
+          "altura_m": 7,
+          "pisos_label": "PB + PA",
+          "FOS_pct": 25,
+          "FOS_SS_pct": 0,
+          "FOS_V_pct": null,
+          "FOT_pct": 45,
+          "retiros": {
+            "frontal_m": 15,
+            "lateral_m": 6,
+            "lateral_sum_min_m": null,
+            "fondo_m": 4
+          },
+          "notas": [
+            "Frontal 15 m sobre Ruta 10 (10 m servidumbre + 5 m)",
+            "FOS PA 20%; FOS NNP 60%; no subsuelos",
+            "Niveles altimétricos naturales conservados"
+          ]
+        },
+        {
+          "codigo": "hotelero",
+          "nombre": "Hotelero",
+          "thresholds": {
+            "area_min_m2": null,
+            "frente_min_m": null,
+            "operator": "and"
+          },
+          "altura_m": 7,
+          "pisos_label": null,
+          "FOS_pct": null,
+          "FOS_SS_pct": null,
+          "FOS_V_pct": null,
+          "FOT_pct": null,
+          "retiros": {
+            "frontal_m": 15,
+            "lateral_m": null,
+            "lateral_sum_min_m": null,
+            "fondo_m": null
+          },
+          "notas": [
+            "Parámetros Opcionales del Art. 308 (Decreto 3889)",
+            "Altura máx. 7 m; FOS NNP 50%"
+          ]
+        }
+      ]
+    },
+    {
+      "zone_code": "1.5",
+      "zone_name": "Santa Mónica",
+      "source_titulo": "titulo-iii-cap-ii-sector-1",
+      "source_article": "Art. D.267",
+      "decreto": "3718/1997",
+      "tipologias": [
+        {
+          "codigo": "unidad_aislada",
+          "nombre": "Unidad Aislada",
+          "thresholds": {
+            "area_min_m2": null,
+            "frente_min_m": 15,
+            "operator": "and"
+          },
+          "altura_m": 7,
+          "pisos_label": "PB + PA",
+          "FOS_pct": 25,
+          "FOS_SS_pct": null,
+          "FOS_V_pct": null,
+          "FOT_pct": 50,
+          "retiros": {
+            "frontal_m": 4,
+            "lateral_m": 3,
+            "lateral_sum_min_m": null,
+            "fondo_m": 3
+          },
+          "notas": [
+            "Frontal 6 m sobre Ruta 10 y predios fiscales (4 m resto)",
+            "Lateral: 3 m + 2 m",
+            "FOS NNP 100% (natural no pavimentado)",
+            "10% adicional de FOS para garaje en PB (excluido del FOT)",
+            "Altura medida desde línea 1 m superior a la recta de comparación",
+            "Construcción sobre pilotes obligatoria: pilotes separados > 2,50 m, diámetro ≤ 30 cm",
+            "No se permiten subsuelos; no se permite modificación topográfica",
+            "No se permite césped ni cubierta de tierra: solo plantas costeras nativas",
+            "Salientes: 2 m máximo en 30% de la superficie de fachada",
+            "Frentes ≤ 15 m: aplican reglas modificadas de retiro"
+          ]
+        },
+        {
+          "codigo": "conjunto_unidades",
+          "nombre": "Conjunto de Unidades Aisladas",
+          "thresholds": {
+            "area_min_m2": 1000,
+            "frente_min_m": 15,
+            "operator": "and"
+          },
+          "altura_m": 7,
+          "pisos_label": "PB + PA",
+          "FOS_pct": 25,
+          "FOS_SS_pct": null,
+          "FOS_V_pct": null,
+          "FOT_pct": 50,
+          "retiros": {
+            "frontal_m": 4,
+            "lateral_m": 3,
+            "lateral_sum_min_m": null,
+            "fondo_m": 3
+          },
+          "notas": [
+            "1.000 m² por unidad + separación mínima 6 m",
+            "Frontal 6 m sobre Ruta 10 y predios fiscales",
+            "FOS NNP 100%"
+          ]
+        }
+      ]
+    },
+    {
+      "zone_code": "1.6",
+      "zone_name": "Pedro Campbell y Manzanas adyacentes al Norte",
+      "source_titulo": "titulo-iii-cap-ii-sector-1",
+      "source_article": "Art. D.325",
+      "decreto": "3970/2017",
+      "tipologias": [
+        {
+          "codigo": "unidad_aislada",
+          "nombre": "Unidad Aislada",
+          "thresholds": {
+            "area_min_m2": 600,
+            "frente_min_m": null,
+            "operator": "and"
+          },
+          "altura_m": 7,
+          "pisos_label": "PB + PA",
+          "FOS_pct": 20,
+          "FOS_SS_pct": 40,
+          "FOS_V_pct": 60,
+          "FOT_pct": 60,
+          "retiros": {
+            "frontal_m": 4,
+            "lateral_m": 2,
+            "lateral_sum_min_m": 6,
+            "fondo_m": 3
+          },
+          "notas": [
+            "600 m² por unidad",
+            "Salientes: 1,50 m",
+            "No se autorizan bloques medios ni altos"
+          ]
+        },
+        {
+          "codigo": "unidad_apareada",
+          "nombre": "Unidad Apareada",
+          "thresholds": {
+            "area_min_m2": 600,
+            "frente_min_m": null,
+            "operator": "and"
+          },
+          "altura_m": 7,
+          "pisos_label": "PB + PA",
+          "FOS_pct": 20,
+          "FOS_SS_pct": 40,
+          "FOS_V_pct": 60,
+          "FOT_pct": 60,
+          "retiros": {
+            "frontal_m": 4,
+            "lateral_m": 2,
+            "lateral_sum_min_m": 6,
+            "fondo_m": 3
+          },
+          "notas": [
+            "600 m² por unidad o par",
+            "Salientes: 1,50 m"
+          ]
+        },
+        {
+          "codigo": "bloque_bajo",
+          "nombre": "Bloque Bajo",
+          "thresholds": {
+            "area_min_m2": 1200,
+            "frente_min_m": 30,
+            "operator": "and"
+          },
+          "altura_m": 9,
+          "pisos_label": "PB + 2PA",
+          "FOS_pct": 20,
+          "FOS_SS_pct": 40,
+          "FOS_V_pct": 60,
+          "FOT_pct": 60,
+          "retiros": {
+            "frontal_m": 6,
+            "lateral_m": 3,
+            "lateral_sum_min_m": 8,
+            "fondo_m": 4
+          },
+          "notas": [
+            "Salientes: hasta 2 m en bloques bajos",
+            "Inscrito en circunferencia Ø 42,50 m; planta máx. 900 m²"
+          ]
+        },
+        {
+          "codigo": "conjunto_bloques",
+          "nombre": "Conjunto de Bloques",
+          "thresholds": {
+            "area_min_m2": 900,
+            "frente_min_m": 30,
+            "operator": "and"
+          },
+          "altura_m": 9,
+          "pisos_label": "PB + 2PA",
+          "FOS_pct": 20,
+          "FOS_SS_pct": 40,
+          "FOS_V_pct": 60,
+          "FOT_pct": 60,
+          "retiros": {
+            "frontal_m": 6,
+            "lateral_m": 3,
+            "lateral_sum_min_m": 8,
+            "fondo_m": 4
+          },
+          "notas": [
+            "900 m² por bloque; 30 m de frente",
+            "Separación mínima entre edificios: 8 m",
+            "Inscrito en circunferencia Ø 42,50 m; planta máx. 900 m²"
+          ]
+        }
+      ]
+    }
+  ]
+}

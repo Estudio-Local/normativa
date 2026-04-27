@@ -1,0 +1,641 @@
+{
+  "titulo": "titulo-ii-cap-ii-sector-2",
+  "zones": [
+    {
+      "zone_code": "2.1",
+      "zone_name": "Plaza",
+      "source_titulo": "titulo-ii-cap-ii-sector-2",
+      "source_article": "Art. D.199",
+      "decreto": "3885/2011",
+      "tipologias": [
+        {
+          "codigo": "bloque_bajo",
+          "nombre": "Bloque Bajo",
+          "thresholds": {
+            "area_min_m2": null,
+            "frente_min_m": null,
+            "operator": "and"
+          },
+          "altura_m": 13.60,
+          "pisos_label": "PB + 4PA",
+          "FOT_pct": 270,
+          "FOS_pct": 60,
+          "FOS_SS_pct": 80,
+          "FOS_V_pct": null,
+          "retiros": {
+            "frontal_m": 0,
+            "lateral_m": null,
+            "fondo_m": 5
+          },
+          "notas": [
+            "Gálibo a 45° en último nivel",
+            "Alineación con construcciones existentes obligatoria",
+            "Usos no residenciales en PB y 1PA pueden alcanzar FOS 100%; excedente no computa en FOT",
+            "Régimen de Patrimonio Histórico (Art. D.196)"
+          ]
+        }
+      ]
+    },
+    {
+      "zone_code": "2.2",
+      "zone_name": "Casco Urbano",
+      "source_titulo": "titulo-ii-cap-ii-sector-2",
+      "source_article": "Art. D.200",
+      "decreto": "3885/2011",
+      "tipologias": [
+        {
+          "codigo": "bloque_bajo",
+          "nombre": "Bloque Bajo",
+          "thresholds": {
+            "area_min_m2": 300,
+            "frente_min_m": 12,
+            "operator": "and"
+          },
+          "altura_m": 13.60,
+          "pisos_label": "PB + 4PA",
+          "FOT_pct": 220,
+          "FOS_pct": 50,
+          "FOS_SS_pct": 80,
+          "FOS_V_pct": null,
+          "retiros": {
+            "frontal_m": 0,
+            "lateral_m": null,
+            "fondo_m": 5
+          },
+          "notas": [
+            "Gálibo a 45° en último nivel",
+            "Alineación con construcciones existentes obligatoria",
+            "Régimen de Patrimonio Histórico (Art. D.196)"
+          ]
+        },
+        {
+          "codigo": "bloque_medio",
+          "nombre": "Bloque Medio",
+          "thresholds": {
+            "area_min_m2": 500,
+            "frente_min_m": 15,
+            "operator": "and"
+          },
+          "altura_m": 28.0,
+          "pisos_label": "PB + 9PA",
+          "FOT_pct": 480,
+          "FOS_pct": 50,
+          "FOS_SS_pct": 80,
+          "FOS_V_pct": null,
+          "retiros": {
+            "frontal_m": 4,
+            "lateral_m": null,
+            "fondo_m": 9
+          },
+          "notas": [
+            "Gálibo a 45° en último nivel",
+            "Alineación con construcciones existentes obligatoria",
+            "Régimen de Patrimonio Histórico (Art. D.196)"
+          ]
+        }
+      ]
+    },
+    {
+      "zone_code": "2.3",
+      "zone_name": "Barrio Jardín",
+      "source_titulo": "titulo-ii-cap-ii-sector-2",
+      "source_article": "Art. D.201",
+      "decreto": "3885/2011",
+      "tipologias": [
+        {
+          "codigo": "bloque_bajo",
+          "nombre": "Bloque Bajo",
+          "thresholds": {
+            "area_min_m2": 450,
+            "frente_min_m": 14,
+            "operator": "and"
+          },
+          "altura_m": 13.60,
+          "pisos_label": "PB + 4PA",
+          "FOT_pct": 180,
+          "FOS_pct": 50,
+          "FOS_SS_pct": 70,
+          "FOS_V_pct": 20,
+          "retiros": {
+            "frontal_m": 4,
+            "lateral_m": "2/7_altura_min_3",
+            "fondo_m": 5
+          },
+          "notas": ["Gálibo a 45° en último nivel"]
+        },
+        {
+          "codigo": "bloque_medio",
+          "nombre": "Bloque Medio",
+          "thresholds": {
+            "area_min_m2": 1000,
+            "frente_min_m": 30,
+            "operator": "and"
+          },
+          "altura_m": 28.0,
+          "pisos_label": "PB + 9PA",
+          "FOT_pct": 290,
+          "FOS_pct": 30,
+          "FOS_SS_pct": 70,
+          "FOS_V_pct": 20,
+          "retiros": {
+            "frontal_m": 4,
+            "lateral_m": "2/7_altura_min_3",
+            "fondo_m": 9
+          },
+          "notas": ["Gálibo a 45° en último nivel"]
+        }
+      ]
+    },
+    {
+      "zone_code": "2.4",
+      "zone_name": "Barrios",
+      "source_titulo": "titulo-ii-cap-ii-sector-2",
+      "source_article": "Art. D.202",
+      "decreto": "3718/1997",
+      "tipologias": [],
+      "notas": [
+        "Zona paragua con 6 subzonas (2.4.1 a 2.4.6). Parámetros específicos en cada subzona."
+      ]
+    },
+    {
+      "zone_code": "2.4.1",
+      "zone_name": "Subzona 2.4.1",
+      "source_titulo": "titulo-ii-cap-ii-sector-2",
+      "source_article": "Art. D.202",
+      "decreto": "3718/1997",
+      "tipologias": [
+        {
+          "codigo": "unidad_aislada",
+          "nombre": "Unidad Aislada",
+          "thresholds": {
+            "area_min_m2": null,
+            "frente_min_m": null,
+            "operator": "and"
+          },
+          "altura_m": 7.0,
+          "pisos_label": "PB + PA",
+          "FOT_pct": 80,
+          "FOS_pct": 40,
+          "FOS_SS_pct": 60,
+          "FOS_V_pct": 50,
+          "retiros": {
+            "frontal_m": 4,
+            "lateral_m": "3 m bilateral (exonerable un lado para frentes < 18 m, hasta 3 m de altura)",
+            "fondo_m": null
+          },
+          "notas": [
+            "Ocupación lateral: hasta 20 m² en mitad posterior del predio",
+            "Zonas de Fragilidad Ecosistémica en cerros",
+            "Zona Buffer: 100 m desde áreas de fragilidad, 1 unidad cada 150 m², lote mín. 700 m², máx. 240 m² construidos + 60 m² decks"
+          ]
+        }
+      ]
+    },
+    {
+      "zone_code": "2.4.2",
+      "zone_name": "Subzona 2.4.2",
+      "source_titulo": "titulo-ii-cap-ii-sector-2",
+      "source_article": "Art. D.202",
+      "decreto": "3718/1997",
+      "tipologias": [
+        {
+          "codigo": "unidad_aislada",
+          "nombre": "Unidad Aislada",
+          "thresholds": {
+            "area_min_m2": null,
+            "frente_min_m": null,
+            "operator": "and"
+          },
+          "altura_m": 7.0,
+          "pisos_label": "PB + PA",
+          "FOT_pct": 100,
+          "FOS_pct": 50,
+          "FOS_SS_pct": 70,
+          "FOS_V_pct": 30,
+          "retiros": {
+            "frontal_m": 4,
+            "lateral_m": null,
+            "fondo_m": null
+          },
+          "notas": [
+            "Pérgolas permitidas en retiro frontal",
+            "Cocheras descubiertas permitidas en retiro frontal"
+          ]
+        }
+      ]
+    },
+    {
+      "zone_code": "2.4.3",
+      "zone_name": "Subzona 2.4.3",
+      "source_titulo": "titulo-ii-cap-ii-sector-2",
+      "source_article": "Art. D.202",
+      "decreto": "3718/1997",
+      "tipologias": [
+        {
+          "codigo": "edificacion_baja",
+          "nombre": "Edificación Baja",
+          "thresholds": {
+            "area_min_m2": null,
+            "frente_min_m": null,
+            "operator": "and"
+          },
+          "altura_m": 9.0,
+          "pisos_label": "PB + 2PA",
+          "FOT_pct": 150,
+          "FOS_pct": 70,
+          "FOS_SS_pct": 80,
+          "FOS_V_pct": 20,
+          "retiros": {
+            "frontal_m": 4,
+            "lateral_m": null,
+            "fondo_m": "4 m (programas VIS con > 9 m de altura)"
+          },
+          "notas": ["Pérgolas permitidas en retiro frontal"]
+        }
+      ]
+    },
+    {
+      "zone_code": "2.4.4",
+      "zone_name": "Subzona 2.4.4 Marina Beach",
+      "source_titulo": "titulo-ii-cap-ii-sector-2",
+      "source_article": "Art. D.202",
+      "decreto": "3718/1997",
+      "tipologias": [
+        {
+          "codigo": "unidad_aislada",
+          "nombre": "Unidad Aislada",
+          "thresholds": {
+            "area_min_m2": null,
+            "frente_min_m": null,
+            "operator": "and"
+          },
+          "altura_m": 7.0,
+          "pisos_label": "PB + PA",
+          "FOT_pct": 100,
+          "FOS_pct": 50,
+          "FOS_SS_pct": 50,
+          "FOS_V_pct": 40,
+          "retiros": {
+            "frontal_m": 4,
+            "lateral_m": "3 m unilateral",
+            "fondo_m": null
+          },
+          "notas": [
+            "Pérgolas horizontales hasta 50% del ancho, máx. 3 m de altura",
+            "Ocupación lateral: hasta 20 m² en mitad posterior, máx. 3 m de altura"
+          ]
+        },
+        {
+          "codigo": "bloque_bajo",
+          "nombre": "Bloque Bajo",
+          "thresholds": {
+            "area_min_m2": 600,
+            "frente_min_m": null,
+            "operator": "and"
+          },
+          "altura_m": 9.0,
+          "pisos_label": "PB + 2PA",
+          "FOT_pct": 150,
+          "FOS_pct": 50,
+          "FOS_SS_pct": 50,
+          "FOS_V_pct": 40,
+          "retiros": {
+            "frontal_m": 4,
+            "lateral_m": "3 m unilateral",
+            "fondo_m": null
+          },
+          "notas": [
+            "Dimensión mínima para Bloque Bajo: 600 m² (D.192)",
+            "Pérgolas horizontales hasta 50% del ancho, máx. 3 m de altura",
+            "Ocupación lateral: hasta 20 m² en mitad posterior"
+          ]
+        }
+      ]
+    },
+    {
+      "zone_code": "2.4.5",
+      "zone_name": "Subzona 2.4.5",
+      "source_titulo": "titulo-ii-cap-ii-sector-2",
+      "source_article": "Art. D.202",
+      "decreto": "3718/1997",
+      "tipologias": [
+        {
+          "codigo": "edificacion_baja",
+          "nombre": "Edificación Baja (H ≤ 9 m)",
+          "thresholds": {
+            "area_min_m2": null,
+            "frente_min_m": null,
+            "operator": "and"
+          },
+          "altura_m": 9.0,
+          "pisos_label": "PB + 2PA",
+          "FOT_pct": 120,
+          "FOS_pct": 50,
+          "FOS_SS_pct": 50,
+          "FOS_V_pct": 30,
+          "retiros": {
+            "frontal_m": 4,
+            "lateral_m": "3 m bilateral",
+            "fondo_m": 3
+          },
+          "notas": [
+            "No se autorizan bloques altos",
+            "Separación entre bloques: 5 m",
+            "Salientes: hasta 2 m en retiros, máx. 35% de superficie de fachada",
+            "Ocupación lateral: hasta 20 m² en mitad posterior",
+            "Índice de ponderación: 0,4"
+          ]
+        },
+        {
+          "codigo": "bloque_bajo_12m",
+          "nombre": "Bloque Bajo (H > 9 m)",
+          "thresholds": {
+            "area_min_m2": 900,
+            "frente_min_m": 12,
+            "operator": "and"
+          },
+          "altura_m": 12.0,
+          "pisos_label": "PB + 3PA",
+          "FOT_pct": 150,
+          "FOS_pct": 50,
+          "FOS_SS_pct": 50,
+          "FOS_V_pct": 30,
+          "retiros": {
+            "frontal_m": "6 m (y sobre Av. Aiguá)",
+            "lateral_m": "4 m bilateral",
+            "fondo_m": 5
+          },
+          "notas": [
+            "FOS PA: 30%",
+            "Separación entre bloques: 8 m",
+            "Salientes: hasta 2 m en retiros, máx. 35% de superficie de fachada",
+            "Ocupación lateral: hasta 20 m² en mitad posterior",
+            "Índice de ponderación: 0,4"
+          ]
+        }
+      ]
+    },
+    {
+      "zone_code": "2.4.6",
+      "zone_name": "Subzona 2.4.6 Rural",
+      "source_titulo": "titulo-ii-cap-ii-sector-2",
+      "source_article": "Art. D.202",
+      "decreto": "3718/1997",
+      "tipologias": [
+        {
+          "codigo": "unidad_aislada",
+          "nombre": "Unidad Aislada (Rural SRPT)",
+          "thresholds": {
+            "area_min_m2": 30000,
+            "frente_min_m": 150,
+            "operator": "and"
+          },
+          "altura_m": 7.0,
+          "pisos_label": "PB + PA",
+          "FOT_pct": null,
+          "FOS_pct": null,
+          "FOS_SS_pct": null,
+          "FOS_V_pct": null,
+          "retiros": {
+            "frontal_m": "25 m (rutas nacionales), 15 m (caminos públicos), 10 m (otros)",
+            "lateral_m": 6,
+            "fondo_m": 6
+          },
+          "notas": [
+            "Suelo Rural Potencialmente Transformable (SRPT); padrones 19039, 166, 18383, 168, 59, 68, 169, 173, 8241",
+            "Lote mín.: 3 ha, 150 m de frente",
+            "Depósitos: hasta 12 m de altura con estudio de impacto paisajístico",
+            "Área edificable máx.: 1.000 m² uso productivo + 500 m² complementario/vivienda (solo PB)",
+            "Área impermeable máx.: 3.000 m² (excl. caminos)",
+            "Unidades máx.: 2 por predio + vivienda de cuidador",
+            "Suelo Rural Natural (Cañada Marrero): edificación prohibida en zona de protección (30 m eje principal, 10 m afluentes)"
+          ]
+        }
+      ]
+    },
+    {
+      "zone_code": "2.5",
+      "zone_name": "Avenidas",
+      "source_titulo": "titulo-ii-cap-ii-sector-2",
+      "source_article": "Art. D.203",
+      "decreto": "3885/2011",
+      "tipologias": [],
+      "notas": [
+        "Zona paragua con 4 subzonas (2.5.1 a 2.5.4). Parámetros específicos en cada subzona."
+      ]
+    },
+    {
+      "zone_code": "2.5.1",
+      "zone_name": "Avenidas Principales",
+      "source_titulo": "titulo-ii-cap-ii-sector-2",
+      "source_article": "Art. D.203",
+      "decreto": "3885/2011",
+      "tipologias": [
+        {
+          "codigo": "bloque_bajo",
+          "nombre": "Bloque Bajo",
+          "thresholds": {
+            "area_min_m2": 450,
+            "frente_min_m": 14,
+            "operator": "and"
+          },
+          "altura_m": 13.60,
+          "pisos_label": "PB + 4PA",
+          "FOT_pct": 180,
+          "FOS_pct": 50,
+          "FOS_SS_pct": 70,
+          "FOS_V_pct": 20,
+          "retiros": {
+            "frontal_m": 4,
+            "lateral_m": "2/7_altura_min_3",
+            "fondo_m": 5
+          },
+          "notas": [
+            "Gálibo a 45° en último nivel",
+            "Predios con frente ≤ 12 m: un retiro lateral exonerable (máx. 3 m de altura)",
+            "Índice de ponderación: 0,4"
+          ]
+        },
+        {
+          "codigo": "bloque_medio",
+          "nombre": "Bloque Medio",
+          "thresholds": {
+            "area_min_m2": 1000,
+            "frente_min_m": 30,
+            "operator": "and"
+          },
+          "altura_m": 28.0,
+          "pisos_label": "PB + 9PA",
+          "FOT_pct": 290,
+          "FOS_pct": 50,
+          "FOS_SS_pct": 70,
+          "FOS_V_pct": 20,
+          "retiros": {
+            "frontal_m": 4,
+            "lateral_m": "2/7_altura_min_3",
+            "fondo_m": 9
+          },
+          "notas": [
+            "Gálibo a 45° en último nivel",
+            "Índice de ponderación: 0,4"
+          ]
+        }
+      ]
+    },
+    {
+      "zone_code": "2.5.2",
+      "zone_name": "Avenidas Secundarias",
+      "source_titulo": "titulo-ii-cap-ii-sector-2",
+      "source_article": "Art. D.203",
+      "decreto": "3885/2011",
+      "tipologias": [
+        {
+          "codigo": "unidad_aislada",
+          "nombre": "Unidad Aislada (H ≤ 7 m)",
+          "thresholds": {
+            "area_min_m2": null,
+            "frente_min_m": null,
+            "operator": "and"
+          },
+          "altura_m": 7.0,
+          "pisos_label": "PB + PA",
+          "FOT_pct": null,
+          "FOS_pct": 50,
+          "FOS_SS_pct": 80,
+          "FOS_V_pct": 30,
+          "retiros": {
+            "frontal_m": 4,
+            "lateral_m": "4 m + 3 m",
+            "fondo_m": 3
+          },
+          "notas": [
+            "Profundidad de aplicación: hasta 120 m desde el frente",
+            "Índice de ponderación: 0,4"
+          ]
+        },
+        {
+          "codigo": "bloque_bajo",
+          "nombre": "Bloque Bajo (H > 7 m)",
+          "thresholds": {
+            "area_min_m2": null,
+            "frente_min_m": null,
+            "operator": "and"
+          },
+          "altura_m": 13.60,
+          "pisos_label": "PB + 4PA",
+          "FOT_pct": 250,
+          "FOS_pct": 50,
+          "FOS_SS_pct": 80,
+          "FOS_V_pct": 30,
+          "retiros": {
+            "frontal_m": "6 m (y sobre Av. Aiguá)",
+            "lateral_m": "4 m + 3 m",
+            "fondo_m": 5
+          },
+          "notas": [
+            "15 m de altura para frentistas Av. Aiguá (Tacuavé–Arroyo Maldonado)",
+            "Profundidad de aplicación: hasta 120 m desde el frente",
+            "Índice de ponderación: 0,4"
+          ]
+        }
+      ]
+    },
+    {
+      "zone_code": "2.5.3",
+      "zone_name": "Ruta 39",
+      "source_titulo": "titulo-ii-cap-ii-sector-2",
+      "source_article": "Art. D.203",
+      "decreto": "3885/2011",
+      "tipologias": [],
+      "notas": [
+        "Sector complejo con subáreas para humedales, servicios, protección paisajística y residencial",
+        "Incluye requisitos ambientales específicos y techos verdes obligatorios (100% de cobertura)",
+        "Parámetros detallados requieren consulta adicional del artículo completo — AMBIGUITY FLAGGED"
+      ]
+    },
+    {
+      "zone_code": "2.5.4",
+      "zone_name": "Roosevelt Maldonado",
+      "source_titulo": "titulo-ii-cap-ii-sector-2",
+      "source_article": "Art. D.203",
+      "decreto": "3885/2011",
+      "tipologias": [
+        {
+          "codigo": "bloque_bajo",
+          "nombre": "Bloque Bajo",
+          "thresholds": {
+            "area_min_m2": null,
+            "frente_min_m": null,
+            "operator": "and"
+          },
+          "altura_m": 13.60,
+          "pisos_label": "PB + 4PA",
+          "FOT_pct": 180,
+          "FOS_pct": null,
+          "FOS_SS_pct": null,
+          "FOS_V_pct": null,
+          "retiros": {
+            "frontal_m": null,
+            "lateral_m": null,
+            "fondo_m": null
+          },
+          "notas": [
+            "Altura mínima: 7 m",
+            "Índice de ponderación: 0,3",
+            "Retiros y FOS no detallados en la fuente — AMBIGUITY FLAGGED"
+          ]
+        },
+        {
+          "codigo": "bloque_medio",
+          "nombre": "Bloque Medio",
+          "thresholds": {
+            "area_min_m2": null,
+            "frente_min_m": null,
+            "operator": "and"
+          },
+          "altura_m": 28.0,
+          "pisos_label": "PB + 9PA",
+          "FOT_pct": 290,
+          "FOS_pct": null,
+          "FOS_SS_pct": null,
+          "FOS_V_pct": null,
+          "retiros": {
+            "frontal_m": null,
+            "lateral_m": null,
+            "fondo_m": null
+          },
+          "notas": [
+            "Altura mínima: 7 m",
+            "Índice de ponderación: 0,3",
+            "Retiros y FOS no detallados en la fuente — AMBIGUITY FLAGGED"
+          ]
+        },
+        {
+          "codigo": "bloque_alto",
+          "nombre": "Bloque Alto",
+          "thresholds": {
+            "area_min_m2": null,
+            "frente_min_m": null,
+            "operator": "and"
+          },
+          "altura_m": 55.0,
+          "pisos_label": null,
+          "FOT_pct": 520,
+          "FOS_pct": null,
+          "FOS_SS_pct": null,
+          "FOS_V_pct": null,
+          "retiros": {
+            "frontal_m": null,
+            "lateral_m": null,
+            "fondo_m": null
+          },
+          "notas": [
+            "Altura mínima: 7 m",
+            "Índice de ponderación: 0,3",
+            "Retiros, pisos y FOS no detallados en la fuente — AMBIGUITY FLAGGED"
+          ]
+        }
+      ]
+    }
+  ]
+}

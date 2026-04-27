@@ -1,0 +1,165 @@
+{
+  "titulo": "titulo-ii-cap-ii-sector-1",
+  "zones": [
+    {
+      "zone_code": "1.1",
+      "zone_name": "Faro",
+      "source_titulo": "titulo-ii-cap-ii-sector-1",
+      "tipologias": []
+    },
+    {
+      "zone_code": "1.1.1",
+      "zone_name": "Comercial",
+      "source_titulo": "titulo-ii-cap-ii-sector-1",
+      "tipologias": []
+    },
+    {
+      "zone_code": "1.1.2",
+      "zone_name": "Residencial",
+      "source_titulo": "titulo-ii-cap-ii-sector-1",
+      "tipologias": []
+    },
+    {
+      "zone_code": "1.2",
+      "zone_name": "Centro de Punta del Este",
+      "source_titulo": "titulo-ii-cap-ii-sector-1",
+      "tipologias": [
+        {
+          "codigo": "otra",
+          "nombre": "Otra",
+          "thresholds": {
+            "area_min_m2": null,
+            "frente_min_m": null,
+            "operator": "and"
+          },
+          "altura_m": 12.0,
+          "pisos_label": null,
+          "FOT_pct": 120,
+          "FOS_pct": 30,
+          "FOS_SS_pct": null,
+          "FOS_V_pct": 20,
+          "retiros": {
+            "frontal_m": "4 m (6 m en ramblas)",
+            "lateral_m": 3.0
+          }
+        }
+      ]
+    },
+    {
+      "zone_code": "1.2.1",
+      "zone_name": "Gorlero",
+      "source_titulo": "titulo-ii-cap-ii-sector-1",
+      "tipologias": [
+        {
+          "codigo": "otra",
+          "nombre": "Otra",
+          "thresholds": {
+            "area_min_m2": null,
+            "frente_min_m": null,
+            "operator": "and"
+          },
+          "altura_m": 14.0,
+          "pisos_label": null,
+          "FOT_pct": 290,
+          "FOS_pct": 30,
+          "FOS_SS_pct": null,
+          "FOS_V_pct": null,
+          "retiros": {
+            "frontal_m": "4 m + pasiva cubierta 3 m (obligatoria en Gorlero)",
+            "lateral_m": "3 m (desde 6 m de altura)"
+          }
+        }
+      ]
+    },
+    {
+      "zone_code": "1.2.2",
+      "zone_name": "Manzanas adyacentes a Gorlero",
+      "source_titulo": "titulo-ii-cap-ii-sector-1",
+      "tipologias": [
+        {
+          "codigo": "otra",
+          "nombre": "Otra",
+          "thresholds": {
+            "area_min_m2": null,
+            "frente_min_m": null,
+            "operator": "and"
+          },
+          "altura_m": 14.0,
+          "pisos_label": null,
+          "FOT_pct": 290,
+          "FOS_pct": 100,
+          "FOS_SS_pct": null,
+          "FOS_V_pct": null,
+          "retiros": {
+            "frontal_m": 4.0,
+            "lateral_m": "3 m (desde 6 m de altura)"
+          }
+        }
+      ]
+    },
+    {
+      "zone_code": "1.2.3",
+      "zone_name": "Calles 20 y 24",
+      "source_titulo": "titulo-ii-cap-ii-sector-1",
+      "tipologias": [
+        {
+          "codigo": "otra",
+          "nombre": "Otra",
+          "thresholds": {
+            "area_min_m2": null,
+            "frente_min_m": null,
+            "operator": "and"
+          },
+          "altura_m": 12.0,
+          "pisos_label": null,
+          "FOT_pct": 190,
+          "FOS_pct": 30,
+          "FOS_SS_pct": null,
+          "FOS_V_pct": null,
+          "retiros": {
+            "frontal_m": 4.0,
+            "lateral_m": 3.0
+          }
+        }
+      ]
+    },
+    {
+      "zone_code": "1.2.4",
+      "zone_name": "Manzanas 39 y 40",
+      "source_titulo": "titulo-ii-cap-ii-sector-1",
+      "tipologias": []
+    },
+    {
+      "zone_code": "1.2.5",
+      "zone_name": "Resto de zona centro",
+      "source_titulo": "titulo-ii-cap-ii-sector-1",
+      "tipologias": [
+        {
+          "codigo": "otra",
+          "nombre": "Otra",
+          "thresholds": {
+            "area_min_m2": null,
+            "frente_min_m": null,
+            "operator": "and"
+          },
+          "altura_m": 12.0,
+          "pisos_label": null,
+          "FOT_pct": 120,
+          "FOS_pct": 30,
+          "FOS_SS_pct": null,
+          "FOS_V_pct": 20,
+          "retiros": {
+            "frontal_m": "4 m (6 m en ramblas)",
+            "lateral_m": 3.0
+          }
+        }
+      ]
+    },
+    {
+      "zone_code": "1.3",
+      "zone_name": "La Pastora",
+      "source_titulo": "titulo-ii-cap-ii-sector-1",
+      "tipologias": []
+    }
+  ]
+}

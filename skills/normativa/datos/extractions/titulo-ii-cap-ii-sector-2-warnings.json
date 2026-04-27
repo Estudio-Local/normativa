@@ -1,0 +1,10 @@
+{
+  "titulo": "titulo-ii-cap-ii-sector-2",
+  "warnings": [
+    "2.4.5: no tipologías extracted; AI fallback needed",
+    "2.5: no tipologías extracted; AI fallback needed",
+    "2.5.2: no tipologías extracted; AI fallback needed",
+    "2.5.3: no tipologías extracted; AI fallback needed",
+    "2.5.4: no tipologías extracted; AI fallback needed"
+  ]
+}

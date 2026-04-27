@@ -1,0 +1,295 @@
+{
+  "titulo": "titulo-iii-cap-ii-sector-1",
+  "zones": [
+    {
+      "zone_code": "1.1",
+      "zone_name": "Predios frentistas a la Ruta 10 y a la Costa",
+      "source_titulo": "titulo-iii-cap-ii-sector-1",
+      "tipologias": [
+        {
+          "altura_m": 7.0,
+          "pisos_label": "PB + PA",
+          "codigo": "unidad_aislada",
+          "nombre": "Unidad Aislada",
+          "thresholds": {
+            "area_min_m2": null,
+            "frente_min_m": null,
+            "operator": "and"
+          },
+          "FOT_pct": null,
+          "FOS_pct": null,
+          "FOS_SS_pct": null,
+          "FOS_V_pct": null,
+          "retiros": {}
+        },
+        {
+          "thresholds": {
+            "area_min_m2": 1000,
+            "frente_min_m": null,
+            "operator": "and"
+          },
+          "codigo": "conjunto_unidades",
+          "nombre": "Conjunto Unidades",
+          "altura_m": null,
+          "pisos_label": null,
+          "FOT_pct": null,
+          "FOS_pct": null,
+          "FOS_SS_pct": null,
+          "FOS_V_pct": null,
+          "retiros": {}
+        }
+      ]
+    },
+    {
+      "zone_code": "1.2",
+      "zone_name": "Costa",
+      "source_titulo": "titulo-iii-cap-ii-sector-1",
+      "tipologias": [
+        {
+          "thresholds": {
+            "area_min_m2": 1200,
+            "frente_min_m": 30,
+            "operator": "and"
+          },
+          "codigo": "bloque_bajo",
+          "nombre": "Bloque Bajo",
+          "altura_m": null,
+          "pisos_label": null,
+          "FOT_pct": null,
+          "FOS_pct": null,
+          "FOS_SS_pct": null,
+          "FOS_V_pct": null,
+          "retiros": {}
+        }
+      ]
+    },
+    {
+      "zone_code": "1.3",
+      "zone_name": "Predios frentistas a la Ruta 10",
+      "source_titulo": "titulo-iii-cap-ii-sector-1",
+      "tipologias": [
+        {
+          "codigo": "otra",
+          "nombre": "Otra",
+          "thresholds": {
+            "area_min_m2": null,
+            "frente_min_m": null,
+            "operator": "and"
+          },
+          "altura_m": null,
+          "pisos_label": null,
+          "FOT_pct": 105,
+          "FOS_pct": 40,
+          "FOS_SS_pct": 40,
+          "FOS_V_pct": 20,
+          "retiros": {}
+        }
+      ]
+    },
+    {
+      "zone_code": "1.4",
+      "zone_name": "Barrio Jardín",
+      "source_titulo": "titulo-iii-cap-ii-sector-1",
+      "tipologias": [
+        {
+          "altura_m": 7.0,
+          "pisos_label": "PB + PA",
+          "FOT_pct": 50,
+          "codigo": "unidad_aislada",
+          "nombre": "Unidad Aislada",
+          "thresholds": {
+            "area_min_m2": null,
+            "frente_min_m": null,
+            "operator": "and"
+          },
+          "FOS_pct": null,
+          "FOS_SS_pct": null,
+          "FOS_V_pct": null,
+          "retiros": {}
+        },
+        {
+          "altura_m": 7.0,
+          "pisos_label": "PB + PA",
+          "FOT_pct": 50,
+          "thresholds": {
+            "area_min_m2": 2000,
+            "frente_min_m": 30,
+            "operator": "and"
+          },
+          "codigo": "edificacion_baja",
+          "nombre": "Edificacion Baja",
+          "FOS_pct": null,
+          "FOS_SS_pct": null,
+          "FOS_V_pct": null,
+          "retiros": {}
+        },
+        {
+          "thresholds": {
+            "area_min_m2": 1200,
+            "frente_min_m": null,
+            "operator": "and"
+          },
+          "codigo": "bloque_bajo_9m",
+          "nombre": "Bloque Bajo 9M",
+          "altura_m": null,
+          "pisos_label": null,
+          "FOT_pct": null,
+          "FOS_pct": null,
+          "FOS_SS_pct": null,
+          "FOS_V_pct": null,
+          "retiros": {}
+        },
+        {
+          "thresholds": {
+            "area_min_m2": 2000,
+            "frente_min_m": 30,
+            "operator": "and"
+          },
+          "codigo": "bloque_bajo_12m",
+          "nombre": "Bloque Bajo 12M",
+          "altura_m": null,
+          "pisos_label": null,
+          "FOT_pct": null,
+          "FOS_pct": null,
+          "FOS_SS_pct": null,
+          "FOS_V_pct": null,
+          "retiros": {}
+        },
+        {
+          "altura_m": 12.0,
+          "pisos_label": "PB + 2PA + PH",
+          "FOT_pct": 70,
+          "codigo": "bloque_bajo",
+          "nombre": "Bloque Bajo",
+          "thresholds": {
+            "area_min_m2": null,
+            "frente_min_m": null,
+            "operator": "and"
+          },
+          "FOS_pct": null,
+          "FOS_SS_pct": null,
+          "FOS_V_pct": null,
+          "retiros": {}
+        },
+        {
+          "thresholds": {
+            "area_min_m2": 1000,
+            "frente_min_m": null,
+            "operator": "and"
+          },
+          "codigo": "conjunto_unidades",
+          "nombre": "Conjunto Unidades",
+          "altura_m": null,
+          "pisos_label": null,
+          "FOT_pct": null,
+          "FOS_pct": null,
+          "FOS_SS_pct": null,
+          "FOS_V_pct": null,
+          "retiros": {}
+        },
+        {
+          "thresholds": {
+            "area_min_m2": 1500,
+            "frente_min_m": 30,
+            "operator": "and"
+          },
+          "codigo": "conjunto_bloques",
+          "nombre": "Conjunto Bloques",
+          "altura_m": null,
+          "pisos_label": null,
+          "FOT_pct": null,
+          "FOS_pct": null,
+          "FOS_SS_pct": null,
+          "FOS_V_pct": null,
+          "retiros": {}
+        }
+      ]
+    },
+    {
+      "zone_code": "1.5",
+      "zone_name": "Santa Mónica",
+      "source_titulo": "titulo-iii-cap-ii-sector-1",
+      "tipologias": [
+        {
+          "codigo": "otra",
+          "nombre": "Otra",
+          "thresholds": {
+            "area_min_m2": null,
+            "frente_min_m": 15,
+            "operator": "and"
+          },
+          "altura_m": null,
+          "pisos_label": null,
+          "FOT_pct": 50,
+          "FOS_pct": 100,
+          "FOS_SS_pct": null,
+          "FOS_V_pct": null,
+          "retiros": {}
+        }
+      ]
+    },
+    {
+      "zone_code": "1.6",
+      "zone_name": "Pedro Campbell y Manzanas adyacentes al Norte",
+      "source_titulo": "titulo-iii-cap-ii-sector-1",
+      "tipologias": [
+        {
+          "altura_m": 7.0,
+          "pisos_label": "PB + PA",
+          "retiros": {
+            "frontal_m": 4.0,
+            "fondo_m": 3.0,
+            "lateral_m": "2 m (suma > 6 m)"
+          },
+          "thresholds": {
+            "area_min_m2": 600,
+            "frente_min_m": null,
+            "operator": "and"
+          },
+          "codigo": "unidad_aislada",
+          "nombre": "Unidad Aislada",
+          "FOT_pct": null,
+          "FOS_pct": null,
+          "FOS_SS_pct": null,
+          "FOS_V_pct": null
+        },
+        {
+          "altura_m": 9.0,
+          "pisos_label": "PB + 2PA",
+          "retiros": {
+            "frontal_m": 6.0,
+            "fondo_m": 4.0,
+            "lateral_m": "3 m (suma > 8 m)"
+          },
+          "thresholds": {
+            "area_min_m2": 1200,
+            "frente_min_m": 30,
+            "operator": "and"
+          },
+          "codigo": "bloque_bajo",
+          "nombre": "Bloque Bajo",
+          "FOT_pct": null,
+          "FOS_pct": null,
+          "FOS_SS_pct": null,
+          "FOS_V_pct": null
+        },
+        {
+          "thresholds": {
+            "area_min_m2": 900,
+            "frente_min_m": 30,
+            "operator": "and"
+          },
+          "codigo": "conjunto_bloques",
+          "nombre": "Conjunto Bloques",
+          "altura_m": null,
+          "pisos_label": null,
+          "FOT_pct": null,
+          "FOS_pct": null,
+          "FOS_SS_pct": null,
+          "FOS_V_pct": null,
+          "retiros": {}
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,185 @@
+{
+  "titulo": "titulo-v-cap-ii-sector-2",
+  "zones": [
+    {
+      "zone_code": "2.1",
+      "zone_name": "Pueblo Garzón",
+      "source_titulo": "titulo-v-cap-ii-sector-2",
+      "tipologias": [
+        {
+          "codigo": "otra",
+          "nombre": "Otra",
+          "thresholds": {
+            "area_min_m2": 2000,
+            "frente_min_m": null,
+            "operator": "and"
+          },
+          "altura_m": 7.0,
+          "pisos_label": null,
+          "FOT_pct": 80,
+          "FOS_pct": 40,
+          "FOS_SS_pct": 40,
+          "FOS_V_pct": 40,
+          "retiros": {
+            "frontal_m": 4.0,
+            "lateral_m": 3.0,
+            "fondo_m": 4.0
+          }
+        }
+      ]
+    },
+    {
+      "zone_code": "2.1.1",
+      "zone_name": "Casco Urbano",
+      "source_titulo": "titulo-v-cap-ii-sector-2",
+      "tipologias": [
+        {
+          "codigo": "otra",
+          "nombre": "Otra",
+          "thresholds": {
+            "area_min_m2": 300,
+            "frente_min_m": null,
+            "operator": "and"
+          },
+          "altura_m": 5.0,
+          "pisos_label": null,
+          "FOT_pct": 55,
+          "FOS_pct": 55,
+          "FOS_SS_pct": 55,
+          "FOS_V_pct": 40,
+          "retiros": {
+            "frontal_m": "0 m (sin retiro mínimo)"
+          }
+        }
+      ]
+    },
+    {
+      "zone_code": "2.1.2",
+      "zone_name": "Estación",
+      "source_titulo": "titulo-v-cap-ii-sector-2",
+      "tipologias": [
+        {
+          "codigo": "otra",
+          "nombre": "Otra",
+          "thresholds": {
+            "area_min_m2": 2000,
+            "frente_min_m": null,
+            "operator": "and"
+          },
+          "altura_m": 7.0,
+          "pisos_label": null,
+          "FOT_pct": 80,
+          "FOS_pct": 40,
+          "FOS_SS_pct": 40,
+          "FOS_V_pct": 40,
+          "retiros": {
+            "frontal_m": 4.0,
+            "lateral_m": 3.0,
+            "fondo_m": 4.0
+          }
+        }
+      ]
+    },
+    {
+      "zone_code": "2.1.3",
+      "zone_name": "Chacras",
+      "source_titulo": "titulo-v-cap-ii-sector-2",
+      "tipologias": []
+    },
+    {
+      "zone_code": "2.2",
+      "zone_name": "Aiguá",
+      "source_titulo": "titulo-v-cap-ii-sector-2",
+      "tipologias": [
+        {
+          "codigo": "bloque_bajo",
+          "nombre": "Bloque Bajo",
+          "thresholds": {
+            "area_min_m2": null,
+            "frente_min_m": null,
+            "operator": "and"
+          },
+          "altura_m": 7.0,
+          "pisos_label": null,
+          "FOT_pct": 110,
+          "FOS_pct": 55,
+          "FOS_SS_pct": 55,
+          "FOS_V_pct": 20,
+          "retiros": {
+            "frontal_m": "0 m (sin retiro)",
+            "fondo_m": 3.0
+          }
+        }
+      ]
+    },
+    {
+      "zone_code": "2.2.1",
+      "zone_name": "Casco Histórico",
+      "source_titulo": "titulo-v-cap-ii-sector-2",
+      "tipologias": []
+    },
+    {
+      "zone_code": "2.2.2",
+      "zone_name": "Centro",
+      "source_titulo": "titulo-v-cap-ii-sector-2",
+      "tipologias": [
+        {
+          "codigo": "otra",
+          "nombre": "Otra",
+          "thresholds": {
+            "area_min_m2": null,
+            "frente_min_m": null,
+            "operator": "and"
+          },
+          "altura_m": 7.0,
+          "pisos_label": null,
+          "FOT_pct": 110,
+          "FOS_pct": 55,
+          "FOS_SS_pct": 55,
+          "FOS_V_pct": 20,
+          "retiros": {
+            "frontal_m": "0 m (sin retiro)",
+            "fondo_m": 3.0
+          }
+        }
+      ]
+    },
+    {
+      "zone_code": "2.2.3",
+      "zone_name": "Bienes y Servicios",
+      "source_titulo": "titulo-v-cap-ii-sector-2",
+      "tipologias": []
+    },
+    {
+      "zone_code": "2.2.4",
+      "zone_name": "Resto",
+      "source_titulo": "titulo-v-cap-ii-sector-2",
+      "tipologias": []
+    },
+    {
+      "zone_code": "2.3",
+      "zone_name": "Pan de Azúcar y otros centros poblados",
+      "source_titulo": "titulo-v-cap-ii-sector-2",
+      "tipologias": [
+        {
+          "codigo": "otra",
+          "nombre": "Otra",
+          "thresholds": {
+            "area_min_m2": null,
+            "frente_min_m": null,
+            "operator": "and"
+          },
+          "altura_m": 10.0,
+          "pisos_label": null,
+          "FOT_pct": 240,
+          "FOS_pct": 80,
+          "FOS_SS_pct": null,
+          "FOS_V_pct": null,
+          "retiros": {
+            "frontal_m": "6 m (predios fiscales); 15 m (Rutas Nacionales)"
+          }
+        }
+      ]
+    }
+  ]
+}

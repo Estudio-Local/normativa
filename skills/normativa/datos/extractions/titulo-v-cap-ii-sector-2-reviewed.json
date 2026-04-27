@@ -1,0 +1,408 @@
+{
+  "titulo": "titulo-v-cap-ii-sector-2",
+  "zones": [
+    {
+      "zone_code": "2.1.1",
+      "zone_name": "Pueblo Garzón — Casco Urbano",
+      "source_titulo": "titulo-v-cap-ii-sector-2",
+      "source_article": "Art. D.321",
+      "decreto": "3718/1997",
+      "tipologias": [
+        {
+          "codigo": "unidad_aislada",
+          "nombre": "Unidad aislada",
+          "thresholds": {
+            "area_min_m2": 300,
+            "frente_min_m": null,
+            "operator": "and"
+          },
+          "altura_m": 5.0,
+          "pisos_label": null,
+          "FOT_pct": 55,
+          "FOS_pct": 55,
+          "FOS_SS_pct": 55,
+          "FOS_V_pct": 40,
+          "retiros": {
+            "frontal_m": "0 m (sin retiro mínimo)",
+            "lateral_m": null,
+            "fondo_m": null
+          },
+          "notas": [
+            "Alineación obligatoria 60% del frente",
+            "Aberturas en fachada: máximo 25%",
+            "Colores obligatorios: tonos tierra y colores específicos reglamentados",
+            "Carpintería: madera o pintada únicamente",
+            "Carácter de pueblo histórico preservado"
+          ]
+        }
+      ]
+    },
+    {
+      "zone_code": "2.1.2",
+      "zone_name": "Pueblo Garzón — Estación",
+      "source_titulo": "titulo-v-cap-ii-sector-2",
+      "source_article": "Art. D.321",
+      "decreto": "3718/1997",
+      "tipologias": [
+        {
+          "codigo": "unidad_aislada",
+          "nombre": "Unidad aislada",
+          "thresholds": {
+            "area_min_m2": 2000,
+            "frente_min_m": null,
+            "operator": "and"
+          },
+          "altura_m": 7.0,
+          "pisos_label": null,
+          "FOT_pct": 80,
+          "FOS_pct": 40,
+          "FOS_SS_pct": 40,
+          "FOS_V_pct": 40,
+          "retiros": {
+            "frontal_m": 4.0,
+            "lateral_m": 3.0,
+            "fondo_m": 4.0
+          },
+          "notas": [
+            "Retiro bilateral 3 m (ambos laterales)"
+          ]
+        }
+      ]
+    },
+    {
+      "zone_code": "2.1.3-oeste",
+      "zone_name": "Pueblo Garzón — Chacras (Oeste)",
+      "source_titulo": "titulo-v-cap-ii-sector-2",
+      "source_article": "Art. D.321",
+      "decreto": "3718/1997",
+      "tipologias": [
+        {
+          "codigo": "unidad_aislada",
+          "nombre": "Unidad aislada",
+          "thresholds": {
+            "area_min_m2": 4000,
+            "frente_min_m": null,
+            "operator": "and"
+          },
+          "altura_m": 7.0,
+          "pisos_label": null,
+          "FOT_pct": 50,
+          "FOS_pct": 25,
+          "FOS_SS_pct": 25,
+          "FOS_V_pct": 60,
+          "retiros": {
+            "frontal_m": 6.0,
+            "lateral_m": 3.0,
+            "fondo_m": 4.0
+          },
+          "notas": [
+            "Una sola unidad habitacional por predio",
+            "Retiro bilateral 3 m (ambos laterales)",
+            "Subzona Oeste"
+          ]
+        }
+      ]
+    },
+    {
+      "zone_code": "2.1.3-este",
+      "zone_name": "Pueblo Garzón — Chacras (Este)",
+      "source_titulo": "titulo-v-cap-ii-sector-2",
+      "source_article": "Art. D.321",
+      "decreto": "3718/1997",
+      "tipologias": [
+        {
+          "codigo": "unidad_aislada",
+          "nombre": "Unidad aislada",
+          "thresholds": {
+            "area_min_m2": 2000,
+            "frente_min_m": null,
+            "operator": "and"
+          },
+          "altura_m": 7.0,
+          "pisos_label": null,
+          "FOT_pct": 50,
+          "FOS_pct": 25,
+          "FOS_SS_pct": 25,
+          "FOS_V_pct": 60,
+          "retiros": {
+            "frontal_m": 6.0,
+            "lateral_m": 3.0,
+            "fondo_m": 4.0
+          },
+          "notas": [
+            "Una sola unidad habitacional por predio",
+            "Retiro bilateral 3 m (ambos laterales)",
+            "Subzona Este"
+          ]
+        }
+      ]
+    },
+    {
+      "zone_code": "2.2.1",
+      "zone_name": "Aiguá — Casco Histórico",
+      "source_titulo": "titulo-v-cap-ii-sector-2",
+      "source_article": "Art. D.321",
+      "decreto": "3718/1997",
+      "tipologias": [
+        {
+          "codigo": "unidad_aislada",
+          "nombre": "Unidad aislada (predios < 300 m²)",
+          "thresholds": {
+            "area_min_m2": null,
+            "area_max_m2": 300,
+            "frente_min_m": null,
+            "operator": "and"
+          },
+          "altura_m": 7.0,
+          "pisos_label": null,
+          "FOT_pct": 160,
+          "FOS_pct": 80,
+          "FOS_SS_pct": null,
+          "FOS_V_pct": null,
+          "retiros": {
+            "frontal_m": null,
+            "lateral_m": null,
+            "fondo_m": null
+          },
+          "notas": [
+            "Aplica a predios menores a 300 m²",
+            "Comisión Asesora para Patrimonio Arquitectónico",
+            "Aberturas en fachada máx. 25%",
+            "Materiales prohibidos especificados",
+            "Equipos A/C prohibidos en fachadas",
+            "Ochava de 3 m obligatoria en esquinas"
+          ]
+        },
+        {
+          "codigo": "unidad_aislada",
+          "nombre": "Unidad aislada (predios > 300 m²)",
+          "thresholds": {
+            "area_min_m2": 300,
+            "frente_min_m": null,
+            "operator": "and"
+          },
+          "altura_m": 7.0,
+          "pisos_label": null,
+          "FOT_pct": 110,
+          "FOS_pct": 55,
+          "FOS_SS_pct": null,
+          "FOS_V_pct": null,
+          "retiros": {
+            "frontal_m": null,
+            "lateral_m": null,
+            "fondo_m": null
+          },
+          "notas": [
+            "Aplica a predios mayores a 300 m²",
+            "Comisión Asesora para Patrimonio Arquitectónico",
+            "Aberturas en fachada máx. 25%",
+            "Materiales prohibidos especificados",
+            "Equipos A/C prohibidos en fachadas",
+            "Ochava de 3 m obligatoria en esquinas"
+          ]
+        }
+      ]
+    },
+    {
+      "zone_code": "2.2.2",
+      "zone_name": "Aiguá — Centro",
+      "source_titulo": "titulo-v-cap-ii-sector-2",
+      "source_article": "Art. D.321",
+      "decreto": "3718/1997",
+      "tipologias": [
+        {
+          "codigo": "unidad_aislada",
+          "nombre": "Unidad aislada",
+          "thresholds": {
+            "area_min_m2": null,
+            "frente_min_m": null,
+            "operator": "and"
+          },
+          "altura_m": 7.0,
+          "pisos_label": null,
+          "FOT_pct": 110,
+          "FOS_pct": 55,
+          "FOS_SS_pct": 55,
+          "FOS_V_pct": 20,
+          "retiros": {
+            "frontal_m": "0 m (sin retiro)",
+            "lateral_m": 2.0,
+            "fondo_m": 3.0
+          },
+          "notas": [
+            "Retiro unilateral 2 m (un solo lateral)"
+          ]
+        }
+      ]
+    },
+    {
+      "zone_code": "2.2.3",
+      "zone_name": "Aiguá — Bienes y Servicios",
+      "source_titulo": "titulo-v-cap-ii-sector-2",
+      "source_article": "Art. D.321",
+      "decreto": "3718/1997",
+      "tipologias": [
+        {
+          "codigo": "bloque_bajo_12m",
+          "nombre": "Bloque Bajo (con saneamiento)",
+          "thresholds": {
+            "area_min_m2": 1000,
+            "frente_min_m": null,
+            "operator": "and"
+          },
+          "altura_m": 12.0,
+          "pisos_label": null,
+          "FOT_pct": 110,
+          "FOS_pct": 55,
+          "FOS_SS_pct": 55,
+          "FOS_V_pct": null,
+          "retiros": {
+            "frontal_m": "4 m (15 m sobre Ruta 39)",
+            "lateral_m": 4.0,
+            "fondo_m": 4.0
+          },
+          "notas": [
+            "Aplica a predios con saneamiento",
+            "FIS 20%",
+            "Retiro bilateral 4 m (ambos laterales)",
+            "Retiro frontal 15 m sobre Ruta 39"
+          ]
+        },
+        {
+          "codigo": "bloque_bajo_12m",
+          "nombre": "Bloque Bajo (otros sistemas de saneamiento)",
+          "thresholds": {
+            "area_min_m2": 4000,
+            "frente_min_m": null,
+            "operator": "and"
+          },
+          "altura_m": 12.0,
+          "pisos_label": null,
+          "FOT_pct": 110,
+          "FOS_pct": 55,
+          "FOS_SS_pct": 55,
+          "FOS_V_pct": null,
+          "retiros": {
+            "frontal_m": "4 m (15 m sobre Ruta 39)",
+            "lateral_m": 4.0,
+            "fondo_m": 4.0
+          },
+          "notas": [
+            "Aplica a predios con otros sistemas de saneamiento (sin red)",
+            "FIS 20%",
+            "Retiro bilateral 4 m (ambos laterales)",
+            "Retiro frontal 15 m sobre Ruta 39"
+          ]
+        }
+      ]
+    },
+    {
+      "zone_code": "2.2.4",
+      "zone_name": "Aiguá — Resto",
+      "source_titulo": "titulo-v-cap-ii-sector-2",
+      "source_article": "Art. D.321",
+      "decreto": "3718/1997",
+      "tipologias": [
+        {
+          "codigo": "unidad_aislada",
+          "nombre": "Vivienda individual / apareada",
+          "thresholds": {
+            "area_min_m2": null,
+            "frente_min_m": null,
+            "operator": "and"
+          },
+          "altura_m": 7.0,
+          "pisos_label": null,
+          "FOT_pct": 80,
+          "FOS_pct": 40,
+          "FOS_SS_pct": null,
+          "FOS_V_pct": null,
+          "retiros": {
+            "frontal_m": null,
+            "lateral_m": null,
+            "fondo_m": null
+          },
+          "notas": [
+            "Admite vivienda individual o apareada"
+          ]
+        },
+        {
+          "codigo": "unidad_apareada",
+          "nombre": "Unidad apareada",
+          "thresholds": {
+            "area_min_m2": null,
+            "frente_min_m": null,
+            "operator": "and"
+          },
+          "altura_m": 7.0,
+          "pisos_label": null,
+          "FOT_pct": 80,
+          "FOS_pct": 40,
+          "FOS_SS_pct": null,
+          "FOS_V_pct": null,
+          "retiros": {
+            "frontal_m": null,
+            "lateral_m": null,
+            "fondo_m": null
+          },
+          "notas": [
+            "Comparte parámetros con vivienda individual"
+          ]
+        },
+        {
+          "codigo": "bloque_bajo_9m",
+          "nombre": "Bloque Bajo",
+          "thresholds": {
+            "area_min_m2": null,
+            "frente_min_m": null,
+            "operator": "and"
+          },
+          "altura_m": 9.0,
+          "pisos_label": null,
+          "FOT_pct": 120,
+          "FOS_pct": 40,
+          "FOS_SS_pct": null,
+          "FOS_V_pct": null,
+          "retiros": {
+            "frontal_m": null,
+            "lateral_m": null,
+            "fondo_m": null
+          },
+          "notas": []
+        }
+      ]
+    },
+    {
+      "zone_code": "2.3",
+      "zone_name": "Pan de Azúcar y otros centros poblados",
+      "source_titulo": "titulo-v-cap-ii-sector-2",
+      "source_article": "Art. D.321",
+      "decreto": "3718/1997",
+      "tipologias": [
+        {
+          "codigo": "bloque_bajo",
+          "nombre": "Bloque Bajo",
+          "thresholds": {
+            "area_min_m2": null,
+            "frente_min_m": null,
+            "operator": "and"
+          },
+          "altura_m": 10.0,
+          "pisos_label": "PB + 2PA",
+          "FOT_pct": 240,
+          "FOS_pct": 80,
+          "FOS_SS_pct": null,
+          "FOS_V_pct": null,
+          "retiros": {
+            "frontal_m": "6 m (predios fiscales); 15 m (Rutas Nacionales)",
+            "lateral_m": null,
+            "fondo_m": null
+          },
+          "notas": [
+            "Ochava de 3 m obligatoria en esquinas"
+          ]
+        }
+      ]
+    }
+  ]
+}

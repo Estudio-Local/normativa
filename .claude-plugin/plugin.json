@@ -1,0 +1,10 @@
+{
+  "name": "normativa",
+  "description": "Zoning envelope analysis + printable report builder for Maldonado, Uruguay (TONE / Digesto Departamental, Volumen V).",
+  "version": "0.1.0",
+  "author": {
+    "name": "Estudio Local",
+    "url": "https://github.com/Estudio-Local"
+  },
+  "homepage": "https://github.com/Estudio-Local/normativa"
+}
