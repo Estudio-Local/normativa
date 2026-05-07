@@ -1,9 +1,9 @@
-# normativa — Maldonado UY zoning skills for Claude Code
+# Normativa TONE — Maldonado UY zoning skills for Claude Code
 
 Two Claude Code skills bundled as a single plugin:
 
-- **`/normativa`** — analyze building envelope rules (FOS, FOT, height, retiros) for one or more parcels in Maldonado department, using the TONE (Texto Ordenado de Normas Edilicias, Volumen V del Digesto Departamental).
-- **`/informe`** — render the analysis as a printable A4 HTML report.
+- **`/TONE`** — analyze building envelope rules (FOS, FOT, height, retiros) for one or more parcels in Maldonado department, using the TONE (Texto Ordenado de Normas Edilicias, Volumen V del Digesto Departamental).
+- **`/TONE-informe`** — render the analysis as a printable A4 HTML report.
 
 ## Install
 
@@ -11,16 +11,16 @@ Two Claude Code skills bundled as a single plugin:
 
 ```
 /plugin marketplace add Estudio-Local/normativa
-/plugin install normativa@normativa
+/plugin install normativa-tone@normativa
 ```
 
-That's it. Both skills appear as `/normativa` and `/informe`.
+That's it. Both skills appear as `/TONE` and `/TONE-informe`.
 
 ### Option B — Symlink (local dev)
 
 ```bash
 git clone https://github.com/Estudio-Local/normativa.git
-ln -s "$(pwd)/normativa" ~/.claude/plugins/normativa
+ln -s "$(pwd)/normativa" ~/.claude/plugins/normativa-tone
 ```
 
 ## End-to-end flow
@@ -29,20 +29,20 @@ ln -s "$(pwd)/normativa" ~/.claude/plugins/normativa
 selection.v1.json (optional)
         │
         ▼
- /normativa --input selection.v1.json
+ /TONE --input selection.v1.json
         │
         ├─→ <basename>.md                    (humans read this)
-        └─→ <basename>.normativa.v1.json     (informe reads this)
+        └─→ <basename>.normativa.v1.json     (TONE-informe reads this)
                                 │
                                 ▼
-                         /informe --input <basename>.normativa.v1.json
+                         /TONE-informe --input <basename>.normativa.v1.json
                                 │
                                 └─→ <basename>.informe.html  (printable A4)
 ```
 
-You can also run `/normativa` directly without an envelope:
+You can also run `/TONE` directly without an envelope:
 
-- `/normativa 130,131,132 en la-juanita` — padron list + locality
+- `/TONE 130,131,132 en la-juanita` — padron list + locality
 - Or paste GIS JSON from the cadastral portal
 
 Three files per run:
@@ -50,8 +50,10 @@ Three files per run:
 | File | Reader | Purpose |
 |------|--------|---------|
 | `*.md` | human | Full written analysis |
-| `*.normativa.v1.json` | machine | Same data, structured — feeds `/informe` |
+| `*.normativa.v1.json` | machine | Same data, structured — feeds `/TONE-informe` |
 | `*.informe.html` | human | Printable A4 report (open in browser, print to PDF) |
+
+The `*.normativa.v1.json` filename and its internal `schema: "estudio-local.normativa.v1"` field are versioned data contracts — they stay stable across plugin renames so downstream consumers (Mapa, other tools) don't break.
 
 ## Try it
 
@@ -59,8 +61,8 @@ Without installing anything, render the bundled example:
 
 ```bash
 git clone https://github.com/Estudio-Local/normativa.git && cd normativa
-python3 skills/informe/render.py examples/padrones-130-132-la-juanita.normativa.v1.json
-open examples/padrones-130-132-la-juanita.informe.html
+python3 skills/TONE-informe/render.py examples/padrones-130-132-la-juanita.normativa.v1.json
+open examples/padrones-130-132-la-juanita.normativa.informe.html
 ```
 
 Reads the sample analysis envelope, renders a 4-page printable report, opens it in your browser. ⌘P / Ctrl+P → "Save as PDF" to share.
@@ -84,12 +86,12 @@ Last decree incorporated: Dto. 4056/2022. Always verify against the live digesto
 ## Repo layout
 
 ```
-normativa/                              ← this repo
+normativa/                              ← this repo (slug: normativa-tone)
 ├── .claude-plugin/
 │   ├── marketplace.json                ← marketplace manifest
 │   └── plugin.json                     ← plugin manifest
 ├── skills/
-│   ├── normativa/                      ← /normativa skill
+│   ├── TONE/                           ← /TONE skill
 │   │   ├── SKILL.md                    ← instructions for Claude
 │   │   ├── SCHEMA.md                   ← normativa.v1.json spec
 │   │   ├── scenarios.py                ← engine (applicable_tipologias)
@@ -101,29 +103,29 @@ normativa/                              ← this repo
 │   │       ├── titulo-*.md             ← full normativa text by sector (7 files)
 │   │       ├── extractions/            ← per-titulo extraction artifacts (audit trail)
 │   │       └── zoning/                 ← per-zone GeoJSON (116 files)
-│   └── informe/                        ← /informe skill
+│   └── TONE-informe/                   ← /TONE-informe skill
 │       ├── SKILL.md
 │       ├── plantilla.html              ← A4 report template
 │       └── render.py                   ← JSON → HTML renderer (Python stdlib)
 ├── examples/
 │   ├── selection.v1.json                                    ← sample input envelope
-│   ├── padrones-130-132-la-juanita.normativa.v1.json        ← sample /normativa output
-│   └── padrones-130-132-la-juanita.informe.html             ← sample /informe output
+│   ├── padrones-130-132-la-juanita.normativa.v1.json        ← sample /TONE output
+│   └── padrones-130-132-la-juanita.normativa.informe.html   ← sample /TONE-informe output
 ├── README.md
 └── LICENSE
 ```
 
 ## Schemas
 
-- **`selection.v1.json`** — optional input to `/normativa`. Shape: `{ schema, padrones[], locality, area_total_m2, regimen, lots[], … }`. See [`skills/normativa/SCHEMA.md`](./skills/normativa/SCHEMA.md) "Sister envelope" section.
-- **`normativa.v1.json`** — produced by `/normativa`, consumed by `/informe`. Shape: `{ schema, selection, zone, scenarios[], recommendation, caveats }`. See [`skills/normativa/SCHEMA.md`](./skills/normativa/SCHEMA.md) for the full spec.
+- **`selection.v1.json`** — optional input to `/TONE`. Shape: `{ schema, padrones[], locality, area_total_m2, regimen, lots[], … }`. See [`skills/TONE/SCHEMA.md`](./skills/TONE/SCHEMA.md) "Sister envelope" section.
+- **`normativa.v1.json`** — produced by `/TONE`, consumed by `/TONE-informe`. Shape: `{ schema, selection, zone, scenarios[], recommendation, caveats }`. See [`skills/TONE/SCHEMA.md`](./skills/TONE/SCHEMA.md) for the full spec.
 
-`schema` field on every envelope is `estudio-local.<name>.v1` — version-bump on breaking changes.
+`schema` field on every envelope is `estudio-local.<name>.v1` — version-bump on breaking changes. The schema name is decoupled from the skill name on purpose: renaming the skills (e.g. `/normativa` → `/TONE`) does not bump the schema version.
 
 ## Requirements
 
 - [Claude Code](https://claude.ai/claude-code) ≥ 2.0
-- Python 3.9+ (for `/informe`'s renderer; `/normativa` is markdown-driven)
+- Python 3.9+ (for `/TONE-informe`'s renderer; `/TONE` is markdown-driven)
 
 ## License
 

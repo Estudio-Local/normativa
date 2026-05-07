@@ -1,7 +1,7 @@
 {
   "schema": "estudio-local.normativa.v1",
   "generated_at": "2026-04-26T23:45:00Z",
-  "skill_version": "0.1.0",
+  "skill_version": "0.2.0",
 
   "selection": {
     "padrones": ["130", "131", "132"],
@@ -166,7 +166,7 @@
   ],
 
   "sources": {
-    "tone_zones": "skills/normativa/datos/tone-zones.json",
+    "tone_zones": "skills/TONE/datos/tone-zones.json",
     "decretos": ["Dto. 3970/2017", "Dto. 4056/2022"],
     "last_updated": "2026-03-15"
   }

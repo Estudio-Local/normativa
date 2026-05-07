@@ -6,10 +6,10 @@
   },
   "plugins": [
     {
-      "name": "normativa",
+      "name": "normativa-tone",
       "source": "./",
-      "description": "Maldonado UY zoning analysis (TONE) + printable report builder. Two skills: /normativa (envelope analysis) + /informe (HTML report).",
-      "version": "0.1.0"
+      "description": "Maldonado UY zoning analysis (TONE / Digesto Departamental, Volumen V) + printable report builder. Two skills: /TONE (envelope analysis) + /TONE-informe (HTML report).",
+      "version": "0.2.0"
     }
   ]
 }
