@@ -270,34 +270,59 @@ def render(envelope, template):
         rec_scenario = {"label": "—", "envelope": {}, "retiros": {}, "tipologia": {}}
 
     n_lots = len(selection.get("lots") or selection.get("padrones") or [])
-    adjacency_desc = (
-        f"{n_lots} lote{'s' if n_lots != 1 else ''} adyacente{'s' if n_lots != 1 else ''}"
-        if selection.get("adjacent")
-        else f"{n_lots} lote{'s' if n_lots != 1 else ''} no contiguos"
-    )
+    is_single = n_lots == 1
+    is_adjacent = bool(selection.get("adjacent"))
+
+    if is_single:
+        adjacency_desc = "Padrón único"
+    elif is_adjacent:
+        adjacency_desc = f"{n_lots} lotes adyacentes"
+    else:
+        adjacency_desc = f"{n_lots} lotes no contiguos"
+
+    if is_single:
+        lot_count_label = "Padrón único"
+    else:
+        lot_count_label = f"{n_lots} lotes"
+
+    padrones_list = ", ".join(str(p) for p in (selection.get("padrones") or []))
+    if is_single:
+        padrones_label = f"Padrón {padrones_list}" if padrones_list else "Padrón —"
+    else:
+        padrones_label = f"Padrones {padrones_list}" if padrones_list else "Padrones —"
+
+    if is_single:
+        lots_note = (
+            f"Padrón único — análisis directo. "
+            f"Régimen: {regimen_label(selection.get('regimen'))}."
+        )
+    elif is_adjacent:
+        lots_note = (
+            f"Adyacencia confirmada (Turf union). "
+            f"Régimen mayoritario: {regimen_label(selection.get('regimen'))}."
+        )
+    else:
+        lots_note = (
+            f"⚠ Lotes no contiguos — los escenarios de unión no aplican. "
+            f"Régimen mayoritario: {regimen_label(selection.get('regimen'))}."
+        )
 
     subs = {
         "{{ANALYSIS_ID}}":          short_id(envelope),
         "{{DOC_DATE}}":             fmt_es_date(envelope.get("generated_at")),
         "{{SKILL_VERSION}}":        envelope.get("skill_version") or "—",
-        "{{LOT_COUNT}}":            f"{n_lots} lote{'s' if n_lots != 1 else ''}",
+        "{{LOT_COUNT}}":            esc(lot_count_label),
         "{{ZONE_HEADLINE}}":        f'Zona {esc(zone.get("code"))} {esc(zone.get("name") or "")}'.strip(),
         "{{LOCALITY_NAME}}":        esc(zone.get("locality_name") or "—"),
         "{{ADJACENCY_DESC}}":       esc(adjacency_desc),
-        "{{PADRONES_RANGE}}":       esc(", ".join(str(p) for p in (selection.get("padrones") or [])) or "—"),
+        "{{PADRONES_LABEL}}":       esc(padrones_label),
 
         "{{LOTS_TABLE_ROWS}}":      build_lots_rows(
                                         selection.get("lots") or [],
                                         selection.get("area_total_m2"),
                                         selection.get("frente_estimado_m"),
                                     ),
-        "{{LOTS_NOTE}}":            esc(
-                                        "Adyacencia confirmada (Turf union)."
-                                        if selection.get("adjacent") else
-                                        "⚠ Lotes no contiguos — los escenarios de unión no aplican."
-                                    ) + (
-                                        f" Régimen mayoritario: {regimen_label(selection.get('regimen'))}."
-                                    ),
+        "{{LOTS_NOTE}}":            esc(lots_note),
 
         "{{ZONE_TABLE_ROWS}}":      build_zone_rows(zone, sources),
         "{{ZONE_DATA_QUALITY}}":    esc(zone.get("data_quality") or "—"),
