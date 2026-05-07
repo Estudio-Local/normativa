@@ -147,11 +147,13 @@ Free-form Spanish strings, one per line. Keep ≤ 200 chars each.
 {
   "tone_zones":    "skills/norma/datos/tone-zones.json",
   "decretos":      ["Dto. 3970/2017"],
-  "last_updated":  "2026-03-15"
+  "last_updated":  "2026-03-15",
+  "map_url":       "https://estudio-local.com/mapa?padron=130,131,132&loc=la-juanita"
 }
 ```
 
-`last_updated` is the date of the most recent decreto incorporated into `tone-zones.json` (not the date of *this* analysis — that's `generated_at`).
+- `last_updated` — date of the most recent decreto incorporated into `tone-zones.json` (not the date of *this* analysis — that's `generated_at`).
+- **`map_url`** — REQUIRED string pointing to the parcel(s) on the Mapa app. Always include it. The Mapa is the canonical visual back-reference for the lot under analysis; without this link the report leaves the reader with no way to inspect geometry or neighbors. URL pattern: `https://estudio-local.com/mapa?padron={comma-joined-padrones}&loc={locality-slug}`. Use the same locality slug that goes into `selection.locality`. For multi-padrón selections, comma-join the padrones in the same order as `selection.padrones[]`.
 
 ## Validation
 
@@ -169,6 +171,7 @@ Minimum required keys:
 - `scenarios` (at least one entry, even if just `applicable: false`)
 - `recommendation.scenario_id` (or `null` if no applicable scenario)
 - `caveats` (empty array OK)
+- `sources.map_url` (string — link to the parcel on the Mapa app, see `sources` section above)
 
 `/norma-informe` refuses to render if any required key is missing.
 

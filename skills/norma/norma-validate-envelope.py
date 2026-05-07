@@ -249,12 +249,19 @@ def validate_envelope(envelope):
                 err(errors, f"caveats[{i}]", "expected string")
 
     sources = envelope.get("sources")
-    if sources is not None:
-        if not isinstance(sources, dict):
-            err(errors, "sources", "expected object or omitted")
-        else:
-            if "decretos" in sources and not isinstance(sources["decretos"], list):
-                err(errors, "sources.decretos", "expected array")
+    if not isinstance(sources, dict):
+        err(errors, "sources", "expected object (sources.map_url is required)")
+    else:
+        if "decretos" in sources and not isinstance(sources["decretos"], list):
+            err(errors, "sources.decretos", "expected array")
+        map_url = sources.get("map_url")
+        if not is_str(map_url) or not map_url.strip():
+            err(errors, "sources.map_url",
+                "required non-empty string — link to the parcel(s) on the Mapa app. "
+                "Pattern: https://estudio-local.com/mapa?padron=<comma-joined>&loc=<locality-slug>")
+        elif not (map_url.startswith("http://") or map_url.startswith("https://")):
+            err(errors, "sources.map_url",
+                f"expected http(s) URL, got {map_url!r}")
 
     return errors
 

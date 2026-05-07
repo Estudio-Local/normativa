@@ -132,11 +132,13 @@ def build_lots_rows(lots, total_area, total_frente):
 
 def build_zone_rows(zone, sources):
     decretos = ", ".join(sources.get("decretos", [])) or zone.get("decreto", "—")
+    dq = zone.get("data_quality")
+    dq_cell = f'<span class="pill">{esc(dq)}</span>' if dq else "—"
     rows = [
         f'<tr><td>Localidad</td><td>{esc(zone.get("locality_name") or "—")}</td></tr>',
         f'<tr><td>Sector / Zona</td><td>Zona {esc(zone.get("code"))} {esc(zone.get("name") or "")}</td></tr>',
         f'<tr><td>Decreto vigente</td><td>{esc(decretos)}</td></tr>',
-        f'<tr><td>Calidad de datos</td><td>{esc(zone.get("data_quality") or "—")}</td></tr>',
+        f'<tr><td>Calidad de datos</td><td>{dq_cell}</td></tr>',
         f'<tr><td>Última actualización</td><td>{esc(sources.get("last_updated") or "—")}</td></tr>',
     ]
     return "\n".join(rows)
@@ -156,8 +158,8 @@ def build_scenario_grid(scenarios, recommendation):
         return ' class="col-recommended"' if s.get("id") == rec_id else ""
 
     def header(s):
-        star = " ★" if s.get("id") == rec_id else ""
-        return f'<th{col_class(s)}>{esc(s.get("id"))} — {esc(s.get("label") or "")}{star}</th>'
+        # Recommended marker rendered via CSS (th.col-recommended::before).
+        return f'<th{col_class(s)}>{esc(s.get("id"))} — {esc(s.get("label") or "")}</th>'
 
     rows = ["<thead><tr><th></th>" + "".join(header(s) for s in cols) + "</tr></thead>"]
     body = ["<tbody>"]
@@ -244,7 +246,7 @@ def build_caveats_html(caveats):
     if not caveats:
         return ""
     items = "\n".join(f"<li>{esc(c)}</li>" for c in caveats)
-    return f'<h2 class="section">Advertencias</h2>\n<ul class="disclaimer">{items}</ul>'
+    return f'<h2 class="section">Advertencias</h2>\n<ul class="caveats">{items}</ul>'
 
 
 # ───────── main ─────────
@@ -323,6 +325,7 @@ def render(envelope, template):
 
         "{{NORMATIVA_ROWS}}":       build_normativa_rows(sources),
         "{{SOURCES_LAST_UPDATED}}": esc(sources.get("last_updated") or "—"),
+        "{{MAP_URL}}":              esc(sources.get("map_url") or "#"),
 
         "{{CAVEATS_BLOCK}}":        build_caveats_html(caveats),
 

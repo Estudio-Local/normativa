@@ -343,6 +343,7 @@ This file is the contract between `/norma` and `/norma-informe`. The shape is st
 | `scenarios[].retiros.{frontal_m, lateral_m, fondo_m, entre_volumenes_m}` | **number** or `null` | `"3 m"` | `3` |
 | `recommendation.scenario_id` | **string from `scenarios[].id`** or `null` | `"recommended"`, `0` | `"C1"` |
 | `generated_at` | ISO-8601 UTC string | `"April 26, 2026"` | `"2026-04-26T23:45:00Z"` |
+| `sources.map_url` | **required string** — link to the parcel(s) on the Mapa app | omitted | `"https://estudio-local.com/mapa?padron=130,131,132&loc=la-juanita"` |
 
 **Structural rules:**
 
@@ -352,6 +353,7 @@ This file is the contract between `/norma` and `/norma-informe`. The shape is st
 - When invoked with `--input selection.v1.json`, **echo the input's `selection.*` values verbatim** into the output. Do not re-derive padrones/locality/area/régimen.
 - `tipologias_catalog` (in `zone`) is the FULL list of tipologías for the zone. Per-scenario `applicable`/`tipologias_habilitadas` say which are reachable for *this* selection.
 - Bias `recommendation` by **m² edificable yield** unless an explicit constraint kills the high-yield path (régimen PH blocking englobamiento, special_rule overrides, etc.).
+- **Always populate `sources.map_url`** so the report links back to the lot on the Mapa app. Pattern: `https://estudio-local.com/mapa?padron=<comma-joined-padrones>&loc=<locality-slug>`. Use the same locality slug that goes into `selection.locality` and the same padron order as `selection.padrones[]`. The validator rejects envelopes without it — `/norma-informe` surfaces the link prominently on page 1 so the reader can inspect the parcel geometry, neighbors, and zoning overlay without leaving the report.
 
 The markdown report (Step 8) and this JSON sidecar carry the same information — markdown for humans, JSON for machines. Keep them in sync.
 
