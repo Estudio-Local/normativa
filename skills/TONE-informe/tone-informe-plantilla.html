@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Análisis · {{ANALYSIS_ID}} · Estudio Local</title>
+<title>Análisis · {{ANALYSIS_ID}}</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Martian+Mono:wght@300;400;700&display=swap" rel="stylesheet">
@@ -40,13 +40,6 @@
     padding: 0 16px;
     z-index: 1000;
     backdrop-filter: blur(8px);
-  }
-  .toolbar .brand {
-    font-size: 13px; font-weight: 700;
-    color: var(--bg);
-    padding-right: 12px;
-    border-right: 1px solid rgba(246,245,241,0.18);
-    margin-right: 8px;
   }
   .toolbar .doc-meta {
     font-size: 11px; color: rgba(246,245,241,0.65);
@@ -89,23 +82,6 @@
     @page { size: A4; margin: 0; }
   }
 
-  .page-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
-    padding-bottom: 8mm;
-    border-bottom: 2px solid var(--rule);
-    margin-bottom: 8mm;
-  }
-  .page-header .ph-brand {
-    font-size: 14pt; font-weight: 700; letter-spacing: 0.02em;
-  }
-  .page-header .ph-doc-id {
-    font-size: 8pt; color: var(--muted);
-    text-align: right; letter-spacing: 0.04em; line-height: 1.5;
-  }
-  .page-header .ph-doc-id b { color: var(--text); font-weight: 700; }
-
   .page-footer {
     margin-top: auto;
     padding-top: 6mm;
@@ -116,7 +92,6 @@
     color: var(--muted);
     letter-spacing: 0.04em;
   }
-  .page-footer b { color: var(--text); font-weight: 700; }
 
   h1.doc-title {
     font-size: 22pt; font-weight: 700;
@@ -241,7 +216,6 @@
 <body>
 
 <div class="toolbar">
-  <span class="brand">Estudio Local</span>
   <div class="doc-meta">
     Informe imprimible · <b>Análisis {{ANALYSIS_ID}}</b> · {{LOT_COUNT}} · {{ZONE_HEADLINE}}
   </div>
@@ -252,14 +226,6 @@
 
 <!-- ════════════════ PAGE 1 — Cover + Lot Data ════════════════ -->
 <div class="page">
-  <div class="page-header">
-    <div class="ph-brand">Estudio Local</div>
-    <div class="ph-doc-id">
-      <b>Análisis · {{ANALYSIS_ID}}</b><br>
-      Generado {{DOC_DATE}} · /TONE v{{SKILL_VERSION}}
-    </div>
-  </div>
-
   <h1 class="doc-title">Análisis de envolvente edificable</h1>
   <p class="doc-subtitle">{{ADJACENCY_DESC}} · {{ZONE_HEADLINE}} · {{LOCALITY_NAME}}</p>
 
@@ -284,21 +250,13 @@
   </table>
 
   <div class="page-footer">
-    <span><b>Estudio Local</b> · {{ANALYSIS_ID}}</span>
+    <span>{{ANALYSIS_ID}} · {{DOC_DATE}}</span>
     <span>Pág 1 / 4</span>
   </div>
 </div>
 
 <!-- ════════════════ PAGE 2 — Comparativa de escenarios ════════════════ -->
 <div class="page">
-  <div class="page-header">
-    <div class="ph-brand">Estudio Local</div>
-    <div class="ph-doc-id">
-      <b>Análisis · {{ANALYSIS_ID}}</b><br>
-      Padrones {{PADRONES_RANGE}} · {{ZONE_HEADLINE}}
-    </div>
-  </div>
-
   <h2 class="section">Comparativa de escenarios</h2>
   <p class="lead">Escenarios evaluados sobre la selección. La unión catastral puede habilitar tipologías de mayor densidad — los escenarios marcados con ★ son los recomendados.</p>
 
@@ -317,21 +275,13 @@
   </div>
 
   <div class="page-footer">
-    <span><b>Estudio Local</b> · {{ANALYSIS_ID}}</span>
+    <span>{{ANALYSIS_ID}} · Padrones {{PADRONES_RANGE}}</span>
     <span>Pág 2 / 4</span>
   </div>
 </div>
 
 <!-- ════════════════ PAGE 3 — Detalle del escenario recomendado ════════════════ -->
 <div class="page">
-  <div class="page-header">
-    <div class="ph-brand">Estudio Local</div>
-    <div class="ph-doc-id">
-      <b>Análisis · {{ANALYSIS_ID}}</b><br>
-      Detalle escenario {{REC_SCENARIO_ID}} — {{REC_SCENARIO_LABEL}}
-    </div>
-  </div>
-
   <h2 class="section">Escenario {{REC_SCENARIO_ID}} — {{REC_SCENARIO_LABEL}}</h2>
 
   <h3 class="sub">Envolvente edificable</h3>
@@ -364,21 +314,13 @@
   <p class="note">{{REC_GALIBO_NOTE}}</p>
 
   <div class="page-footer">
-    <span><b>Estudio Local</b> · {{ANALYSIS_ID}}</span>
+    <span>{{ANALYSIS_ID}} · Detalle escenario {{REC_SCENARIO_ID}}</span>
     <span>Pág 3 / 4</span>
   </div>
 </div>
 
 <!-- ════════════════ PAGE 4 — Normativa, fuentes, descargo ════════════════ -->
 <div class="page">
-  <div class="page-header">
-    <div class="ph-brand">Estudio Local</div>
-    <div class="ph-doc-id">
-      <b>Análisis · {{ANALYSIS_ID}}</b><br>
-      Normativa, fuentes y descargo
-    </div>
-  </div>
-
   <h2 class="section">Marco normativo aplicable</h2>
   <p class="lead">El análisis se rige por el TONE (Texto Ordenado de Normas de Edificación), Volumen V del Digesto Departamental de Maldonado.</p>
   <table>
@@ -405,11 +347,11 @@
   <div class="disclaimer">
     <p><b>Análisis indicativo, no certificación.</b> Este informe se basa en datos catastrales publicados por la Intendencia de Maldonado y en la interpretación del TONE vigente al momento de la generación. No reemplaza el dictamen del cuerpo técnico de la Intendencia ni la consulta formal previa a un trámite de permiso.</p>
     <p>Verificá el TONE vigente y las modificaciones en <b>digesto.maldonado.gub.uy</b>. La habilitación efectiva de tipologías de unión catastral depende de la aprobación de la DNC.</p>
-    <p>Estudio Local no garantiza completitud ni exactitud de los datos catastrales reproducidos. Los valores de FOS/FOT/altura corresponden a la zona declarada en el portal cartográfico al momento del análisis.</p>
+    <p>No se garantiza completitud ni exactitud de los datos catastrales reproducidos. Los valores de FOS/FOT/altura corresponden a la zona declarada en el portal cartográfico al momento del análisis.</p>
   </div>
 
   <div class="page-footer">
-    <span><b>Estudio Local</b> · {{ANALYSIS_ID}} · Generado {{DOC_DATE}}</span>
+    <span>{{ANALYSIS_ID}} · Generado {{DOC_DATE}}</span>
     <span>Pág 4 / 4</span>
   </div>
 </div>

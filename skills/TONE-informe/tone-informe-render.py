@@ -326,8 +326,7 @@ def render(envelope, template):
 
         "{{CAVEATS_BLOCK}}":        build_caveats_html(caveats),
 
-        "{{GENERATOR_LINE}}":       f'/TONE v{esc(envelope.get("skill_version") or "—")} · '
-                                    f'github.com/Estudio-Local/normativa',
+        "{{GENERATOR_LINE}}":       f'/TONE v{esc(envelope.get("skill_version") or "—")}',
     }
 
     out = template
