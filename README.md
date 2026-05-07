@@ -32,8 +32,9 @@ selection.v1.json (optional)
  /TONE --input selection.v1.json
         │
         ├─→ <basename>.md                    (humans read this)
-        └─→ <basename>.normativa.v1.json     (TONE-informe reads this)
-                                │
+        └─→ <basename>.normativa.v1.json     (validated against
+                                │             normativa-v1-schema.md
+                                │             before exit)
                                 ▼
                          /TONE-informe --input <basename>.normativa.v1.json
                                 │
@@ -53,7 +54,7 @@ Three files per run:
 | `*.normativa.v1.json` | machine | Same data, structured — feeds `/TONE-informe` |
 | `*.informe.html` | human | Printable A4 report (open in browser, print to PDF) |
 
-The `*.normativa.v1.json` filename and its internal `schema: "estudio-local.normativa.v1"` field are versioned data contracts — they stay stable across plugin renames so downstream consumers (Mapa, other tools) don't break.
+The `*.normativa.v1.json` filename and its internal `schema: "estudio-local.normativa.v1"` field are versioned data contracts — they stay stable across plugin renames so downstream consumers (Mapa, other tools) don't break. `/TONE` runs `tone-validate-envelope.py` against its own output before exiting; if validation fails, the envelope is fixed before `/TONE-informe` ever sees it.
 
 ## Try it
 
@@ -61,11 +62,12 @@ Without installing anything, render the bundled example:
 
 ```bash
 git clone https://github.com/Estudio-Local/normativa.git && cd normativa
-python3 skills/TONE-informe/render.py examples/padrones-130-132-la-juanita.normativa.v1.json
-open examples/padrones-130-132-la-juanita.normativa.informe.html
+python3 skills/TONE/tone-validate-envelope.py examples/padrones-130-132-la-juanita.normativa.v1.json
+python3 skills/TONE-informe/tone-informe-render.py examples/padrones-130-132-la-juanita.normativa.v1.json
+open examples/padrones-130-132-la-juanita.informe.html
 ```
 
-Reads the sample analysis envelope, renders a 4-page printable report, opens it in your browser. ⌘P / Ctrl+P → "Save as PDF" to share.
+Validates the canonical envelope, renders a 4-page printable report, opens it in your browser. ⌘P / Ctrl+P → "Save as PDF" to share.
 
 ## What's covered
 
@@ -86,46 +88,68 @@ Last decree incorporated: Dto. 4056/2022. Always verify against the live digesto
 ## Repo layout
 
 ```
-normativa/                              ← this repo (slug: normativa-tone)
+normativa/                              ← this repo (plugin slug: normativa-tone)
 ├── .claude-plugin/
 │   ├── marketplace.json                ← marketplace manifest
 │   └── plugin.json                     ← plugin manifest
 ├── skills/
 │   ├── TONE/                           ← /TONE skill
-│   │   ├── SKILL.md                    ← instructions for Claude
-│   │   ├── SCHEMA.md                   ← normativa.v1.json spec
-│   │   ├── scenarios.py                ← engine (applicable_tipologias)
-│   │   ├── extract-tipologias.py       ← markdown → JSON extractor
-│   │   ├── merge-tipologias.py         ← reviewed extractions → tone-zones.json
-│   │   ├── README.md
+│   │   ├── SKILL.md                    ← instructions for Claude (harness convention name)
+│   │   ├── README.md                   ← per-skill overview
+│   │   ├── normativa-v1-schema.md      ← envelope schema spec
+│   │   ├── tone-validate-envelope.py   ← strict stdlib validator (run before exit)
+│   │   ├── tone-scenarios.py           ← engine (applicable_tipologias)
+│   │   ├── tone-extract-tipologias.py  ← markdown → JSON extractor
+│   │   ├── tone-merge-tipologias.py    ← reviewed extractions → tone-zones.json
 │   │   └── datos/
 │   │       ├── tone-zones.json         ← 10 localities, 33 zones, ~91 subzones
+│   │       ├── tone-sync-zoning.py     ← pull/refresh zoning polygons
 │   │       ├── titulo-*.md             ← full normativa text by sector (7 files)
 │   │       ├── extractions/            ← per-titulo extraction artifacts (audit trail)
 │   │       └── zoning/                 ← per-zone GeoJSON (116 files)
 │   └── TONE-informe/                   ← /TONE-informe skill
-│       ├── SKILL.md
-│       ├── plantilla.html              ← A4 report template
-│       └── render.py                   ← JSON → HTML renderer (Python stdlib)
+│       ├── SKILL.md                    ← (harness convention name)
+│       ├── tone-informe-plantilla.html ← A4 report template
+│       └── tone-informe-render.py      ← JSON → HTML renderer (Python stdlib)
 ├── examples/
 │   ├── selection.v1.json                                    ← sample input envelope
 │   ├── padrones-130-132-la-juanita.normativa.v1.json        ← sample /TONE output
-│   └── padrones-130-132-la-juanita.normativa.informe.html   ← sample /TONE-informe output
+│   └── padrones-130-132-la-juanita.informe.html             ← sample /TONE-informe output
 ├── README.md
 └── LICENSE
 ```
 
+## Naming convention
+
+This repo follows a deliberate naming convention so files stay legible across multiple skills and repos. Generic names (`render.py`, `SCHEMA.md`, `helpers.py`) become indistinguishable in editor tabs, grep results, and stack traces once you have more than one skill.
+
+**Inviolate names — never rename**, the harness or community standards require these exact filenames:
+- `SKILL.md` (Anthropic skill discovery)
+- `plugin.json`, `marketplace.json` (Claude Code plugin manifests)
+- `README.md`, `LICENSE` (github / OSS convention)
+
+**Everything else — prefixed:** kebab-case, lowercase, prefixed with the skill slug or schema id.
+
+| Pattern | When to use | Example |
+|---|---|---|
+| `<skill-slug>-<role>.<ext>` | Code, templates, helpers belonging to one skill | `tone-scenarios.py`, `tone-informe-render.py` |
+| `<schema-id>-schema.md` | Data contract docs (named after the schema, not the skill — survives skill renames) | `normativa-v1-schema.md` |
+
+Why prefix even though the skill folder already namespaces them: a filename is what shows up in editor tabs, error stack traces, grep results across repos, and pasted code snippets — places where the surrounding folder context isn't visible. The prefix is defensive against the file ever being seen out of context.
+
 ## Schemas
 
-- **`selection.v1.json`** — optional input to `/TONE`. Shape: `{ schema, padrones[], locality, area_total_m2, regimen, lots[], … }`. See [`skills/TONE/SCHEMA.md`](./skills/TONE/SCHEMA.md) "Sister envelope" section.
-- **`normativa.v1.json`** — produced by `/TONE`, consumed by `/TONE-informe`. Shape: `{ schema, selection, zone, scenarios[], recommendation, caveats }`. See [`skills/TONE/SCHEMA.md`](./skills/TONE/SCHEMA.md) for the full spec.
+- **`selection.v1.json`** — optional input to `/TONE`. Shape: `{ schema, padrones[], locality, area_total_m2, regimen, lots[], … }`. See [`skills/TONE/normativa-v1-schema.md`](./skills/TONE/normativa-v1-schema.md) "Sister envelope" section.
+- **`normativa.v1.json`** — produced by `/TONE`, consumed by `/TONE-informe`. Shape: `{ schema, selection, zone, scenarios[], recommendation, caveats }`. See [`skills/TONE/normativa-v1-schema.md`](./skills/TONE/normativa-v1-schema.md) for the full spec, strict-types table, and common pitfalls.
 
 `schema` field on every envelope is `estudio-local.<name>.v1` — version-bump on breaking changes. The schema name is decoupled from the skill name on purpose: renaming the skills (e.g. `/normativa` → `/TONE`) does not bump the schema version.
+
+`/TONE` runs `tone-validate-envelope.py` against its own output before declaring done. The validator is pure stdlib, surfaces concrete per-field errors (e.g. `selection.padrones[0]: expected string, got int (130)`), and refuses to accept malformed envelopes — so `/TONE-informe` never has to defend itself against bad input.
 
 ## Requirements
 
 - [Claude Code](https://claude.ai/claude-code) ≥ 2.0
-- Python 3.9+ (for `/TONE-informe`'s renderer; `/TONE` is markdown-driven)
+- Python 3.9+ (for the renderer + validator; the analysis itself is markdown-driven)
 
 ## License
 

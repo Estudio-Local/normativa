@@ -10,7 +10,7 @@ user-invocable: true
 
 # /TONE-informe — Printable HTML report from a `/TONE` analysis
 
-Take a `*.normativa.v1.json` envelope and render it as a self-contained, printable A4 HTML report. No analysis here — pure rendering. Thin wrapper around `render.py` (Python stdlib only, no dependencies).
+Take a `*.normativa.v1.json` envelope and render it as a self-contained, printable A4 HTML report. No analysis here — pure rendering. Thin wrapper around `tone-informe-render.py` (Python stdlib only, no dependencies).
 
 ## Startup message
 
@@ -34,14 +34,14 @@ Output: <basename>.informe.html  (open in browser, print to PDF for sharing)
 
 1. File exists and is valid JSON.
 2. Top-level `schema` field equals `"estudio-local.normativa.v1"`. If different (e.g. `.v2`), bail with: *"This /TONE-informe expects schema v1; the input is `<schema>`. Re-run /TONE with the latest version, or install a matching /TONE-informe."*
-3. Required keys present (per `../TONE/SCHEMA.md`'s "Validation" section): `selection.padrones`, `selection.locality`, `selection.area_total_m2`, `zone.code`, `scenarios` (≥ 1), `recommendation` (object), `caveats`.
+3. Required keys present (per `../TONE/normativa-v1-schema.md`'s "Validation" section): `selection.padrones`, `selection.locality`, `selection.area_total_m2`, `zone.code`, `scenarios` (≥ 1), `recommendation` (object), `caveats`.
 
 Surface missing keys as a clear error pointing back at `/TONE`. Do not try to render a partial envelope.
 
 ### Step 3: Run the renderer
 
 ```bash
-python3 "$CLAUDE_PLUGIN_ROOT/skills/TONE-informe/render.py" <input-path> [<output-path>]
+python3 "$CLAUDE_PLUGIN_ROOT/skills/TONE-informe/tone-informe-render.py" <input-path> [<output-path>]
 ```
 
 If `<output-path>` is omitted, the script writes alongside the input with `.informe.html` suffix. Print the script's stdout (the "wrote …" line) verbatim — don't paraphrase.
@@ -68,7 +68,7 @@ The rendered HTML is 4 A4 pages:
 | 3 — Detalle escenario recomendado | Envelope, retiros, tipologías habilitadas, programa, plazos | `scenarios[recommended]`, `zone.tipologias_catalog` |
 | 4 — Normativa, fuentes, descargo | Decretos table, sources, caveats, disclaimer | `sources`, `caveats` |
 
-To change the report shape: edit `plantilla.html` (HTML/CSS) and / or `render.py`'s `build_*` helpers — they map JSON keys to HTML chunks. No template engine; just `str.replace` on `{{PLACEHOLDER}}` markers.
+To change the report shape: edit `tone-informe-plantilla.html` (HTML/CSS) and / or `tone-informe-render.py`'s `build_*` helpers — they map JSON keys to HTML chunks. No template engine; just `str.replace` on `{{PLACEHOLDER}}` markers.
 
 ## Limitations (v0.1)
 
@@ -80,5 +80,5 @@ To change the report shape: edit `plantilla.html` (HTML/CSS) and / or `render.py
 | Error | Likely cause | Fix |
 |-------|--------------|-----|
 | `error: expected schema='estudio-local.normativa.v1', got '...'` | Envelope is v2 or hand-edited | Re-run `/TONE`; update the schema field |
-| Missing required key | `/TONE` aborted mid-write | Re-run `/TONE`; check `SCHEMA.md` for required set |
+| Missing required key | `/TONE` aborted mid-write | Re-run `/TONE`; check `normativa-v1-schema.md` for required set |
 | Empty scenarios grid | All scenarios have `applicable: false` | Expected for selections that fail every threshold — report still renders the recommendation as "Sin escenario recomendado" |

@@ -188,7 +188,7 @@ If the file doesn't exist yet:
 
 Apply the normativa rules to the specific lot.
 
-**Prefer the scenario engine when available:** if the subzone carries a `tipologias[]` array, use `TONE/scenarios.py` → `applicable_tipologias(zone, area_m2, frente_m)` to filter tipologías whose `thresholds` are met. The returned list drives per-tipología envelope math (altura/FOT/FOS/retiros come from each tipología entry directly). Fall back to legacy scalar fields (`altura_maxima`, `FOT`, `FOS`, `retiros`) only for subzones that don't carry `tipologias[]` yet (27 pending zones as of 2026-04-24).
+**Prefer the scenario engine when available:** if the subzone carries a `tipologias[]` array, use `TONE/tone-scenarios.py` → `applicable_tipologias(zone, area_m2, frente_m)` to filter tipologías whose `thresholds` are met. The returned list drives per-tipología envelope math (altura/FOT/FOS/retiros come from each tipología entry directly). Fall back to legacy scalar fields (`altura_maxima`, `FOT`, `FOS`, `retiros`) only for subzones that don't carry `tipologias[]` yet (27 pending zones as of 2026-04-24).
 
 1. **Permitted building types**: For each tipología in the subzone, check `thresholds.area_min_m2` and `thresholds.frente_min_m` against the lot. Use `scenarios.applicable_tipologias` when available
 2. **Maximum height and floors**: Per-tipología — read `altura_m` and `pisos_label` from the tipología entry
@@ -317,40 +317,59 @@ Save the report as a markdown file to `./`:
 
 Use lowercase, hyphens for spaces, and the locality name (e.g., `buenos-aires`, `la-barra`, `punta-del-este`).
 
-### Step 8b: Save the JSON sidecar (`*.normativa.v1.json`)
+### Step 8b: Save the JSON sidecar (`*.normativa.v1.json`) — strict contract
 
 **Always** write a structured JSON sidecar next to the markdown report. Same directory, same basename, `.normativa.v1.json` extension:
 
 - Single lot: `padron-{number}-{location}.normativa.v1.json`
 - Multiple lots: `padrones-{range}-{location}-{count}-lots.normativa.v1.json`
 
-This file is the contract between `/TONE` and downstream skills. `/TONE-informe` reads it to render the printable HTML report. The schema is locked — see [`SCHEMA.md`](./SCHEMA.md) for the full spec, field-by-field rules, and validation requirements.
+This file is the contract between `/TONE` and `/TONE-informe`. The shape is strict: don't paraphrase it, don't restructure fields, don't guess types. If the validator (Step 8c) rejects your output, fix the envelope — do not skip ahead to `/TONE-informe`.
 
-**Top-level shape (mandatory keys):**
+**Read the canonical example before writing.** A fully populated valid envelope ships at `${CLAUDE_PLUGIN_ROOT}/examples/padrones-130-132-la-juanita.normativa.v1.json`. Match its field nesting, key names, and types verbatim. Full spec at [`normativa-v1-schema.md`](./normativa-v1-schema.md).
 
-```json
-{
-  "schema":         "estudio-local.normativa.v1",
-  "generated_at":   "2026-04-26T23:45:00Z",
-  "skill_version":  "0.1.0",
-  "selection":      { "padrones": [...], "locality": "...", "area_total_m2": ..., "regimen": "...", "lots": [...] },
-  "zone":           { "code": "...", "name": "...", "data_quality": "...", "tipologias_catalog": [...] },
-  "scenarios":      [ { "id": "A", "label": "...", "applicable": true, "envelope": {...}, "retiros": {...}, ... } ],
-  "recommendation": { "scenario_id": "C1", "rationale": "...", "uplift_vs_individual_pct": ... },
-  "caveats":        [ "..." ],
-  "sources":        { "decretos": ["..."], "last_updated": "..." }
-}
+**Strict types — get these wrong and the renderer crashes or shows blanks:**
+
+| Field | Type | Wrong | Right |
+|---|---|---|---|
+| `selection.padrones` | array of **strings** | `[130, 131, 132]` | `["130", "131", "132"]` |
+| `selection.lots[].padron` | **string** (matches `selection.padrones`) | `130` | `"130"` |
+| `selection.area_total_m2`, `lots[].area_m2`, `lots[].frente_m` | **number** | `"13050"` | `13050` |
+| `selection.adjacent` | **boolean** | `"true"` | `true` |
+| `selection.regimen`, `lots[].regimen` | one of `comun \| ph \| otro \| mixed` | `"common"`, `"PH"` | `"comun"`, `"ph"` |
+| `zone.data_quality` | one of `verified \| partial \| estimated \| pending \| conditional` | `"good"` | `"verified"` |
+| `scenarios[].applicable` | **boolean** | `"true"`, `1` | `true` |
+| `scenarios[].envelope.{FOS_pct, FOT_pct, altura_m, area_edificable_m2, area_ocupacion_m2, viviendas_estimadas}` | **number** (no units, no `%`) | `"50%"`, `"13.6 m"` | `50`, `13.6` |
+| `scenarios[].retiros.{frontal_m, lateral_m, fondo_m, entre_volumenes_m}` | **number** or `null` | `"3 m"` | `3` |
+| `recommendation.scenario_id` | **string from `scenarios[].id`** or `null` | `"recommended"`, `0` | `"C1"` |
+| `generated_at` | ISO-8601 UTC string | `"April 26, 2026"` | `"2026-04-26T23:45:00Z"` |
+
+**Structural rules:**
+
+- Each scenario nests envelope fields under `envelope: { ... }` — do NOT flatten them onto the scenario. Same for `tipologia: { codigo, nombre }` and `retiros`.
+- When `applicable: false`, include `reason` (string) — omit `envelope`/`tipologia`/`retiros`.
+- For rural lots: one scenario, `applicable: false`, `reason: "Rural — 50.000 m²/vivienda mínimo"`, and `recommendation.scenario_id: null`.
+- When invoked with `--input selection.v1.json`, **echo the input's `selection.*` values verbatim** into the output. Do not re-derive padrones/locality/area/régimen.
+- `tipologias_catalog` (in `zone`) is the FULL list of tipologías for the zone. Per-scenario `applicable`/`tipologias_habilitadas` say which are reachable for *this* selection.
+- Bias `recommendation` by **m² edificable yield** unless an explicit constraint kills the high-yield path (régimen PH blocking englobamiento, special_rule overrides, etc.).
+
+The markdown report (Step 8) and this JSON sidecar carry the same information — markdown for humans, JSON for machines. Keep them in sync.
+
+### Step 8c: Validate the envelope — mandatory before declaring done
+
+Run the strict validator on the file you just wrote:
+
+```bash
+python3 ${CLAUDE_PLUGIN_ROOT}/skills/TONE/tone-validate-envelope.py <path-to-output.normativa.v1.json>
 ```
 
-**Key rules** (full detail in `SCHEMA.md`):
+Expected output on success:
 
-- Always write the file, **including for single-lot and rural-lot analyses**. For rural lots, `scenarios` is `[{ "id": "A", "applicable": false, "reason": "Rural — 50.000 m²/vivienda mínimo" }]` and `recommendation.scenario_id` is `null`.
-- When the input came from `selection.v1.json`, **echo its `selection.*` values verbatim**. Do not re-derive area/régimen — the envelope is authoritative.
-- `tipologias_catalog` lists ALL tipologías defined for the zone. Per-scenario `applicable` flags say whether each is reachable for *this* selection.
-- Bias `recommendation` by **m² edificable yield** unless an explicit constraint kills the high-yield path (régimen PH blocking englobamiento, special_rule overrides, etc.).
-- Validate before writing: every key in `SCHEMA.md`'s "Validation" section must be present.
+```
+ok <basename>: envelope conforms to estudio-local.normativa.v1
+```
 
-The markdown report (Step 8) and this JSON sidecar carry the same information — markdown for humans, JSON for machines (next skill in the chain). Keep them in sync.
+If the validator exits non-zero, it prints concrete per-field errors. Fix every error and re-run until it prints `ok`. Do not consider Step 8 complete with a failing validator — `/TONE-informe` will choke on the same issues. The validator is fast (pure stdlib, no I/O beyond reading the JSON) so iterate freely.
 
 ### Step 9: Save Normativa (if fetched)
 
@@ -544,7 +563,7 @@ Which scenario offers the best development potential, considering:
 
 Canonical tipología codes: `unidad_aislada`, `unidad_apareada`, `edificacion_baja`, `bloque_bajo_9m`, `bloque_bajo_12m`, `bloque_bajo`, `bloque_medio`, `bloque_alto`, `conjunto_unidades`, `conjunto_bloques`, `torre_media`, `torre_alta`, `hotelero`.
 
-Engine: `TONE/scenarios.py` exposes `applicable_tipologias(zone, area_m2, frente_m, es_manzana_entera=False)` — a pure function returning the filtered tipologías.
+Engine: `TONE/tone-scenarios.py` exposes `applicable_tipologias(zone, area_m2, frente_m, es_manzana_entera=False)` — a pure function returning the filtered tipologías.
 
 Data-quality levels drive both the analysis and any UI warnings:
 - **verified** — full source citation
@@ -553,7 +572,7 @@ Data-quality levels drive both the analysis and any UI warnings:
 - **pending** — source not transcribed; avoid committing to numbers
 - **conditional** — applies only under condition (see `_applicability_note`); confirm with user before applying
 
-Extraction pipeline: `extract-tipologias.py` + `merge-tipologias.py` (with AI review per titulo). See `estudios/phase2-extraction-report-2026-04-24.md` for coverage snapshot and human review items.
+Extraction pipeline: `tone-extract-tipologias.py` + `tone-merge-tipologias.py` (with AI review per titulo). See `estudios/phase2-extraction-report-2026-04-24.md` for coverage snapshot and human review items.
 
 ### Multi-lot notes
 - **Apareadas** (party wall): each lot retains its own padrón and is calculated independently; the shared boundary has 0 m setback; the TONE permits this wherever "unidades apareadas" are listed as an allowed building type

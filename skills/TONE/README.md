@@ -16,10 +16,11 @@ For install instructions and the full plugin overview, see the [repo README](../
 | File | Purpose |
 |------|---------|
 | `SKILL.md` | Instructions Claude follows when the skill runs |
-| `SCHEMA.md` | Spec for the `normativa.v1.json` envelope |
-| `scenarios.py` | Pure-function engine — `applicable_tipologias(zone, area, frente)` |
-| `extract-tipologias.py` | Deterministic markdown → JSON extractor (data pipeline) |
-| `merge-tipologias.py` | Reviewed extractions → `tone-zones.json` merger |
+| `normativa-v1-schema.md` | Spec for the `normativa.v1.json` envelope (named after the schema id, stable across skill renames) |
+| `tone-validate-envelope.py` | Strict validator — `/TONE` runs this before declaring done |
+| `tone-scenarios.py` | Pure-function engine — `applicable_tipologias(zone, area, frente)` |
+| `tone-extract-tipologias.py` | Deterministic markdown → JSON extractor (data pipeline) |
+| `tone-merge-tipologias.py` | Reviewed extractions → `tone-zones.json` merger |
 | `datos/tone-zones.json` | 10 localities, 33 zones, ~91 subzones with `tipologias[]` schema |
 | `datos/titulo-*.md` | Full normativa text by sector (audit trail) |
 | `datos/extractions/` | Per-titulo extraction artifacts (audit trail) |

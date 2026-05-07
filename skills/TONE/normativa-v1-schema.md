@@ -41,9 +41,9 @@ The schema id (`estudio-local.normativa.v1`) and filename suffix (`.normativa.v1
   "frente_estimado_m":  90,          // longest contiguous edge if multi-lot
   "adjacent":           true,        // false = non-contiguous selection
   "lots": [
-    { "padron": "130", "manzana": "045", "area_m2": 4350, "regimen": "comun" },
-    { "padron": "131", "manzana": "045", "area_m2": 4350, "regimen": "comun" },
-    { "padron": "132", "manzana": "045", "area_m2": 4350, "regimen": "comun" }
+    { "padron": "130", "manzana": "045", "area_m2": 4350, "frente_m": 30, "regimen": "comun" },
+    { "padron": "131", "manzana": "045", "area_m2": 4350, "frente_m": 30, "regimen": "comun" },
+    { "padron": "132", "manzana": "045", "area_m2": 4350, "frente_m": 30, "regimen": "comun" }
   ]
 }
 ```
@@ -155,7 +155,13 @@ Free-form Spanish strings, one per line. Keep ≤ 200 chars each.
 
 ## Validation
 
-`/TONE` should write a valid envelope on every run. Minimum required keys:
+`/TONE` MUST write a valid envelope on every run AND MUST run `tone-validate-envelope.py` against the output before declaring done. The validator (pure stdlib, ships next to this schema) refuses malformed envelopes with concrete per-field errors so you can fix them deterministically instead of trial-and-error against `/TONE-informe`.
+
+```bash
+python3 ${CLAUDE_PLUGIN_ROOT}/skills/TONE/tone-validate-envelope.py <output-path>
+```
+
+Minimum required keys:
 
 - `schema`, `generated_at`, `skill_version`
 - `selection.padrones`, `selection.locality`, `selection.area_total_m2`
@@ -165,6 +171,31 @@ Free-form Spanish strings, one per line. Keep ≤ 200 chars each.
 - `caveats` (empty array OK)
 
 `/TONE-informe` refuses to render if any required key is missing.
+
+## Strict types & common pitfalls
+
+These mistakes silently produce broken output (the renderer crashes or shows `—` instead of real values). The validator catches them all — but knowing them up front saves a round trip:
+
+| Field | Type | Wrong | Right |
+|---|---|---|---|
+| `selection.padrones` | array of **strings** | `[130, 131, 132]` | `["130", "131", "132"]` |
+| `selection.lots[].padron` | **string** (must match an entry in `selection.padrones`) | `130` | `"130"` |
+| `selection.area_total_m2`, `selection.lots[].area_m2`, `selection.lots[].frente_m` | **number** | `"13050"` | `13050` |
+| `selection.adjacent` | **boolean** | `"true"` | `true` |
+| `selection.regimen` and `selection.lots[].regimen` | one of `comun \| ph \| otro \| mixed` | `"common"`, `"PH"` | `"comun"`, `"ph"` |
+| `zone.data_quality` | one of `verified \| partial \| estimated \| pending \| conditional` | `"good"`, `"high"` | `"verified"` |
+| `scenarios[].applicable` | **boolean** | `"true"`, `1` | `true` |
+| `scenarios[].envelope.{FOS_pct, FOT_pct, altura_m, area_edificable_m2, area_ocupacion_m2, viviendas_estimadas}` | **number** (no units, no `%` suffix) | `"50%"`, `"13.6 m"` | `50`, `13.6` |
+| `scenarios[].retiros.{frontal_m, lateral_m, fondo_m, entre_volumenes_m}` | **number** or `null` | `"3 m"` | `3` |
+| `recommendation.scenario_id` | **string from `scenarios[].id`** or `null` | `"recommended"`, `0` | `"C1"` |
+| `generated_at` | ISO-8601 UTC string | `"April 26, 2026"` | `"2026-04-26T23:45:00Z"` |
+
+**Structural pitfalls** (shape, not type):
+
+- Each scenario MUST nest envelope fields under `envelope: { ... }`, NOT flatten them at the scenario level. The renderer reads `scenario.envelope.FOS_pct`, not `scenario.FOS_pct`.
+- Same for `tipologia: { codigo, nombre }` and `retiros: { ... }` — keep them nested.
+- When `applicable: false`, include `reason` (string), not an empty `envelope`.
+- `recommendation.scenario_id` must equal an existing `scenarios[].id` exactly. Use `null` when no scenario applies (rural lots, all thresholds fail).
 
 ## Versioning
 

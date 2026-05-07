@@ -5,9 +5,10 @@
 Pure stdlib. No external dependencies.
 
 Usage:
-  python3 render.py <input.normativa.v1.json> [<output.html>]
+  python3 tone-informe-render.py <input.normativa.v1.json> [<output.html>]
 
-If <output.html> is omitted, writes alongside the input with `.informe.html` suffix.
+If <output.html> is omitted, writes alongside the input as `<basename>.informe.html`
+(stripping the `.normativa.v1` suffix from the input).
 """
 
 import sys
@@ -77,7 +78,7 @@ def fmt_es_date(iso_string):
 def short_id(envelope):
     import hashlib
     seed = "|".join([
-        ",".join(envelope.get("selection", {}).get("padrones", [])),
+        ",".join(str(p) for p in envelope.get("selection", {}).get("padrones", [])),
         envelope.get("selection", {}).get("locality", ""),
         (envelope.get("generated_at") or "")[:10],
     ])
@@ -281,7 +282,7 @@ def render(envelope, template):
         "{{ZONE_HEADLINE}}":        f'Zona {esc(zone.get("code"))} {esc(zone.get("name") or "")}'.strip(),
         "{{LOCALITY_NAME}}":        esc(zone.get("locality_name") or "—"),
         "{{ADJACENCY_DESC}}":       esc(adjacency_desc),
-        "{{PADRONES_RANGE}}":       esc(", ".join(selection.get("padrones") or []) or "—"),
+        "{{PADRONES_RANGE}}":       esc(", ".join(str(p) for p in (selection.get("padrones") or [])) or "—"),
 
         "{{LOTS_TABLE_ROWS}}":      build_lots_rows(
                                         selection.get("lots") or [],
@@ -345,11 +346,16 @@ def main():
         print(f"error: input file not found: {in_path}", file=sys.stderr)
         sys.exit(1)
 
-    out_path = (
-        Path(sys.argv[2]).expanduser().resolve()
-        if len(sys.argv) >= 3
-        else in_path.with_suffix("").with_suffix(".informe.html")
-    )
+    if len(sys.argv) >= 3:
+        out_path = Path(sys.argv[2]).expanduser().resolve()
+    else:
+        # Strip both ".v1" and ".normativa" suffixes if present, then add ".informe.html".
+        # E.g. "padrones-130-la-juanita.normativa.v1.json" → "padrones-130-la-juanita.informe.html".
+        stem = in_path.name
+        for suffix in (".json", ".v1", ".normativa"):
+            if stem.endswith(suffix):
+                stem = stem[: -len(suffix)]
+        out_path = in_path.with_name(stem + ".informe.html")
 
     with in_path.open() as f:
         envelope = json.load(f)
@@ -363,7 +369,7 @@ def main():
         )
         sys.exit(1)
 
-    template_path = Path(__file__).parent / "plantilla.html"
+    template_path = Path(__file__).parent / "tone-informe-plantilla.html"
     template = template_path.read_text()
 
     html = render(envelope, template)
