@@ -1,6 +1,6 @@
 ---
-name: TONE
-description: Analyze zoning envelope rules for lots in Maldonado, Uruguay using GIS data and the TONE (Texto Ordenado de Normas Edilicias, Volumen V del Digesto Departamental).
+name: norma
+description: Norma — analyze zoning envelope rules for lots in Maldonado, Uruguay using GIS data and the TONE (Texto Ordenado de Normas Edilicias, Volumen V del Digesto Departamental).
 allowed-tools:
   - Read
   - Write
@@ -13,7 +13,7 @@ allowed-tools:
 user-invocable: true
 ---
 
-# /TONE — Zoning Envelope Analysis (Maldonado, Uruguay)
+# /norma — Zoning Envelope Analysis (Maldonado, Uruguay)
 
 Analyze building envelope rules for one or more lots in Maldonado using GIS data from the ArcGIS cadastral portal and the TONE (Volume V of the Digesto Departamental). When multiple adjoining lots are provided, compares individual, apareada (party wall), and unified (englobamiento) development scenarios.
 
@@ -49,8 +49,8 @@ Three ways to invoke this skill — pick the path that matches what the user pro
 
 | Invocation | Where the data comes from | Jump to |
 |------------|---------------------------|---------|
-| `/TONE --input <path>` | `selection.v1.json` envelope — already contains padrones, locality, total area, régimen, per-lot data | **Step 1a** |
-| `/TONE 130,131,132 en la-juanita` (padrones + locality phrase) | Look up each padrón via the cadastral portal | **Step 1** |
+| `/norma --input <path>` | `selection.v1.json` envelope — already contains padrones, locality, total area, régimen, per-lot data | **Step 1a** |
+| `/norma 130,131,132 en la-juanita` (padrones + locality phrase) | Look up each padrón via the cadastral portal | **Step 1** |
 | Pasted ArcGIS JSON (one or more features) | Direct from the Maldonado ArcGIS cadastral portal | **Step 1** |
 
 The end state is always the same: an in-memory `selection` object containing `{ padrones, locality, area_total_m2, regimen, lots[] }`. From there the workflow is identical.
@@ -160,13 +160,13 @@ To convert EPSG:3857 to lat/lon for reference:
 
 ### Step 3: Look Up Location
 
-Read `~/.claude/skills/TONE/datos/location-map.md` to match `nomloccat` to a TONE sector/region.
+Read `~/.claude/skills/norma/datos/location-map.md` to match `nomloccat` to a TONE sector/region.
 
 If no match is found, search the digesto website at `https://digesto.maldonado.gub.uy/` for the location.
 
 ### Step 4: Load Normativa
 
-Read the corresponding normativa file from `~/.claude/skills/TONE/datos/`.
+Read the corresponding normativa file from `~/.claude/skills/norma/datos/`.
 
 If the file doesn't exist yet:
 1. Fetch the relevant articles from the digesto using WebFetch
@@ -177,7 +177,7 @@ If the file doesn't exist yet:
 
 ### Step 5: Determine Zone/Subzone
 
-1. **First**, read `~/.claude/skills/TONE/datos/tone-zones.json` — a structured index of all 10 localities, 33 zones, 91 subzones. Each subzone carries a `tipologias[]` array (per Phase 2 schema, April 2026) with per-tipología `thresholds` (area_min_m2, frente_min_m), altura, pisos, FOT/FOS/FOS_SS/FOS_V, and retiros. Also carries `_data_quality` (verified / partial / estimated / pending / conditional) and optional `_applicability_note`. Use it to narrow candidates by matching `nomloccat` to a locality and `nummancat` to manzana descriptions. When `_data_quality !== 'verified'`, surface the caveat in the analysis output.
+1. **First**, read `~/.claude/skills/norma/datos/tone-zones.json` — a structured index of all 10 localities, 33 zones, 91 subzones. Each subzone carries a `tipologias[]` array (per Phase 2 schema, April 2026) with per-tipología `thresholds` (area_min_m2, frente_min_m), altura, pisos, FOT/FOS/FOS_SS/FOS_V, and retiros. Also carries `_data_quality` (verified / partial / estimated / pending / conditional) and optional `_applicability_note`. Use it to narrow candidates by matching `nomloccat` to a locality and `nummancat` to manzana descriptions. When `_data_quality !== 'verified'`, surface the caveat in the analysis output.
 2. **Then**, cross-reference against the full normativa text (loaded in Step 4) to verify zone boundaries described by street names and geographic features.
 3. Use `nomloccat` and `nummancat` (block number) to match zone boundary descriptions
 4. Check position relative to Ruta 10, coastline, and named streets
@@ -188,7 +188,7 @@ If the file doesn't exist yet:
 
 Apply the normativa rules to the specific lot.
 
-**Prefer the scenario engine when available:** if the subzone carries a `tipologias[]` array, use `TONE/tone-scenarios.py` → `applicable_tipologias(zone, area_m2, frente_m)` to filter tipologías whose `thresholds` are met. The returned list drives per-tipología envelope math (altura/FOT/FOS/retiros come from each tipología entry directly). Fall back to legacy scalar fields (`altura_maxima`, `FOT`, `FOS`, `retiros`) only for subzones that don't carry `tipologias[]` yet (27 pending zones as of 2026-04-24).
+**Prefer the scenario engine when available:** if the subzone carries a `tipologias[]` array, use `norma/norma-scenarios.py` → `applicable_tipologias(zone, area_m2, frente_m)` to filter tipologías whose `thresholds` are met. The returned list drives per-tipología envelope math (altura/FOT/FOS/retiros come from each tipología entry directly). Fall back to legacy scalar fields (`altura_maxima`, `FOT`, `FOS`, `retiros`) only for subzones that don't carry `tipologias[]` yet (27 pending zones as of 2026-04-24).
 
 1. **Permitted building types**: For each tipología in the subzone, check `thresholds.area_min_m2` and `thresholds.frente_min_m` against the lot. Use `scenarios.applicable_tipologias` when available
 2. **Maximum height and floors**: Per-tipología — read `altura_m` and `pisos_label` from the tipología entry
@@ -324,7 +324,7 @@ Use lowercase, hyphens for spaces, and the locality name (e.g., `buenos-aires`, 
 - Single lot: `padron-{number}-{location}.normativa.v1.json`
 - Multiple lots: `padrones-{range}-{location}-{count}-lots.normativa.v1.json`
 
-This file is the contract between `/TONE` and `/TONE-informe`. The shape is strict: don't paraphrase it, don't restructure fields, don't guess types. If the validator (Step 8c) rejects your output, fix the envelope — do not skip ahead to `/TONE-informe`.
+This file is the contract between `/norma` and `/norma-informe`. The shape is strict: don't paraphrase it, don't restructure fields, don't guess types. If the validator (Step 8c) rejects your output, fix the envelope — do not skip ahead to `/norma-informe`.
 
 **Read the canonical example before writing.** A fully populated valid envelope ships at `${CLAUDE_PLUGIN_ROOT}/examples/padrones-130-132-la-juanita.normativa.v1.json`. Match its field nesting, key names, and types verbatim. Full spec at [`normativa-v1-schema.md`](./normativa-v1-schema.md).
 
@@ -360,7 +360,7 @@ The markdown report (Step 8) and this JSON sidecar carry the same information �
 Run the strict validator on the file you just wrote:
 
 ```bash
-python3 ${CLAUDE_PLUGIN_ROOT}/skills/TONE/tone-validate-envelope.py <path-to-output.normativa.v1.json>
+python3 ${CLAUDE_PLUGIN_ROOT}/skills/norma/norma-validate-envelope.py <path-to-output.normativa.v1.json>
 ```
 
 Expected output on success:
@@ -369,13 +369,13 @@ Expected output on success:
 ok <basename>: envelope conforms to estudio-local.normativa.v1
 ```
 
-If the validator exits non-zero, it prints concrete per-field errors. Fix every error and re-run until it prints `ok`. Do not consider Step 8 complete with a failing validator — `/TONE-informe` will choke on the same issues. The validator is fast (pure stdlib, no I/O beyond reading the JSON) so iterate freely.
+If the validator exits non-zero, it prints concrete per-field errors. Fix every error and re-run until it prints `ok`. Do not consider Step 8 complete with a failing validator — `/norma-informe` will choke on the same issues. The validator is fast (pure stdlib, no I/O beyond reading the JSON) so iterate freely.
 
 ### Step 9: Save Normativa (if fetched)
 
 If new articles were fetched from the digesto during this analysis:
 1. Ask the user if they want to save them as a local normativa reference file
-2. If yes, write to `~/.claude/skills/TONE/datos/` with a descriptive filename
+2. If yes, write to `~/.claude/skills/norma/datos/` with a descriptive filename
 3. Update `location-map.md` with the new mapping
 
 ## Output Format
@@ -563,7 +563,7 @@ Which scenario offers the best development potential, considering:
 
 Canonical tipología codes: `unidad_aislada`, `unidad_apareada`, `edificacion_baja`, `bloque_bajo_9m`, `bloque_bajo_12m`, `bloque_bajo`, `bloque_medio`, `bloque_alto`, `conjunto_unidades`, `conjunto_bloques`, `torre_media`, `torre_alta`, `hotelero`.
 
-Engine: `TONE/tone-scenarios.py` exposes `applicable_tipologias(zone, area_m2, frente_m, es_manzana_entera=False)` — a pure function returning the filtered tipologías.
+Engine: `norma/norma-scenarios.py` exposes `applicable_tipologias(zone, area_m2, frente_m, es_manzana_entera=False)` — a pure function returning the filtered tipologías.
 
 Data-quality levels drive both the analysis and any UI warnings:
 - **verified** — full source citation
@@ -572,7 +572,7 @@ Data-quality levels drive both the analysis and any UI warnings:
 - **pending** — source not transcribed; avoid committing to numbers
 - **conditional** — applies only under condition (see `_applicability_note`); confirm with user before applying
 
-Extraction pipeline: `tone-extract-tipologias.py` + `tone-merge-tipologias.py` (with AI review per titulo). See `estudios/phase2-extraction-report-2026-04-24.md` for coverage snapshot and human review items.
+Extraction pipeline: `norma-extract-tipologias.py` + `norma-merge-tipologias.py` (with AI review per titulo). See `estudios/phase2-extraction-report-2026-04-24.md` for coverage snapshot and human review items.
 
 ### Multi-lot notes
 - **Apareadas** (party wall): each lot retains its own padrón and is calculated independently; the shared boundary has 0 m setback; the TONE permits this wherever "unidades apareadas" are listed as an allowed building type

@@ -1,13 +1,13 @@
 #!/usr/bin/env python3
 """
-tone-validate-envelope.py — strict validator for `*.normativa.v1.json` envelopes.
+norma-validate-envelope.py — strict validator for `*.normativa.v1.json` envelopes.
 
-Runs after /TONE writes its output, before /TONE-informe consumes it. Refuses
+Runs after /norma writes its output, before /norma-informe consumes it. Refuses
 malformed envelopes with concrete error messages so the LLM author can fix
 them without guesswork.
 
 Usage:
-  python3 tone-validate-envelope.py <path-to-envelope.normativa.v1.json>
+  python3 norma-validate-envelope.py <path-to-envelope.normativa.v1.json>
 
 Exit codes:
   0  envelope is valid (also prints "ok ..." to stdout)
@@ -282,7 +282,7 @@ def main():
         for line in errors:
             print(line, file=sys.stderr)
         print(file=sys.stderr)
-        print("Fix the envelope and re-run. Reference: skills/TONE/normativa-v1-schema.md",
+        print("Fix the envelope and re-run. Reference: skills/norma/normativa-v1-schema.md",
               file=sys.stderr)
         sys.exit(1)
 

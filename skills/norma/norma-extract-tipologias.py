@@ -5,8 +5,8 @@ tipologias[] per zone. Handles the 5 standard titulos (`## Zona` header
 pattern + `### a-h)` subsections). José Ignacio (titulo-iii-cap-iii-sector-2)
 does NOT follow this structure and must be handled by AI.
 
-Outputs: TONE/datos/extractions/<titulo-slug>.json
-Plus:    TONE/datos/extractions/<titulo-slug>-warnings.json (issues for AI review)
+Outputs: norma/datos/extractions/<titulo-slug>.json
+Plus:    norma/datos/extractions/<titulo-slug>-warnings.json (issues for AI review)
 
 Usage:
   python3 extract-tipologias.py                  # process all standard titulos
