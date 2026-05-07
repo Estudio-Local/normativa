@@ -337,6 +337,22 @@
   .disclaimer p:last-child { margin-bottom: 0; }
   .disclaimer b { color: var(--text); font-weight: 700; }
 
+  /* ASCII envelope sketch */
+  pre.sketch {
+    font-family: var(--font-sans);
+    font-size: 8.5pt;
+    line-height: 1.25;
+    color: var(--text);
+    background: var(--bg);
+    border-left: 2px solid var(--rule);
+    padding: 4mm 5mm;
+    margin: 2mm 0 5mm;
+    white-space: pre;
+    overflow-x: auto;
+    letter-spacing: 0;
+    font-feature-settings: normal;
+  }
+
   /* Inline accent links in tables */
   a.accent-link {
     color: var(--accent);
@@ -450,6 +466,8 @@
       {{REC_RETIROS_ROWS}}
     </tbody>
   </table>
+
+  {{REC_SKETCH_BLOCK}}
 
   <h3 class="sub">Tipologías habilitadas</h3>
   <ul class="tipologias">

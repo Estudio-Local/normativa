@@ -344,6 +344,7 @@ This file is the contract between `/norma` and `/norma-informe`. The shape is st
 | `recommendation.scenario_id` | **string from `scenarios[].id`** or `null` | `"recommended"`, `0` | `"C1"` |
 | `generated_at` | ISO-8601 UTC string | `"April 26, 2026"` | `"2026-04-26T23:45:00Z"` |
 | `sources.map_url` | **required string** — link to the parcel(s) on the Mapa app | omitted | `"https://estudio-local.com/mapa?padron=130,131,132&loc=la-juanita"` |
+| `scenarios[].sketch` | **string** with `\n` line breaks (ASCII envelope diagram) — include for every `applicable: true` scenario | omitted, or array of lines | `"┌────┐\n│ ZE │\n└────┘"` |
 
 **Structural rules:**
 
@@ -354,6 +355,20 @@ This file is the contract between `/norma` and `/norma-informe`. The shape is st
 - `tipologias_catalog` (in `zone`) is the FULL list of tipologías for the zone. Per-scenario `applicable`/`tipologias_habilitadas` say which are reachable for *this* selection.
 - Bias `recommendation` by **m² edificable yield** unless an explicit constraint kills the high-yield path (régimen PH blocking englobamiento, special_rule overrides, etc.).
 - **Always populate `sources.map_url`** so the report links back to the lot on the Mapa app. Pattern: `https://estudio-local.com/mapa?padron=<comma-joined-padrones>&loc=<locality-slug>`. Use the same locality slug that goes into `selection.locality` and the same padron order as `selection.padrones[]`. The validator rejects envelopes without it — `/norma-informe` surfaces the link prominently on page 1 so the reader can inspect the parcel geometry, neighbors, and zoning overlay without leaving the report.
+- **Include an ASCII envelope sketch (`scenarios[].sketch`) for every `applicable: true` scenario.** Orient frente at the bottom (street-level view). Use box-drawing characters (`┌─┐│└┘`) — Geist Mono in the report renders them cleanly. Label retiros by side with meters, name the buildable zone in the interior, and put headline FOS / FOT figures inside. Keep total width ≤ 60 columns so it fits the print page without wrapping. Use `\n` for line breaks (JSON-escaped). Skip sketches for `applicable: false` scenarios. Example:
+
+  ```
+         ┌──────────────────────────────┐
+         │      Fondo · 5 m             │
+    L 3  │   ┌────────────────────────┐ │  L 3
+         │   │   ZONA EDIFICABLE      │ │
+         │   │   FOS 50% · 6.525 m²   │ │
+         │   │   FOT 290% · 13.050 m² │ │
+         │   └────────────────────────┘ │
+         │      Frente · 4 m            │
+         └──────────────────────────────┘
+                        ↑ frente
+  ```
 
 The markdown report (Step 8) and this JSON sidecar carry the same information — markdown for humans, JSON for machines. Keep them in sync.
 

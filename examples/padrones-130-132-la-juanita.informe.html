@@ -337,6 +337,22 @@
   .disclaimer p:last-child { margin-bottom: 0; }
   .disclaimer b { color: var(--text); font-weight: 700; }
 
+  /* ASCII envelope sketch */
+  pre.sketch {
+    font-family: var(--font-sans);
+    font-size: 8.5pt;
+    line-height: 1.25;
+    color: var(--text);
+    background: var(--bg);
+    border-left: 2px solid var(--rule);
+    padding: 4mm 5mm;
+    margin: 2mm 0 5mm;
+    white-space: pre;
+    overflow-x: auto;
+    letter-spacing: 0;
+    font-feature-settings: normal;
+  }
+
   /* Inline accent links in tables */
   a.accent-link {
     color: var(--accent);
@@ -465,6 +481,21 @@
 <tr><td>Entre volúmenes</td><td>6 m</td><td>—</td></tr>
     </tbody>
   </table>
+
+  <h3 class="sub">Esquema de envolvente</h3>
+<pre class="sketch" aria-label="Esquema ASCII de la envolvente edificable">       ┌──────────────────────────────────┐
+       │           Fondo · 5 m            │
+   L 3 │   ┌──────────────────────────┐   │ L 3
+       │   │                          │   │
+       │   │    ZONA EDIFICABLE       │   │
+       │   │    FOS 50%   ·  6.525 m² │   │
+       │   │    FOT 290%  · 13.050 m² │   │
+       │   │    Altura    ·  28 m     │   │
+       │   │                          │   │
+       │   └──────────────────────────┘   │
+       │           Frente · 4 m           │
+       └──────────────────────────────────┘
+                       ↑ frente (90 m)</pre>
 
   <h3 class="sub">Tipologías habilitadas</h3>
   <ul class="tipologias">

@@ -242,6 +242,15 @@ def build_normativa_rows(sources):
     return "\n".join(rows)
 
 
+def build_sketch_block(sketch):
+    if not sketch or not isinstance(sketch, str) or not sketch.strip():
+        return ""
+    return (
+        '<h3 class="sub">Esquema de envolvente</h3>\n'
+        f'<pre class="sketch" aria-label="Esquema ASCII de la envolvente edificable">{esc(sketch)}</pre>'
+    )
+
+
 def build_caveats_html(caveats):
     if not caveats:
         return ""
@@ -347,6 +356,7 @@ def render(envelope, template):
         "{{REC_TIPOLOGIAS_LIST}}":  build_tipologias_list(rec_scenario, zone),
         "{{REC_PROGRAMA}}":         esc(rec_scenario.get("programa") or "—"),
         "{{REC_PLAZOS}}":           esc(rec_scenario.get("plazos") or "—"),
+        "{{REC_SKETCH_BLOCK}}":     build_sketch_block(rec_scenario.get("sketch")),
 
         "{{NORMATIVA_ROWS}}":       build_normativa_rows(sources),
         "{{SOURCES_LAST_UPDATED}}": esc(sources.get("last_updated") or "—"),

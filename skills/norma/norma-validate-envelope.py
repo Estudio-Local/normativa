@@ -185,6 +185,9 @@ def validate_scenarios(scenarios, errors):
                         if not is_str(code):
                             err(errors, f"{sp}.tipologias_habilitadas[{j}]",
                                 "expected string")
+            if "sketch" in s and s["sketch"] is not None and not is_str(s["sketch"]):
+                err(errors, f"{sp}.sketch",
+                    "expected string (ASCII envelope diagram with \\n line breaks) or null")
         else:
             if not is_str(s.get("reason")):
                 err(errors, f"{sp}.reason",

@@ -108,11 +108,22 @@ Array of evaluated scenarios. Conventional ordering: A (individual lots) → B (
   "tipologias_habilitadas": ["bloque_bajo", "bloque_medio"],
   "programa":  "Aprox. 96 unidades de 80 m² (3 dorm) o 120 unidades de 60 m² (2 dorm)…",
   "plazos":    "Permiso de construcción ~6–9 meses; englobamiento previo ~3 meses…",
-  "notes":     "Frente union de 90 m supera el mínimo de 30 m. FOS 50% × 13.050 = 6.525 m² ocupación."
+  "notes":     "Frente union de 90 m supera el mínimo de 30 m. FOS 50% × 13.050 = 6.525 m² ocupación.",
+  "sketch":    "       ┌──────────────────────────────┐\n       │      Fondo · 5 m              │\n  L 3  │   ┌────────────────────────┐   │  L 3\n       │   │   ZONA EDIFICABLE      │   │\n       │   │   FOS 50% · 6.525 m²   │   │\n       │   │   FOT 290% · 13.050 m² │   │\n       │   └────────────────────────┘   │\n       │      Frente · 4 m              │\n       └──────────────────────────────┘\n                       ↑ frente"
 }
 ```
 
-When a tipología does NOT apply (lot too small, etc.), still include the scenario with `applicable: false` and a `reason` field — `/norma-informe` shows it greyed out.
+`sketch` is an OPTIONAL string carrying an ASCII envelope diagram for this scenario. When present, `/norma-informe` renders it inside a `<pre>` block on page 3 (Detalle del escenario recomendado). Conventions:
+
+- **Orient with frente at the bottom** so the page reader sees what they'd see standing on the street.
+- Use box-drawing characters (`┌─┐│└┘`) — Geist Mono renders them correctly.
+- Show retiros labeled by side (Frente, Fondo, Lateral 1/2 with their meters).
+- Inside the inner rectangle: name the buildable zone and headline FOS / FOT figures.
+- Keep total width ≤ 60 columns so it fits the print page without wrapping.
+- Use `\n` to separate lines — JSON requires escaped newlines.
+- Include sketches for every `applicable: true` scenario; the report only displays the recommended one but downstream readers may want the full set.
+
+When a tipología does NOT apply (lot too small, etc.), still include the scenario with `applicable: false` and a `reason` field — `/norma-informe` shows it greyed out. Omit `sketch` for non-applicable scenarios.
 
 ## `recommendation`
 
@@ -199,6 +210,7 @@ These mistakes silently produce broken output (the renderer crashes or shows `�
 - Same for `tipologia: { codigo, nombre }` and `retiros: { ... }` — keep them nested.
 - When `applicable: false`, include `reason` (string), not an empty `envelope`.
 - `recommendation.scenario_id` must equal an existing `scenarios[].id` exactly. Use `null` when no scenario applies (rural lots, all thresholds fail).
+- `scenarios[].sketch`, when present, must be a string (multi-line via `\n`). Do not emit an array of lines or a markdown code block — the renderer wraps the raw string in `<pre>` and renders verbatim.
 
 ## Versioning
 
