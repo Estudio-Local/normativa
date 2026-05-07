@@ -234,7 +234,32 @@ When `/norma` is invoked with `--input <path>`, the file is a `selection.v1.json
   "frente_estimado_m": 90,
   "adjacent":       true,
   "lots": [
-    { "padron": "130", "manzana": "045", "area_m2": 4350, "regimen": "comun" }
+    {
+      "padron":   "130",
+      "manzana":  "045",
+      "area_m2":  4350,
+      "regimen":  "comun",
+      "frentes": [
+        {
+          "edges":         [4, 5],
+          "length_m":      82.3,
+          "distance_m":    3.1,
+          "calle_idcalle": 22549,
+          "calle_nombre":  "AVENIDA FRANCIA",
+          "calle_tipo":    "CALLE",
+          "calle_fuente":  "INTENDENCIA_DE_MALDONADO"
+        },
+        {
+          "edges":         [7],
+          "length_m":      30.0,
+          "distance_m":    11.4,
+          "calle_idcalle": 22612,
+          "calle_nombre":  "CALLE 1",
+          "calle_tipo":    "CALLE",
+          "calle_fuente":  "OSM"
+        }
+      ]
+    }
   ],
   "zone_hint":      { "code": "2.1", "data_quality": "verified" }
 }
@@ -243,7 +268,13 @@ When `/norma` is invoked with `--input <path>`, the file is a `selection.v1.json
 **Authority rules for `/norma` when consuming this:**
 - `padrones`, `locality`, `area_total_m2`, `regimen`, `lots[]` are **authoritative** — copy verbatim into the output's `selection.*`.
 - `zone_hint.code` is a **suggestion** — `/norma` should still resolve the zone independently from `tone-zones.json` and only use the hint if its own resolution is ambiguous.
-- `frente_estimado_m` is best-effort — re-compute if a more authoritative geometry is available.
+- **`lots[].frentes[]` is authoritative** when present — pre-computed by the Mapa app via parcel-polygon × IDE-calles intersection in UTM 21S meters. Do NOT re-derive frente from polygon dimensions if this field is present. When multiple frentes are listed, apply the TONE "frente principal" rule:
+  1. **Rank by `calle_tipo` hierarchy:** `Ruta > CALLE > PASAJE > PASAJE INTERNO > PEATONAL > CALLE INTERNA > VIRTUAL > SENDERO`. Higher tier = higher priority for the principal frente.
+  2. **Within `CALLE`:** parse `calle_nombre` for `"AVENIDA"`/`"AVDA"`/`"BOULEVARD"`/`"BLVD"` prefixes — these outrank plain calles per the TONE jerarquía vial.
+  3. **Tiebreaker:** longest `length_m`.
+  4. Cite the chosen calle by name in the analysis (`"Frente principal: AVENIDA FRANCIA, 82,3 m sobre la cara N del padrón"`); list secondary frentes in caveats so the reader can verify.
+- **`selection.frente_estimado_m`** (top-level) is best-effort — superseded by `lots[].frentes[].length_m` when present.
+- When `lots[].frentes` is empty `[]`, the parcel didn't intersect any cataloged calle within 15m. This typically means: (a) area=0 placeholder cadastral record, (b) interior parcel of a manzana with no street access, or (c) IDE catalog gap for that subdivision. Flag in caveats and fall back to polygon-dimension heuristic only as a last resort.
 
 This input mode is optional. `/norma` works equally well with padron lists or pasted GIS JSON (see SKILL.md).
 

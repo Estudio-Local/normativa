@@ -9,7 +9,7 @@
       "name": "norma",
       "source": "./",
       "description": "Norma — Maldonado UY zoning analysis (TONE / Digesto Departamental, Volumen V) + printable report builder. Two skills: /norma (envelope analysis) + /norma-informe (HTML report).",
-      "version": "0.6.0"
+      "version": "0.7.0"
     }
   ]
 }

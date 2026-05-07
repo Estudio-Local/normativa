@@ -64,7 +64,14 @@ When invoked with `--input <path>`:
 3. Only re-derive missing fields. Common case: `frente_estimado_m` may be absent — compute it via the cadastral portal lookup if so.
 4. If `selection.regimen == "ph"` or `regimen == "mixed"`, surface this in the analysis: PH (Propiedad Horizontal) lots can't be englobado without copropietarios authorization. Note in `caveats` and downgrade C-scenarios accordingly.
 5. If `selection.padrones.length > 1`, also load each padron's geometry (cadastral portal or local cache) for adjacency / combined-frente logic. Areas from the envelope stay authoritative; geometry is only for adjacency checks.
-6. Skip ahead to **Step 3** (Convert Coordinates) — Step 2's "extract attributes from ArcGIS JSON" doesn't apply.
+6. **Read `selection.lots[].frentes[]` as authoritative when present** — this is pre-computed by the Mapa app via parcel-polygon × IDE-calles intersection in UTM 21S meters. Apply the TONE "frente principal" rule (see [`normativa-v1-schema.md`](./normativa-v1-schema.md) "Sister envelope" section):
+   - Rank `calle_tipo`: `Ruta > CALLE > PASAJE > PASAJE INTERNO > PEATONAL > CALLE INTERNA > VIRTUAL > SENDERO`
+   - Within `CALLE`, parse `calle_nombre` for `AVENIDA / AVDA / BOULEVARD / BLVD` prefixes — these outrank plain calles per jerarquía vial
+   - Tiebreaker: longest `length_m`
+   - Cite the chosen frente by name (`"Frente principal: AVENIDA FRANCIA, 82,3 m"`); list secondary frentes in caveats
+   - Use `length_m` of the principal frente as the canonical `frente_m` value — do NOT re-derive from polygon edge-length math when this field is present
+   - When `frentes` is empty `[]`, surface in caveats and fall back to polygon-dimension heuristic only as a last resort
+7. Skip ahead to **Step 3** (Convert Coordinates) — Step 2's "extract attributes from ArcGIS JSON" doesn't apply.
 
 If the file is NOT a `selection.v1.json` envelope (user passed an ArcGIS JSON file by mistake), fall back to Step 1's parsing logic.
 
