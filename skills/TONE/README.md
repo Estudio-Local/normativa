@@ -1,4 +1,4 @@
-# `/normativa` skill
+# `/TONE` skill
 
 Zoning envelope analyzer for lots in Maldonado, Uruguay. Paste GIS JSON from the cadastral portal — or pass a `selection.v1.json` envelope via `--input` — and get a building envelope analysis based on the TONE (Texto Ordenado de Normas de Edificación, Volumen V del Digesto Departamental).
 
@@ -9,7 +9,7 @@ For install instructions and the full plugin overview, see the [repo README](../
 | File | Format | Audience |
 |------|--------|----------|
 | `<basename>.md` | Markdown | Humans — full written analysis |
-| `<basename>.normativa.v1.json` | JSON envelope | Machines — fed to `/informe` for the printable HTML report |
+| `<basename>.normativa.v1.json` | JSON envelope | Machines — fed to `/TONE-informe` for the printable HTML report |
 
 ## Files in this directory
 

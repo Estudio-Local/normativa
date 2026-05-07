@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-/informe renderer — normativa.v1.json → printable A4 HTML report.
+/TONE-informe renderer — normativa.v1.json → printable A4 HTML report.
 
 Pure stdlib. No external dependencies.
 
@@ -325,7 +325,7 @@ def render(envelope, template):
 
         "{{CAVEATS_BLOCK}}":        build_caveats_html(caveats),
 
-        "{{GENERATOR_LINE}}":       f'/normativa v{esc(envelope.get("skill_version") or "—")} · '
+        "{{GENERATOR_LINE}}":       f'/TONE v{esc(envelope.get("skill_version") or "—")} · '
                                     f'github.com/Estudio-Local/normativa',
     }
 

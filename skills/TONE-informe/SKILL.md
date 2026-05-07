@@ -1,6 +1,6 @@
 ---
-name: informe
-description: Render a /normativa analysis as a printable A4 HTML report. Input is the *.normativa.v1.json envelope produced by /normativa.
+name: TONE-informe
+description: Render a /TONE analysis as a printable A4 HTML report. Input is the *.normativa.v1.json envelope produced by /TONE.
 allowed-tools:
   - Read
   - Bash
@@ -8,14 +8,14 @@ allowed-tools:
 user-invocable: true
 ---
 
-# /informe — Printable HTML report from a `/normativa` analysis
+# /TONE-informe — Printable HTML report from a `/TONE` analysis
 
 Take a `*.normativa.v1.json` envelope and render it as a self-contained, printable A4 HTML report. No analysis here — pure rendering. Thin wrapper around `render.py` (Python stdlib only, no dependencies).
 
 ## Startup message
 
 ```
-Informe — printable report builder
+TONE Informe — printable report builder
 Input:  <path-to>.normativa.v1.json
 Output: <basename>.informe.html  (open in browser, print to PDF for sharing)
 ```
@@ -26,22 +26,22 @@ Output: <basename>.informe.html  (open in browser, print to PDF for sharing)
 
 | Invocation | What you do |
 |------------|-------------|
-| `/informe <path>` | Use that path directly. |
-| `/informe` (no args) | Search the current working directory for `*.normativa.v1.json` via `Glob`. If exactly one match, use it. If multiple, list them and ask which. If none, error out with a friendly message. |
-| `/informe N1,N2[,…]` (padron list) | Search cwd for `*.normativa.v1.json` whose `selection.padrones` match. If found, use it; if not, tell the user to run `/normativa` first. |
+| `/TONE-informe <path>` | Use that path directly. |
+| `/TONE-informe` (no args) | Search the current working directory for `*.normativa.v1.json` via `Glob`. If exactly one match, use it. If multiple, list them and ask which. If none, error out with a friendly message. |
+| `/TONE-informe N1,N2[,…]` (padron list) | Search cwd for `*.normativa.v1.json` whose `selection.padrones` match. If found, use it; if not, tell the user to run `/TONE` first. |
 
 ### Step 2: Validate the envelope
 
 1. File exists and is valid JSON.
-2. Top-level `schema` field equals `"estudio-local.normativa.v1"`. If different (e.g. `.v2`), bail with: *"This /informe expects schema v1; the input is `<schema>`. Re-run /normativa with the latest version, or install a matching /informe."*
-3. Required keys present (per `../normativa/SCHEMA.md`'s "Validation" section): `selection.padrones`, `selection.locality`, `selection.area_total_m2`, `zone.code`, `scenarios` (≥ 1), `recommendation` (object), `caveats`.
+2. Top-level `schema` field equals `"estudio-local.normativa.v1"`. If different (e.g. `.v2`), bail with: *"This /TONE-informe expects schema v1; the input is `<schema>`. Re-run /TONE with the latest version, or install a matching /TONE-informe."*
+3. Required keys present (per `../TONE/SCHEMA.md`'s "Validation" section): `selection.padrones`, `selection.locality`, `selection.area_total_m2`, `zone.code`, `scenarios` (≥ 1), `recommendation` (object), `caveats`.
 
-Surface missing keys as a clear error pointing back at `/normativa`. Do not try to render a partial envelope.
+Surface missing keys as a clear error pointing back at `/TONE`. Do not try to render a partial envelope.
 
 ### Step 3: Run the renderer
 
 ```bash
-python3 "$CLAUDE_PLUGIN_ROOT/skills/informe/render.py" <input-path> [<output-path>]
+python3 "$CLAUDE_PLUGIN_ROOT/skills/TONE-informe/render.py" <input-path> [<output-path>]
 ```
 
 If `<output-path>` is omitted, the script writes alongside the input with `.informe.html` suffix. Print the script's stdout (the "wrote …" line) verbatim — don't paraphrase.
@@ -79,6 +79,6 @@ To change the report shape: edit `plantilla.html` (HTML/CSS) and / or `render.py
 
 | Error | Likely cause | Fix |
 |-------|--------------|-----|
-| `error: expected schema='estudio-local.normativa.v1', got '...'` | Envelope is v2 or hand-edited | Re-run `/normativa`; update the schema field |
-| Missing required key | `/normativa` aborted mid-write | Re-run `/normativa`; check `SCHEMA.md` for required set |
+| `error: expected schema='estudio-local.normativa.v1', got '...'` | Envelope is v2 or hand-edited | Re-run `/TONE`; update the schema field |
+| Missing required key | `/TONE` aborted mid-write | Re-run `/TONE`; check `SCHEMA.md` for required set |
 | Empty scenarios grid | All scenarios have `applicable: false` | Expected for selections that fail every threshold — report still renders the recommendation as "Sin escenario recomendado" |

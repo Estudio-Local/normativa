@@ -1,6 +1,8 @@
 # `normativa.v1.json` — schema spec
 
-Machine-readable envelope produced by `/normativa` alongside the markdown report. Consumed by `/informe` (HTML report renderer).
+Machine-readable envelope produced by `/TONE` alongside the markdown report. Consumed by `/TONE-informe` (HTML report renderer).
+
+The schema id (`estudio-local.normativa.v1`) and filename suffix (`.normativa.v1.json`) intentionally preserve the historical `normativa` token — they are versioned data contracts, decoupled from the skill name. Renaming the skill (`/normativa` → `/TONE`, etc.) does not bump the schema.
 
 ## Conventions
 
@@ -110,7 +112,7 @@ Array of evaluated scenarios. Conventional ordering: A (individual lots) → B (
 }
 ```
 
-When a tipología does NOT apply (lot too small, etc.), still include the scenario with `applicable: false` and a `reason` field — `/informe` shows it greyed out.
+When a tipología does NOT apply (lot too small, etc.), still include the scenario with `applicable: false` and a `reason` field — `/TONE-informe` shows it greyed out.
 
 ## `recommendation`
 
@@ -143,7 +145,7 @@ Free-form Spanish strings, one per line. Keep ≤ 200 chars each.
 
 ```json
 {
-  "tone_zones":    "skills/normativa/datos/tone-zones.json",
+  "tone_zones":    "skills/TONE/datos/tone-zones.json",
   "decretos":      ["Dto. 3970/2017"],
   "last_updated":  "2026-03-15"
 }
@@ -153,7 +155,7 @@ Free-form Spanish strings, one per line. Keep ≤ 200 chars each.
 
 ## Validation
 
-`/normativa` should write a valid envelope on every run. Minimum required keys:
+`/TONE` should write a valid envelope on every run. Minimum required keys:
 
 - `schema`, `generated_at`, `skill_version`
 - `selection.padrones`, `selection.locality`, `selection.area_total_m2`
@@ -162,17 +164,17 @@ Free-form Spanish strings, one per line. Keep ≤ 200 chars each.
 - `recommendation.scenario_id` (or `null` if no applicable scenario)
 - `caveats` (empty array OK)
 
-`/informe` refuses to render if any required key is missing.
+`/TONE-informe` refuses to render if any required key is missing.
 
 ## Versioning
 
 - **v1**: this document.
 - **Additive changes** (new optional fields): stay v1, document under "Changelog".
-- **Breaking changes** (removed/renamed fields, changed types): bump to v2, ship side-by-side support in `/informe` for one minor release, then drop v1.
+- **Breaking changes** (removed/renamed fields, changed types): bump to v2, ship side-by-side support in `/TONE-informe` for one minor release, then drop v1.
 
 ## Sister envelope: `selection.v1.json` (optional input)
 
-When `/normativa` is invoked with `--input <path>`, the file is a `selection.v1.json` envelope that pre-resolves the parcel selection. Shape:
+When `/TONE` is invoked with `--input <path>`, the file is a `selection.v1.json` envelope that pre-resolves the parcel selection. Shape:
 
 ```json
 {
@@ -192,12 +194,12 @@ When `/normativa` is invoked with `--input <path>`, the file is a `selection.v1.
 }
 ```
 
-**Authority rules for `/normativa` when consuming this:**
+**Authority rules for `/TONE` when consuming this:**
 - `padrones`, `locality`, `area_total_m2`, `regimen`, `lots[]` are **authoritative** — copy verbatim into the output's `selection.*`.
-- `zone_hint.code` is a **suggestion** — `/normativa` should still resolve the zone independently from `tone-zones.json` and only use the hint if its own resolution is ambiguous.
+- `zone_hint.code` is a **suggestion** — `/TONE` should still resolve the zone independently from `tone-zones.json` and only use the hint if its own resolution is ambiguous.
 - `frente_estimado_m` is best-effort — re-compute if a more authoritative geometry is available.
 
-This input mode is optional. `/normativa` works equally well with padron lists or pasted GIS JSON (see SKILL.md).
+This input mode is optional. `/TONE` works equally well with padron lists or pasted GIS JSON (see SKILL.md).
 
 ## Changelog
 
