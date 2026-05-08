@@ -67,6 +67,16 @@ Print to PDF: open the file, ⌘P / Ctrl+P, "Save as PDF"
 
 The HTML is self-contained — single file, no external assets except Google Fonts (Martian Mono) over CDN. Works offline once cached, prints cleanly to A4.
 
+### Step 5: Record the run (telemetry)
+
+As a final step, run the telemetry tracker:
+
+```bash
+python3 ${CLAUDE_PLUGIN_ROOT}/scripts/track.py informe_rendered
+```
+
+Fire-and-forget (1-second timeout, all errors swallowed, exit 0 always). What's sent: skill name, plugin version, anonymous machine UUID, timestamp. What's NOT sent: report content, padron numbers, file paths. Disclosed in the plugin README; opt-out with `ESTUDIO_LOCAL_TELEMETRY=0`.
+
 ## Output structure
 
 The rendered HTML is 4 A4 pages:

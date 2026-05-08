@@ -167,6 +167,33 @@ The dispatcher pattern (`/norma` is a router, sub-skills do the work) means the 
 - Python 3.9+ (for the renderer + validator; the analysis itself is markdown-driven)
 - `bash` + `jq` (for the lint script + disclaimer hook)
 
+## Telemetry
+
+This plugin records anonymous skill-invocation events so we can see how often the toolchain is used end to end. Events fire from `scripts/track.py` at the end of `/norma-analyze` and `/norma-informe`.
+
+**What we collect** — and *only* this:
+
+| Field | Example | Why |
+|---|---|---|
+| `event` | `analyze_invoked` / `informe_rendered` | Which skill ran |
+| `skill_version` | `0.9.0` | Plugin version (from `plugin.json`) |
+| `machine_id` | random UUID stored in `~/.config/estudio-local/machine-id` | Distinguish "one user, many runs" from "many users, one run each" — no link to your name, hostname, or IP |
+| `ts` | `2026-05-08T14:32:47.984Z` | When |
+
+**What we deliberately do NOT collect** — padrón numbers, envelope JSON, locality, zone codes, file paths, project paths, conversation content, hostname, username, IP address (Cloudflare drops the source IP before the function reads the request).
+
+**Where it goes** — POSTed to `https://estudio-local.com/api/telemetry`, written to a Cloudflare D1 database owned by Estudio Local. Not shared, not sold, not used for advertising.
+
+**How to opt out** — set the env var. Once is enough; persist it in your shell profile if you want it permanent.
+
+```bash
+export ESTUDIO_LOCAL_TELEMETRY=0
+```
+
+When opted out, `track.py` returns immediately without making any network call and without creating the machine-id file. To delete an existing machine-id: `rm ~/.config/estudio-local/machine-id`.
+
+The `track.py` script is short (~120 lines, mostly comments). If you want to verify the claims above, [read it directly](./scripts/track.py).
+
 ## License
 
 MIT. See [LICENSE](./LICENSE).

@@ -6,6 +6,22 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## [Unreleased]
 
+## [0.9.0] - 2026-05-08
+
+### Added
+
+- Anonymous skill-invocation telemetry. `/norma-analyze` and `/norma-informe` now run `scripts/track.py` as a final step, recording `event` + `skill_version` + a stable per-machine UUID + `ts` to `https://estudio-local.com/api/telemetry`. Machine UUID lives at `~/.config/estudio-local/machine-id`. Padrón numbers, envelope content, file paths, conversation content, hostname, username, and IP are deliberately not collected.
+- README "Telemetry" section disclosing exactly what's collected, where it goes, and how to opt out.
+- `scripts/track.py` (~80 lines, pure stdlib).
+
+### Opt-out
+
+Set `ESTUDIO_LOCAL_TELEMETRY=0` in your environment. No machine-id file is created when opted out; an existing one can be removed with `rm ~/.config/estudio-local/machine-id`.
+
+### Why
+
+The Mapa side of the funnel (parcel clicks, JSON downloads, prompt copies) was already instrumented at `estudio-local.com/mapa`. The plugin side was a black box: we couldn't see whether anyone who exported a `selection.v1.json` actually ran `/norma-analyze` on it, or whether anyone went all the way to `/norma-informe`. Two events fix that.
+
 ## [0.8.1] - 2026-05-08
 
 ### Added

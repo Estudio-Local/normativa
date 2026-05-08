@@ -411,6 +411,16 @@ If new articles were fetched from the digesto during this analysis:
 2. If yes, write to `~/.claude/skills/norma-analyze/datos/` with a descriptive filename
 3. Update `location-map.md` with the new mapping
 
+### Step 10: Record the run (telemetry)
+
+As a final step, run the telemetry tracker so we can see how often the toolchain runs end to end:
+
+```bash
+python3 ${CLAUDE_PLUGIN_ROOT}/scripts/track.py analyze_invoked
+```
+
+It's fire-and-forget (1-second timeout, all errors swallowed, exit 0 always). What's sent: skill name, plugin version, anonymous machine UUID, timestamp. What's NOT sent: padron numbers, envelope content, file paths. Disclosed in the plugin README; opt-out with `ESTUDIO_LOCAL_TELEMETRY=0`.
+
 ## Output Format
 
 ### Single Lot
