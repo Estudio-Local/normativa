@@ -1,11 +1,14 @@
-# Norma — Maldonado UY zoning analysis for Claude Code
+# Norma — Maldonado UY zoning plugin for Claude Code
 
-Norma is a single-product family for working with Maldonado department zoning rules: pick parcels on a map, get a written envelope analysis grounded in the TONE (Texto Ordenado de Normas Edilicias, Volumen V del Digesto Departamental), and render a printable report. This repo ships the Claude Code plugin half — two skills bundled together:
+Norma is a Claude Code plugin for working with Maldonado department zoning rules: pick parcels (on the [Mapa app](https://estudio-local.com/mapa) or by padron number), get a written envelope analysis grounded in the TONE (Texto Ordenado de Normas Edilicias, Volumen V del Digesto Departamental), and render a printable report.
 
-- **`/norma`** — analyze building envelope rules (FOS, FOT, height, retiros) for one or more parcels.
-- **`/norma-informe`** — render the analysis as a printable A4 HTML report.
+The plugin ships **one entry point — `/norma` — that dispatches to two sub-skills**:
 
-The companion Mapa app (parcel selection, exports `selection.v1.json` envelopes) lives in a separate repo. Both fall under the Norma umbrella.
+| Slash command | Does | When |
+|---|---|---|
+| **`/norma`** | Dispatcher — reads your task, routes to the right sub-skill | Always start here |
+| `/norma-analyze` | Envelope analysis (FOS, FOT, height, retiros, scenario filtering) | Padrón + locality, ArcGIS JSON, or `selection.v1.json` from the Mapa |
+| `/norma-informe` | Printable A4 HTML report | An existing `*.normativa.v1.json` envelope |
 
 ## Install
 
@@ -16,7 +19,7 @@ The companion Mapa app (parcel selection, exports `selection.v1.json` envelopes)
 /plugin install norma@normativa
 ```
 
-That's it. Both skills appear as `/norma` and `/norma-informe`.
+That's it. `/norma`, `/norma-analyze`, and `/norma-informe` all become available.
 
 ### Option B — Symlink (local dev)
 
@@ -33,30 +36,34 @@ selection.v1.json (optional, from Mapa)
         ▼
  /norma --input selection.v1.json
         │
-        ├─→ <basename>.md                    (humans read this)
+        ▼ (dispatcher routes to /norma-analyze)
+ /norma-analyze --input selection.v1.json
+        │
+        ├─→ <basename>.md                    (humans read this; carries
+        │                                     norma:requires-disclaimer marker)
         └─→ <basename>.normativa.v1.json     (validated against
                                 │             normativa-v1-schema.md
                                 │             before exit)
                                 ▼
+                         /norma --input <basename>.normativa.v1.json
+                                │
+                                ▼ (dispatcher routes to /norma-informe)
                          /norma-informe --input <basename>.normativa.v1.json
                                 │
                                 └─→ <basename>.informe.html  (printable A4)
 ```
 
-You can also run `/norma` directly without an envelope:
+You can also call the sub-skills directly if you know what you need (`/norma-analyze 130,131,132 en la-juanita`, `/norma-informe path/to/envelope.normativa.v1.json`).
 
-- `/norma 130,131,132 en la-juanita` — padron list + locality
-- Or paste GIS JSON from the cadastral portal
-
-Three files per run:
+Three files per analysis:
 
 | File | Reader | Purpose |
 |------|--------|---------|
-| `*.md` | human | Full written analysis |
-| `*.normativa.v1.json` | machine | Same data, structured — feeds `/norma-informe` |
+| `*.md` | human | Full written analysis (with disclaimer + marker) |
+| `*.normativa.v1.json` | machine | Structured envelope — feeds `/norma-informe` |
 | `*.informe.html` | human | Printable A4 report (open in browser, print to PDF) |
 
-The `*.normativa.v1.json` filename and its internal `schema: "estudio-local.normativa.v1"` field are versioned data contracts — they intentionally preserve the historical token across skill renames so downstream consumers (the Mapa app, other tools) don't break. `/norma` runs `norma-validate-envelope.py` against its own output before exiting; if validation fails, the envelope is fixed before `/norma-informe` ever sees it.
+The `*.normativa.v1.json` filename and its internal `schema: "estudio-local.normativa.v1"` field are versioned data contracts — they intentionally preserve the historical token across skill renames so downstream consumers (the Mapa app, other tools) don't break. `/norma-analyze` runs `normativa-v1-validate.py` against its own output before exiting; if validation fails, the envelope is fixed before `/norma-informe` ever sees it.
 
 ## Try it
 
@@ -64,12 +71,59 @@ Without installing anything, render the bundled example:
 
 ```bash
 git clone https://github.com/Estudio-Local/normativa.git && cd normativa
-python3 skills/norma/norma-validate-envelope.py examples/padrones-130-132-la-juanita.normativa.v1.json
-python3 skills/norma-informe/norma-informe-render.py examples/padrones-130-132-la-juanita.normativa.v1.json
+python3 skills/norma-analyze/normativa-v1-validate.py \
+  examples/padrones-130-132-la-juanita.normativa.v1.json
+python3 skills/norma-informe/norma-informe-render.py \
+  examples/padrones-130-132-la-juanita.normativa.v1.json
 open examples/padrones-130-132-la-juanita.informe.html
 ```
 
 Validates the canonical envelope, renders a 4-page printable report, opens it in your browser. ⌘P / Ctrl+P → "Save as PDF" to share.
+
+## Repo layout (v0.8 architecture)
+
+```
+normativa/                              ← this repo (plugin slug: norma)
+├── .claude-plugin/
+│   ├── marketplace.json                marketplace manifest
+│   └── plugin.json                     plugin manifest
+├── rules/                              CROSS-SKILL ENFORCEMENT COPY
+│   ├── README.md                       index — when to add a rule
+│   ├── envelope-contract.md            strict types for *.normativa.v1.json
+│   ├── professional-disclaimer.md      disclaimer block + norma:requires-disclaimer marker
+│   ├── units-and-measurements.md       SI conventions, ISO-8601, enums
+│   └── terminology.md                  tipología codes, frente principal hierarchy, decreto format
+├── hooks/
+│   ├── README.md                       how to wire hooks into ~/.claude/settings.json
+│   ├── post-write-disclaimer-check.sh  marker-driven disclaimer enforcement
+│   └── settings-snippet.json           ready-to-paste settings.json block
+├── scripts/
+│   └── lint.sh                         structural lint (frontmatter, schema refs, version drift)
+├── skills/
+│   ├── norma/                          ← /norma DISPATCHER (no work, just routing)
+│   │   ├── SKILL.md                    routing table + rules
+│   │   └── README.md
+│   ├── norma-analyze/                  ← /norma-analyze (envelope analysis)
+│   │   ├── SKILL.md
+│   │   ├── README.md
+│   │   ├── normativa-v1-schema.md      envelope schema spec
+│   │   ├── normativa-v1-validate.py    strict stdlib validator (mandatory before exit)
+│   │   ├── norma-scenarios.py          engine (applicable_tipologias)
+│   │   ├── norma-extract-tipologias.py markdown → JSON extractor
+│   │   ├── norma-merge-tipologias.py   reviewed extractions → tone-zones.json
+│   │   └── datos/                      TONE source data (preserves tone- prefix)
+│   └── norma-informe/                  ← /norma-informe (printable HTML report)
+│       ├── SKILL.md
+│       ├── README.md
+│       ├── norma-informe-plantilla.html
+│       └── norma-informe-render.py
+├── examples/
+│   ├── selection.v1.json
+│   ├── padrones-130-132-la-juanita.normativa.v1.json
+│   └── padrones-130-132-la-juanita.informe.html
+├── README.md
+└── LICENSE
+```
 
 ## What's covered
 
@@ -87,74 +141,31 @@ Validates the canonical envelope, renders a 4-page printable report, opens it in
 
 Last decree incorporated: Dto. 4056/2022. Always verify against the live digesto at https://digesto.maldonado.gub.uy.
 
-## Repo layout
+## Architecture (v0.8 — adopting layered plugin pattern)
 
-```
-normativa/                              ← this repo (plugin slug: norma)
-├── .claude-plugin/
-│   ├── marketplace.json                ← marketplace manifest
-│   └── plugin.json                     ← plugin manifest
-├── skills/
-│   ├── norma/                          ← /norma skill
-│   │   ├── SKILL.md                    ← instructions for Claude (harness convention name)
-│   │   ├── README.md                   ← per-skill overview
-│   │   ├── normativa-v1-schema.md      ← envelope schema spec
-│   │   ├── norma-validate-envelope.py  ← strict stdlib validator (run before exit)
-│   │   ├── norma-scenarios.py          ← engine (applicable_tipologias)
-│   │   ├── norma-extract-tipologias.py ← markdown → JSON extractor
-│   │   ├── norma-merge-tipologias.py   ← reviewed extractions → tone-zones.json
-│   │   └── datos/
-│   │       ├── tone-zones.json         ← 10 localities, 33 zones, ~91 subzones (TONE-derived)
-│   │       ├── norma-sync-zoning.py    ← pull/refresh zoning polygons
-│   │       ├── titulo-*.md             ← full normativa text by sector (7 files)
-│   │       ├── extractions/            ← per-titulo extraction artifacts (audit trail)
-│   │       └── zoning/                 ← per-zone GeoJSON (116 files)
-│   └── norma-informe/                  ← /norma-informe skill
-│       ├── SKILL.md                    ← (harness convention name)
-│       ├── README.md
-│       ├── norma-informe-plantilla.html ← A4 report template
-│       └── norma-informe-render.py     ← JSON → HTML renderer (Python stdlib)
-├── examples/
-│   ├── selection.v1.json                                    ← sample input envelope
-│   ├── padrones-130-132-la-juanita.normativa.v1.json        ← sample /norma output
-│   └── padrones-130-132-la-juanita.informe.html             ← sample /norma-informe output
-├── README.md
-└── LICENSE
-```
+Norma's directory structure follows a layered plugin pattern that scales as more skills land. The current six layers are:
 
-## Naming convention
+1. **Plugin** (`.claude-plugin/`) — manifest + marketplace entry. Single plugin today; upgradable to multi-plugin marketplace when /proforma and /mercado go public.
+2. **Skills** (`skills/<slug>/SKILL.md`) — invocable units of behavior. Today: dispatcher `/norma` + `/norma-analyze` + `/norma-informe`.
+3. **Rules** (`rules/`) — cross-skill enforcement copy. One source of truth; skills cite rules by relative path. Lint verifies citations resolve.
+4. **Hooks** (`hooks/`) — Claude Code tool-event hooks that enforce contracts. Today: marker-driven disclaimer check on Write events.
+5. **Scripts** (`scripts/lint.sh`) — structural lint, run pre-commit and pre-release. Catches frontmatter drift, missing schema docs, version mismatches between plugin.json and marketplace.json.
+6. **Schema artifacts** (`<schema-id>-schema.md`, `<schema-id>-validate.py`) — named after the schema id, not the skill, so they survive skill renames intact.
 
-This repo follows a deliberate naming convention so files stay legible across multiple skills and repos. Generic names (`render.py`, `SCHEMA.md`, `helpers.py`) become indistinguishable in editor tabs, grep results, and stack traces once you have more than one skill.
-
-**Inviolate names — never rename**, the harness or community standards require these exact filenames:
-- `SKILL.md` (Anthropic skill discovery)
-- `plugin.json`, `marketplace.json` (Claude Code plugin manifests)
-- `README.md`, `LICENSE` (github / OSS convention)
-
-**Code & templates — prefixed:** kebab-case, lowercase, prefixed with the skill slug.
-
-| Pattern | When to use | Example |
-|---|---|---|
-| `<skill-slug>-<role>.<ext>` | Code, templates, helpers belonging to one skill | `norma-scenarios.py`, `norma-informe-render.py` |
-| `<schema-id>-schema.md` | Data contract docs (named after the schema id, stable across skill renames) | `normativa-v1-schema.md` |
-
-**Content files keep their domain names** — `tone-zones.json` and `titulo-*.md` are TONE-derived data, not Norma-product code, so the `tone-` prefix is appropriate there. The brand prefix only applies to product surfaces (skills, plugins, code).
-
-Why prefix even though the skill folder already namespaces them: a filename is what shows up in editor tabs, error stack traces, grep results across repos, and pasted code snippets — places where the surrounding folder context isn't visible. The prefix is defensive against the file ever being seen out of context.
+The dispatcher pattern (`/norma` is a router, sub-skills do the work) means the user-facing entry point stays stable as the catalog grows. Adding a new sub-skill is: drop `skills/norma-foo/SKILL.md`, add a row to the dispatcher's routing table, run `scripts/lint.sh`. No rename of the user-facing command.
 
 ## Schemas
 
-- **`selection.v1.json`** — optional input to `/norma` (typically produced by the Mapa app). Shape: `{ schema, padrones[], locality, area_total_m2, regimen, lots[], … }`. See [`skills/norma/normativa-v1-schema.md`](./skills/norma/normativa-v1-schema.md) "Sister envelope" section.
-- **`normativa.v1.json`** — produced by `/norma`, consumed by `/norma-informe`. Shape: `{ schema, selection, zone, scenarios[], recommendation, caveats }`. See [`skills/norma/normativa-v1-schema.md`](./skills/norma/normativa-v1-schema.md) for the full spec, strict-types table, and common pitfalls.
+- **`selection.v1.json`** — optional input to `/norma-analyze` (typically produced by the Mapa app). Shape: `{ schema, padrones[], locality, area_total_m2, regimen, lots[].frentes[], … }`. See [`skills/norma-analyze/normativa-v1-schema.md`](./skills/norma-analyze/normativa-v1-schema.md) "Sister envelope" section.
+- **`normativa.v1.json`** — produced by `/norma-analyze`, consumed by `/norma-informe`. Shape: `{ schema, selection, zone, scenarios[], recommendation, caveats, sources }`. See [`skills/norma-analyze/normativa-v1-schema.md`](./skills/norma-analyze/normativa-v1-schema.md) for the full spec, strict-types table, and common pitfalls.
 
-`schema` field on every envelope is `estudio-local.<name>.v1` — version-bump on breaking changes only. The schema name is decoupled from the skill name on purpose: renaming the skills (e.g. `/normativa` → `/TONE` → `/norma`) does not bump the schema version. Downstream consumers keep working through brand changes.
-
-`/norma` runs `norma-validate-envelope.py` against its own output before declaring done. The validator is pure stdlib, surfaces concrete per-field errors (e.g. `selection.padrones[0]: expected string, got int (130)`), and refuses to accept malformed envelopes — so `/norma-informe` never has to defend itself against bad input.
+`schema` field on every envelope is `estudio-local.<name>.v1` — version-bump on breaking changes only. The schema name is decoupled from the skill name on purpose: renaming the skills (`/normativa` → `/TONE` → `/norma` → `/norma-analyze`) does not bump the schema version. Downstream consumers keep working through brand changes.
 
 ## Requirements
 
 - [Claude Code](https://claude.ai/claude-code) ≥ 2.0
 - Python 3.9+ (for the renderer + validator; the analysis itself is markdown-driven)
+- `bash` + `jq` (for the lint script + disclaimer hook)
 
 ## License
 

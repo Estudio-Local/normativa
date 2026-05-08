@@ -1,0 +1,16 @@
+{
+  "_comment": "Drop these into your ~/.claude/settings.json hooks block to enable Norma's disclaimer enforcement. Plugin-bundled hooks aren't auto-enabled — see hooks/README.md.",
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "${CLAUDE_PLUGIN_ROOT}/hooks/post-write-disclaimer-check.sh"
+          }
+        ]
+      }
+    ]
+  }
+}

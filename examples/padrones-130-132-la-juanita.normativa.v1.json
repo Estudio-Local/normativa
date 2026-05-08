@@ -1,7 +1,7 @@
 {
   "schema": "estudio-local.normativa.v1",
   "generated_at": "2026-04-26T23:45:00Z",
-  "skill_version": "0.6.0",
+  "skill_version": "0.8.0",
   "selection": {
     "padrones": [
       "130",

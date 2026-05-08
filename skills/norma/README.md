@@ -1,27 +1,27 @@
-# `/norma` skill
+# `/norma` — dispatcher skill
 
-Zoning envelope analyzer for lots in Maldonado, Uruguay. Paste GIS JSON from the cadastral portal — or pass a `selection.v1.json` envelope via `--input` — and get a building envelope analysis based on the TONE (Texto Ordenado de Normas de Edificación, Volumen V del Digesto Departamental).
+Smart router for the Norma plugin. Reads the user's task description and forwards to the correct sub-skill (`/norma-analyze` for envelope analysis, `/norma-informe` for the printable report). The dispatcher itself doesn't do the work; sub-skills own the algorithms.
 
-For install instructions and the full plugin overview, see the [repo README](../../README.md).
+For install instructions and the full plugin overview, see the [repo README](../../README.md). For the routing table + rules, see [`SKILL.md`](./SKILL.md).
 
-## What this skill writes per run
+## Why a dispatcher?
 
-| File | Format | Audience |
-|------|--------|----------|
-| `<basename>.md` | Markdown | Humans — full written analysis |
-| `<basename>.normativa.v1.json` | JSON envelope | Machines — fed to `/norma-informe` for the printable HTML report |
+End users don't always know which sub-skill they need. The most common ergonomic — typing `/norma <padron> en <locality>` and getting an analysis — used to be the only behavior. Now Norma has two surfaces (analyze + render) and will grow more (proforma, 3D viewer, market intel), and routing through a thin entry point keeps the interface stable as the catalog grows.
+
+Pattern modeled on `/studio` from the architecture-studio plugin family — a routing skill that reads task intent and hands off, never carrying its own orchestration logic.
+
+## Sub-skills currently routed
+
+| Skill | When |
+|---|---|
+| [`/norma-analyze`](../norma-analyze/SKILL.md) | Padrón + locality, ArcGIS JSON, `selection.v1.json` from the Mapa, or any verb-shaped analysis request |
+| [`/norma-informe`](../norma-informe/SKILL.md) | Existing `*.normativa.v1.json` envelope + a verb like "report", "informe", "PDF", "render" |
 
 ## Files in this directory
 
 | File | Purpose |
 |------|---------|
-| `SKILL.md` | Instructions Claude follows when the skill runs |
-| `normativa-v1-schema.md` | Spec for the `normativa.v1.json` envelope (named after the schema id, stable across skill renames) |
-| `norma-validate-envelope.py` | Strict validator — `/norma` runs this before declaring done |
-| `norma-scenarios.py` | Pure-function engine — `applicable_tipologias(zone, area, frente)` |
-| `norma-extract-tipologias.py` | Deterministic markdown → JSON extractor (data pipeline) |
-| `norma-merge-tipologias.py` | Reviewed extractions → `tone-zones.json` merger |
-| `datos/tone-zones.json` | 10 localities, 33 zones, ~91 subzones with `tipologias[]` schema (TONE-derived content; filename keeps the `tone-` prefix because the data IS TONE) |
-| `datos/titulo-*.md` | Full normativa text by sector (audit trail) |
-| `datos/extractions/` | Per-titulo extraction artifacts (audit trail) |
-| `datos/zoning/` | Per-zone GeoJSON polygons (reference geometry, 116 files) |
+| `SKILL.md` | The dispatcher logic Claude follows when routed `/norma` |
+| `README.md` | This file |
+
+The dispatcher itself has no Python helpers, no schema, no validator — it's pure routing copy.

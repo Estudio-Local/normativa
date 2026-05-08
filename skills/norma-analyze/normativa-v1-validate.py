@@ -1,13 +1,15 @@
 #!/usr/bin/env python3
 """
-norma-validate-envelope.py — strict validator for `*.normativa.v1.json` envelopes.
+normativa-v1-validate.py — strict validator for `*.normativa.v1.json` envelopes.
 
-Runs after /norma writes its output, before /norma-informe consumes it. Refuses
+Named after the schema id (`estudio-local.normativa.v1`) rather than after a
+specific skill, so the script survives skill renames intact. Runs after
+/norma-analyze writes its output, before /norma-informe consumes it. Refuses
 malformed envelopes with concrete error messages so the LLM author can fix
 them without guesswork.
 
 Usage:
-  python3 norma-validate-envelope.py <path-to-envelope.normativa.v1.json>
+  python3 normativa-v1-validate.py <path-to-envelope.normativa.v1.json>
 
 Exit codes:
   0  envelope is valid (also prints "ok ..." to stdout)
@@ -292,7 +294,7 @@ def main():
         for line in errors:
             print(line, file=sys.stderr)
         print(file=sys.stderr)
-        print("Fix the envelope and re-run. Reference: skills/norma/normativa-v1-schema.md",
+        print("Fix the envelope and re-run. Reference: skills/norma-analyze/normativa-v1-schema.md",
               file=sys.stderr)
         sys.exit(1)
 

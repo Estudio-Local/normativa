@@ -1,8 +1,8 @@
 # `normativa.v1.json` — schema spec
 
-Machine-readable envelope produced by `/norma` alongside the markdown report. Consumed by `/norma-informe` (HTML report renderer).
+Machine-readable envelope produced by `/norma-analyze` alongside the markdown report. Consumed by `/norma-informe` (HTML report renderer). End users typically invoke both via the `/norma` dispatcher.
 
-The schema id (`estudio-local.normativa.v1`) and filename suffix (`.normativa.v1.json`) intentionally preserve the historical `normativa` token — they are versioned data contracts, decoupled from the skill name. Renaming the skill (`/normativa` → `/norma`, etc.) does not bump the schema.
+The schema id (`estudio-local.normativa.v1`) and filename suffix (`.normativa.v1.json`) intentionally preserve the historical `normativa` token — they are versioned data contracts, decoupled from the skill name. Renaming the skill (`/normativa` → `/TONE` → `/norma` → `/norma-analyze`, etc.) does not bump the schema.
 
 ## Conventions
 
@@ -156,7 +156,7 @@ Free-form Spanish strings, one per line. Keep ≤ 200 chars each.
 
 ```json
 {
-  "tone_zones":    "skills/norma/datos/tone-zones.json",
+  "tone_zones":    "skills/norma-analyze/datos/tone-zones.json",
   "decretos":      ["Dto. 3970/2017"],
   "last_updated":  "2026-03-15",
   "map_url":       "https://estudio-local.com/mapa?padron=130,131,132&loc=la-juanita"
@@ -168,10 +168,10 @@ Free-form Spanish strings, one per line. Keep ≤ 200 chars each.
 
 ## Validation
 
-`/norma` MUST write a valid envelope on every run AND MUST run `norma-validate-envelope.py` against the output before declaring done. The validator (pure stdlib, ships next to this schema) refuses malformed envelopes with concrete per-field errors so you can fix them deterministically instead of trial-and-error against `/norma-informe`.
+`/norma-analyze` MUST write a valid envelope on every run AND MUST run `normativa-v1-validate.py` against the output before declaring done. The validator (pure stdlib, ships next to this schema) refuses malformed envelopes with concrete per-field errors so you can fix them deterministically instead of trial-and-error against `/norma-informe`.
 
 ```bash
-python3 ${CLAUDE_PLUGIN_ROOT}/skills/norma/norma-validate-envelope.py <output-path>
+python3 ${CLAUDE_PLUGIN_ROOT}/skills/norma-analyze/normativa-v1-validate.py <output-path>
 ```
 
 Minimum required keys:
@@ -220,7 +220,7 @@ These mistakes silently produce broken output (the renderer crashes or shows `�
 
 ## Sister envelope: `selection.v1.json` (optional input)
 
-When `/norma` is invoked with `--input <path>`, the file is a `selection.v1.json` envelope that pre-resolves the parcel selection. Shape:
+When `/norma-analyze` is invoked with `--input <path>`, the file is a `selection.v1.json` envelope that pre-resolves the parcel selection. Shape:
 
 ```json
 {
